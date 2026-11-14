@@ -1206,6 +1206,8 @@ function unlockAudio() {
     if ('speechSynthesis' in window) { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; u.lang = 'zh-CN'; speechSynthesis.speak(u); }
   } catch (e) { /* 無視 */ }
 }
+const PAGE_URL = 'https://fumito-art.github.io/auto-scripts/';
+const PAGE_LINK = HOSTED ? '' : ' <a href="' + PAGE_URL + '" target="_blank" rel="noopener">公開ページ版を開く</a>';
 function audioSession(type) { try { if (navigator.audioSession) navigator.audioSession.type = type; } catch (e) { /* 無視 */ } }
 
 /* ================= 音声(お手本) ================= */
@@ -1536,7 +1538,7 @@ function practiceCard(item, o = {}) {
     (o.key && S.pr[o.key] != null ? '<span class="pill gold num">自己ベスト ' + S.pr[o.key] + '点</span>' : '') + '</div>' +
     '<div class="pc-live" hidden><canvas aria-label="録音中の声の高さ"></canvas><div class="live-foot"><span class="small muted">聞いています…</span><button class="btn sm" data-a="stop">' + IC.stop + '止める</button></div></div>' +
     '<div class="pc-res" hidden></div>' +
-    (mode === 'none' ? '<p class="note">' + (IOS ? 'この表示ではマイクを使えません。iPhoneでは、Safariで開く公開ページ版なら、その場で録音して声の高さを折れ線にできます。' : 'この表示ではマイクを使えません。Chromeで開くファイル版なら、その場で録音して声の高さを分析できます。') + 'ここでは「録音ファイルを分析」で音声ファイルを読み込めます。</p>' : mode === 'dict' ? '<p class="note">この表示では「聞き取り判定」(話した内容が中国語として正しく聞き取れるか)が使えます。声の高さをその場で折れ線にするリアルタイム表示は、Chromeで開くファイル版で使えます(録音済みの音声は「録音ファイルを分析」で分析できます)。</p>' : '') + '</div>');
+    (mode === 'none' ? '<p class="note">' + (IOS ? 'この表示ではマイクを使えません。iPhoneでは、Safariで開く公開ページ版なら、その場で録音して声の高さを折れ線にできます。' : 'この表示ではマイクを使えません。Chromeで開くファイル版なら、その場で録音して声の高さを分析できます。') + 'ここでは「録音ファイルを分析」で音声ファイルを読み込めます。' + PAGE_LINK + '</p>' : mode === 'dict' ? '<p class="note">この表示では「聞き取り判定」(話した内容が中国語として正しく聞き取れるか)が使えます。声の高さをその場で折れ線にするリアルタイム表示は、Chromeで開くファイル版か公開ページ版で使えます(録音済みの音声は「録音ファイルを分析」で分析できます)。' + PAGE_LINK + '</p>' : '') + '</div>');
   const box = $('.tgbox', pc), live = $('.pc-live', pc), res = $('.pc-res', pc), cv = $('canvas', pc);
   const draw = extra => mountGraph(box, items, Object.assign({ size: o.size || 'lg', py: S.set.py }, extra || {}));
   requestAnimationFrame(() => draw());
@@ -2094,7 +2096,7 @@ function vVoice(v) {
     (Voice.ttsOK() ? '<div class="grid g2"><div class="field"><label for="cvF">Claudeの音声(女性の声として使う)</label><select id="cvF">' + optC('f') + '</select></div><div class="field"><label for="cvM">Claudeの音声(男性の声として使う)</label><select id="cvM">' + optC('m') + '</select></div></div>' : '') +
     '<p class="note">声の質(年代・性別)は、端末やブラウザに入っている音声で決まります。' + (noNatM ? '<b>この端末には自然な男性の中国語音声がありません。</b>男性の声は、女性の音声の高さを下げて代用しています。' : '') + (IOS ? 'iPhoneは「設定 → アクセシビリティ → 読み上げコンテンツ → 声 → 中国語」から音声を追加できます(Li-mu は男性、Lili・Yu-shu などは女性の声です)。追加後にこのページを読み込み直すと、下の一覧から選べます。' : 'Microsoft Edge で開くと、若い男女の自然な音声(Yunxi・Xiaoxiao など)が使えます。Mac は「システム設定 → アクセシビリティ → 読み上げコンテンツ → システムの声 → 声を管理」から中国語(中国本土)の音声を追加できます。') + '</p></section>' +
     '<section class="card grid"><p class="eyebrow">録音と判定</p><p class="small">この表示での判定方法：<b>' + ({ mic: 'マイクで録音して、声の高さの動きを分析', dict: '聞き取り判定(話した中国語が正しく聞き取れるか)', none: '録音ファイルの読み込みのみ' })[mode] + '</b></p>' +
-    (mode !== 'mic' ? '<p class="note">この表示ではマイクの音声を直接取得できません。' + (IOS ? 'iPhoneでは、Safariで開く公開ページ版なら、その場で録音して声の高さを分析できます。' : 'Chromeで開くファイル版では、その場で録音して声の高さの波形を分析できます。') + '</p>' : IOS ? '<p class="small muted">iPhoneでは、声の高さ(声調)の分析に絞って判定します。話した内容の聞き取り判定は、パソコンのChromeで使えます。</p>' : '<label class="sw"><input type="checkbox" id="sr" ' + (S.set.sr ? 'checked' : '') + '>録音と同時に、話した内容の聞き取り判定もする(Chrome)</label>') +
+    (mode !== 'mic' ? '<p class="note">この表示ではマイクの音声を直接取得できません。' + (IOS ? 'iPhoneでは、Safariで開く公開ページ版なら、その場で録音して声の高さを分析できます。' : 'Chromeで開くファイル版か公開ページ版では、その場で録音して声の高さの波形を分析できます。') + PAGE_LINK + '</p>' : IOS ? '<p class="small muted">iPhoneでは、声の高さ(声調)の分析に絞って判定します。話した内容の聞き取り判定は、パソコンのChromeで使えます。</p>' : '<label class="sw"><input type="checkbox" id="sr" ' + (S.set.sr ? 'checked' : '') + '>録音と同時に、話した内容の聞き取り判定もする(Chrome)</label>') +
     (S.range ? '<p class="small muted">あなたの声域を学習済みです。高さの判定はこの声域を基準にしています。<button class="btn sm" id="rr">声域をリセット</button></p>' : '<p class="small muted">録音を重ねると、あなたの声域(低い所と高い所)を学習して判定が安定します。</p>') + '</section>' +
     '<section class="card grid"><p class="eyebrow">学習</p><div class="field"><label for="goal">1日の目標</label><select id="goal">' + [30, 50, 80, 120].map(g => '<option value="' + g + '" ' + (S.set.goal === g ? 'selected' : '') + '>' + g + ' XP（' + ({ 30: '約5分', 50: '約10分', 80: '約15分', 120: '約25分' })[g] + '）</option>').join('') + '</select></div><label class="sw"><input type="checkbox" id="unlock" ' + (S.set.unlock ? 'checked' : '') + '>すべてのシーンを最初から開く</label><div class="row"><button class="btn" id="reset">学習記録をすべて消す</button><span class="small muted" id="resetmsg"></span></div></section>';
   const sv = () => { Store.save(); };
