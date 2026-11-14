@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="说说 中国語">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#F2F4F8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1326" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>说说 中国語会話</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500;600&family=Noto+Serif+SC:wght@700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 青花(染付)の白と藍。主役は声調の線。レイアウト: 上部ナビ+1カラム、五線譜のような5段の高さ目盛りを全画面の共通モチーフにする */
+  --bg: #F2F4F8; --surface: #FFFFFF; --surface-2: #E8ECF5; --ink: #152142; --muted: #5A6685; --line: #D3DAE8;
+  --accent: #2346C4; --accent-ink: #FFFFFF; --accent-soft: #E2E8FB; --gold: #C98612; --gold-soft: #FBF0D9;
+  --good: #14845A; --warn: #B8720A; --bad: #C43B3B;
+  --t1: #D5422E; --t2: #188F56; --t3: #0A8AA0; --t4: #7A3FD0; --t0: #8690A8;
+  --hz: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --ui: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  --py: "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --r: 14px; --shadow: 0 1px 2px rgba(21,33,66,.06), 0 8px 24px rgba(21,33,66,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0D1326; --surface: #171F3A; --surface-2: #212B4C; --ink: #EDF0FA; --muted: #A2ACC8; --line: #2D395E;
+    --accent: #8CA5FF; --accent-ink: #0D1326; --accent-soft: #222E5C; --gold: #F0B341; --gold-soft: #3A3018;
+    --good: #4FD08B; --warn: #F0B341; --bad: #FF8580;
+    --t1: #FF7B66; --t2: #4FD08B; --t3: #3CC6DD; --t4: #B690FF; --t0: #8690A8;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0D1326; --surface: #171F3A; --surface-2: #212B4C; --ink: #EDF0FA; --muted: #A2ACC8; --line: #2D395E;
+  --accent: #8CA5FF; --accent-ink: #0D1326; --accent-soft: #222E5C; --gold: #F0B341; --gold-soft: #3A3018;
+  --good: #4FD08B; --warn: #F0B341; --bad: #FF8580;
+  --t1: #FF7B66; --t2: #4FD08B; --t3: #3CC6DD; --t4: #B690FF; --t0: #8690A8;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.3; margin: 0; }
+p { margin: 0; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+[hidden] { display: none !important; }
+.hz { font-family: var(--hz); font-weight: 700; }
+.py { font-family: var(--py); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- ヘッダー ---------- */
+.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.top-in { max-width: 960px; margin: 0 auto; padding: 10px 16px 0; display: flex; flex-direction: column; gap: 8px; }
+.top-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: baseline; gap: 8px; text-decoration: none; color: var(--ink); margin-right: auto; }
+.brand b { font-family: var(--hz); font-size: 26px; font-weight: 900; letter-spacing: .04em; }
+.brand span { font-size: 12px; color: var(--muted); font-weight: 500; letter-spacing: .08em; }
+.stat { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14px; padding: 4px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); }
+.stat svg { width: 16px; height: 16px; }
+.stat.streak { color: var(--t1); }
+.stat.streak.zero { color: var(--muted); }
+.stat.lv { color: var(--accent); }
+.xpbar { width: 64px; height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
+.xpbar i { display: block; height: 100%; background: var(--gold); border-radius: 3px; transition: width .8s cubic-bezier(.2,.9,.3,1); }
+.nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; margin: 0 -4px; }
+.nav::-webkit-scrollbar { display: none; }
+.nav a { flex: none; padding: 8px 12px 10px; font-size: 14px; font-weight: 700; color: var(--muted); text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+.nav a:hover { color: var(--ink); }
+.nav a.on { color: var(--accent); border-bottom-color: var(--accent); }
+.nav a .dot { display: inline-block; min-width: 18px; padding: 0 5px; margin-left: 4px; border-radius: 9px; background: var(--t1); color: #fff; font-size: 11px; line-height: 18px; text-align: center; }
+
+.wrap { max-width: 960px; margin: 0 auto; padding: 20px 16px 80px; display: flex; flex-direction: column; gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; box-shadow: var(--shadow); }
+.card.flat { box-shadow: none; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; color: var(--muted); }
+.sec-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.sec-h h2 { font-size: 20px; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.grid { display: grid; gap: 14px; }
+.g3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+/* ---------- ボタン ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 8px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); font-weight: 700; font-size: 14px; transition: transform .12s, background .15s, border-color .15s; }
+.btn:hover { border-color: var(--accent); }
+.btn:active { transform: scale(.96); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn.pri { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.rec { background: var(--t1); color: #fff; border-color: var(--t1); }
+.btn.rec.live { animation: pulse 1.2s infinite; }
+.btn.sm { min-height: 34px; padding: 4px 12px; font-size: 13px; }
+.btn.ico { width: 42px; padding: 0; border-radius: 50%; }
+.btn.ico.sm { width: 34px; }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.btn.speaking { border-color: var(--accent); background: var(--accent-soft); }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--t1) 55%, transparent); } 100% { box-shadow: 0 0 0 14px transparent; } }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: none; padding: 8px 14px; font-weight: 700; font-size: 14px; min-height: 40px; }
+.seg button.on { background: var(--accent); color: var(--accent-ink); }
+.pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; background: var(--surface-2); color: var(--muted); }
+.pill.me { background: var(--accent-soft); color: var(--accent); }
+.pill.gold { background: var(--gold-soft); color: var(--gold); }
+
+/* ---------- 声調グラフ ---------- */
+.tg { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+.tg svg { display: block; max-width: 100%; height: auto; overflow: visible; }
+.tg .staff { stroke: var(--line); stroke-width: 1; }
+.tg .staff.mid { stroke-dasharray: 2 4; }
+.tg .ax { font-family: var(--ui); font-size: 10px; fill: var(--muted); font-weight: 700; }
+.tg .curve { fill: none; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; animation: draw .7s cubic-bezier(.3,.7,.2,1) both; animation-delay: calc(var(--i) * 60ms); transition: stroke-width .15s; }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.tg .nd { animation: pop .3s both; animation-delay: calc(var(--i) * 60ms + .1s); }
+@keyframes pop { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: scale(1); } }
+.tg .nd { transform-box: fill-box; transform-origin: center; }
+.tg .t1 .curve { stroke: var(--t1); } .tg .t1 .nd, .tg .t1 .pyt { fill: var(--t1); }
+.tg .t2 .curve { stroke: var(--t2); } .tg .t2 .nd, .tg .t2 .pyt { fill: var(--t2); }
+.tg .t3 .curve { stroke: var(--t3); } .tg .t3 .nd, .tg .t3 .pyt { fill: var(--t3); }
+.tg .t4 .curve { stroke: var(--t4); } .tg .t4 .nd, .tg .t4 .pyt { fill: var(--t4); }
+.tg .t0 .curve { stroke: var(--t0); } .tg .t0 .nd, .tg .t0 .pyt { fill: var(--t0); }
+.tg .pyt { font-family: var(--py); font-weight: 600; text-anchor: middle; }
+.tg .hzt { font-family: var(--hz); font-weight: 700; fill: var(--ink); text-anchor: middle; }
+.tg .pct { font-family: var(--hz); fill: var(--muted); text-anchor: middle; }
+.tg .sd { font-family: var(--ui); font-size: 9.5px; font-weight: 700; fill: var(--gold); text-anchor: middle; }
+.tg .colbg { fill: var(--accent-soft); opacity: 0; transition: opacity .15s; }
+.tg .sy.on .colbg { opacity: 1; }
+.tg .sy.on .curve { stroke-width: 6; }
+.tg .runner { fill: var(--ink); stroke: var(--surface); stroke-width: 2; }
+.tg .usr { fill: none; stroke: var(--gold); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 5; }
+.tg .usrd { fill: var(--gold); }
+.tg .mk { font-family: var(--ui); font-size: 11px; font-weight: 700; text-anchor: middle; }
+.tg .mk.ok { fill: var(--good); } .tg .mk.mid { fill: var(--warn); } .tg .mk.ng { fill: var(--bad); }
+.tg.nopy .pyt { display: none; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); font-weight: 500; }
+.legend i { display: inline-block; width: 18px; height: 4px; border-radius: 2px; vertical-align: middle; margin-right: 5px; }
+
+/* ---------- ヒーロー ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(220px, 1fr); gap: 16px; }
+@media (max-width: 720px) { .hero { grid-template-columns: 1fr; } }
+.hero-main { display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden; }
+.hero-main h1 { font-size: 15px; color: var(--muted); font-weight: 700; letter-spacing: .1em; }
+.hero-ja { font-size: 17px; font-weight: 700; }
+.goal { display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center; justify-content: center; }
+.ring { position: relative; width: 132px; height: 132px; }
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring .bg { fill: none; stroke: var(--surface-2); stroke-width: 10; }
+.ring .fg { fill: none; stroke: var(--gold); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1s cubic-bezier(.2,.9,.3,1); }
+.ring.acc .fg { stroke: var(--accent); }
+.ring .in { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.2; }
+.ring .in b { font-size: 30px; font-weight: 700; }
+.ring .in span { font-size: 11px; color: var(--muted); font-weight: 700; }
+.ring.s { width: 84px; height: 84px; } .ring.s .in b { font-size: 22px; }
+.flame { display: inline-block; transform-origin: 50% 90%; animation: flick 1.6s ease-in-out infinite; }
+@keyframes flick { 0%, 100% { transform: scale(1) rotate(-2deg); } 50% { transform: scale(1.12) rotate(3deg); } }
+
+/* ---------- コース ---------- */
+.course { display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; transition: transform .15s, border-color .15s; }
+.course:hover { transform: translateY(-3px); border-color: var(--accent); }
+.course .zh { font-family: var(--hz); font-size: 40px; font-weight: 900; line-height: 1.1; }
+.course .zh small { font-family: var(--py); font-size: 13px; font-weight: 600; color: var(--muted); margin-left: 8px; }
+.bar { height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: 4px; background: var(--accent); transition: width .8s cubic-bezier(.2,.9,.3,1); }
+.lvh { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: .08em; }
+.lvh::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.scn { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; text-decoration: none; color: inherit; padding: 14px 16px; }
+.scn:hover:not(.lock) { border-color: var(--accent); }
+.scn .zt { font-family: var(--hz); font-size: 22px; font-weight: 700; min-width: 5.2em; }
+.scn h3 { font-size: 16px; }
+.scn.lock { opacity: .5; cursor: not-allowed; }
+.stars { display: flex; gap: 2px; color: var(--line); }
+.stars svg { width: 20px; height: 20px; }
+.stars .on { color: var(--gold); }
+.stars .on.new { animation: starpop .5s cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes starpop { from { transform: scale(0) rotate(-40deg); } to { transform: scale(1) rotate(0); } }
+
+/* ---------- シーン ---------- */
+.scene-h { display: flex; flex-direction: column; gap: 6px; }
+.scene-h .zt { font-family: var(--hz); font-size: 38px; font-weight: 900; line-height: 1.2; }
+.back { font-size: 13px; font-weight: 700; color: var(--muted); text-decoration: none; }
+.back:hover { color: var(--accent); }
+.tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs button { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-weight: 700; font-size: 14px; min-height: 40px; }
+.tabs button.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.tabs button .ck { width: 16px; height: 16px; border-radius: 50%; background: var(--good); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; }
+.line { display: flex; flex-direction: column; gap: 8px; }
+.line.me { border-left: 4px solid var(--accent); }
+.line-h { display: flex; align-items: center; gap: 8px; }
+.line-h .sp { margin-left: auto; display: flex; gap: 6px; }
+.ja { font-size: 15px; }
+.noja .ja { display: none; }
+
+/* ---------- 発音練習 ---------- */
+.pc { display: flex; flex-direction: column; gap: 12px; }
+.pc-live { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; border-radius: 10px; background: var(--surface-2); }
+.pc-live canvas { display: none; width: 100%; height: 150px; border-radius: 8px; background: var(--surface); }
+.pc-live.pitch canvas { display: block; }
+.live-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pc-live.done [data-a="stop"] { display: none; }
+.pc-res { display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 12px; background: var(--surface-2); animation: rise .35s both; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.res-top { display: flex; align-items: center; gap: 14px; }
+.res-top h3 { font-size: 18px; }
+.adv { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.adv li { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; font-size: 14px; }
+.adv .w { font-family: var(--hz); font-weight: 700; font-size: 18px; white-space: nowrap; }
+.adv .w small { font-family: var(--py); font-size: 12px; font-weight: 600; margin-left: 4px; }
+.heard { font-family: var(--hz); font-size: 20px; letter-spacing: .06em; }
+.heard .hit { color: var(--good); } .heard .miss { color: var(--bad); text-decoration: underline wavy; text-underline-offset: 5px; }
+.note { font-size: 13px; color: var(--muted); padding: 10px 12px; border-radius: 10px; border: 1px dashed var(--line); }
+.pager { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.dots button { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); font-size: 12px; font-weight: 700; padding: 0; }
+.dots button.on { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.dots button.done { background: var(--good); border-color: var(--good); color: #fff; }
+
+/* ---------- 単語カード ---------- */
+.flip { perspective: 1200px; width: min(100%, 420px); height: 250px; margin: 0 auto; cursor: pointer; border: 0; background: none; padding: 0; display: block; }
+.flip-in { position: relative; width: 100%; height: 100%; transition: transform .55s cubic-bezier(.3,.9,.3,1); transform-style: preserve-3d; }
+.flip.on .flip-in { transform: rotateY(180deg); }
+.face { position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 16px; }
+.face.b { transform: rotateY(180deg); background: var(--accent-soft); }
+.face .zh { font-family: var(--hz); font-size: 60px; font-weight: 900; line-height: 1.1; }
+.face .pyl { font-family: var(--py); font-size: 20px; font-weight: 600; color: var(--muted); }
+.face .jl { font-size: 24px; font-weight: 700; }
+.fc-out { animation: fcout .28s both; } @keyframes fcout { to { opacity: 0; transform: translateX(var(--dx, 60px)) rotate(var(--rot, 6deg)); } }
+
+/* ---------- ロールプレイ ---------- */
+.chat { display: flex; flex-direction: column; gap: 12px; }
+.bub { max-width: min(100%, 560px); padding: 12px 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; animation: rise .3s both; }
+.bub.me { align-self: flex-end; background: var(--accent-soft); border-color: transparent; }
+.bub .who { font-size: 12px; font-weight: 700; color: var(--muted); }
+.bub .zh { font-family: var(--hz); font-size: 21px; font-weight: 700; line-height: 1.5; }
+.bub .pyl { font-family: var(--py); font-size: 13px; color: var(--muted); font-weight: 600; }
+
+/* ---------- クイズ ---------- */
+.q { display: flex; flex-direction: column; gap: 14px; }
+.q h3 { font-size: 18px; }
+.q .big { font-family: var(--hz); font-size: 44px; font-weight: 900; text-align: center; line-height: 1.3; }
+.opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.opt { text-align: left; padding: 12px 14px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); font-weight: 700; min-height: 52px; transition: transform .12s, border-color .15s; }
+.opt:hover:not([disabled]) { border-color: var(--accent); }
+.opt.ok { border-color: var(--good); background: color-mix(in srgb, var(--good) 14%, var(--surface)); animation: okp .4s; }
+.opt.ng { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 12%, var(--surface)); animation: shake .35s; }
+@keyframes okp { 50% { transform: scale(1.04); } }
+@keyframes shake { 20% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 80% { transform: translateX(-3px); } }
+.tiles { display: flex; flex-wrap: wrap; gap: 8px; min-height: 56px; padding: 10px; border-radius: 12px; border: 2px dashed var(--line); align-items: center; }
+.tiles.pool { border-style: solid; background: var(--surface-2); border-color: transparent; }
+.tile { font-family: var(--hz); font-size: 22px; font-weight: 700; padding: 6px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); min-height: 46px; animation: pop .2s both; }
+.qprog { display: flex; gap: 5px; }
+.qprog i { flex: 1; height: 6px; border-radius: 3px; background: var(--surface-2); }
+.qprog i.ok { background: var(--good); } .qprog i.ng { background: var(--bad); } .qprog i.cur { background: var(--accent); }
+
+/* ---------- 発音ラボ ---------- */
+.pairgrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 560px) { .pairgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.chipb { display: flex; flex-direction: column; align-items: center; gap: 0; padding: 8px 6px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); line-height: 1.3; }
+.chipb .zh { font-family: var(--hz); font-size: 22px; font-weight: 700; }
+.chipb .pyl { font-family: var(--py); font-size: 12px; color: var(--muted); font-weight: 600; }
+.chipb.on { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.chipb.done { background: color-mix(in srgb, var(--good) 10%, var(--surface)); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ---------- 記録 ---------- */
+.heat { display: grid; grid-template-rows: repeat(7, 1fr); grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; max-width: 420px; }
+.heat i { aspect-ratio: 1; border-radius: 4px; background: var(--surface-2); }
+.heat i.l1 { background: color-mix(in srgb, var(--accent) 30%, var(--surface-2)); }
+.heat i.l2 { background: color-mix(in srgb, var(--accent) 60%, var(--surface-2)); }
+.heat i.l3 { background: var(--accent); }
+.heat i.today { outline: 2px solid var(--gold); outline-offset: 1px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+.kpi { display: flex; flex-direction: column; gap: 2px; }
+.kpi b { font-size: 30px; line-height: 1.2; }
+.kpi span { font-size: 12px; color: var(--muted); font-weight: 700; }
+.badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.badge { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; padding: 12px 8px; border-radius: 12px; border: 1px solid var(--line); font-size: 12px; font-weight: 700; color: var(--muted); }
+.badge .seal { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--hz); font-size: 26px; font-weight: 900; background: var(--surface-2); color: var(--muted); }
+.badge.on { color: var(--ink); border-color: var(--gold); }
+.badge.on .seal { background: var(--t1); color: #fff; transform: rotate(-4deg); }
+.spark { width: 100%; height: 90px; }
+
+/* ---------- 設定 ---------- */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field > label, .field > .lab { font-size: 13px; font-weight: 700; color: var(--muted); }
+select, input[type=range] { font: inherit; }
+select { padding: 9px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); max-width: 100%; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.sw { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; }
+.sw input { width: 20px; height: 20px; accent-color: var(--accent); }
+
+/* ---------- 演出 ---------- */
+#toasts { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); display: flex; flex-direction: column; gap: 8px; align-items: center; z-index: 50; pointer-events: none; }
+.toast { padding: 8px 18px; border-radius: 999px; background: var(--ink); color: var(--bg); font-weight: 700; font-size: 15px; box-shadow: var(--shadow); animation: toast 2.2s both; }
+.toast.xp { background: var(--gold); color: #1c1403; }
+@keyframes toast { 0% { opacity: 0; transform: translateY(20px) scale(.9); } 12% { opacity: 1; transform: none; } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(-24px); } }
+#lvup { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter: blur(6px); padding: 16px; }
+#lvup canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.lvbox { position: relative; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; padding: 30px 36px; max-width: 420px; animation: lvin .6s cubic-bezier(.3,1.5,.5,1) both; }
+.lvbox .zh { font-family: var(--hz); font-size: 68px; font-weight: 900; color: var(--t1); line-height: 1.1; }
+.lvbox .n { font-size: 44px; font-weight: 700; color: var(--accent); line-height: 1.1; }
+@keyframes lvin { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; }
+}
+
+.veil .tgbox { filter: blur(11px); pointer-events: none; user-select: none; }
+.bare .pyt, .bare .hzt, .bare .sd, .bare .pct { display: none; }
+.opt .tgbox svg { margin: 0 auto; }
+
+.seg { align-self: flex-start; max-width: 100%; flex-wrap: wrap; }
+.seg button[disabled] { opacity: .4; cursor: not-allowed; }
+.field select { align-self: flex-start; }
+
+#novoice { background: color-mix(in srgb, var(--bad) 12%, var(--bg)); border-bottom: 1px solid var(--bad); }
+.novoice-in { max-width: 960px; margin: 0 auto; padding: 10px 16px; font-size: 14px; }
+.novoice-in a { color: var(--accent); font-weight: 700; margin-left: 8px; }
+
+/* ---------- スマホ(iPhone) ---------- */
+html { -webkit-text-size-adjust: 100%; }
+button, .btn, .tabs button, .nav a, label.btn, select { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.top-in { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+.wrap { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+@media (max-width: 560px) {
+  select { font-size: 16px; }
+  .pc-btns .btn { flex: 1 1 calc(50% - 6px); min-height: 48px; padding: 8px 10px; }
+  .pc-btns .btn.rec { flex-basis: 100%; order: -1; min-height: 54px; font-size: 16px; }
+  .pc-btns .pill { flex-basis: 100%; justify-content: center; }
+}
+@media (display-mode: standalone) { .top { padding-top: env(safe-area-inset-top); } }
+.live-foot .btn { flex: none; white-space: nowrap; }
+@media (max-width: 560px) { .nav a { padding: 8px 9px 10px; } }
+
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in"><div class="top-row"><a class="brand" href="#home"><b lang="zh-CN">说说</b><span>中国語会話</span></a><span class="stat streak" id="st-streak"></span><span class="stat lv" id="st-lv"></span></div><nav class="nav" id="nav" aria-label="メニュー"></nav></div></header>
+<div id="novoice" hidden><div class="novoice-in"><b>この画面では中国語の音声を再生できません。</b>端末に中国語の音声が見つからないため、誤った発音を避けて再生を止めています。Chromeで開くファイル版をお使いください。<a href="#voice">音声と設定を見る</a></div></div>
+<main class="wrap" id="view"></main>
+<div id="toasts" aria-live="polite"></div>
+<script>
+/* 学習データ。ピンインは漢字1字につき1音節。"/" は韻律の切れ目、末尾の数字(例 nǎ2)は実際に発音される声調。 */
+const COURSES = [
+  { id: 'life', name: '生活', zh: '生活', py: 'shēng huó', desc: '朝のあいさつから義母のおもてなしまで。毎日の暮らしで交わす言葉。' },
+  { id: 'love', name: '夫婦', zh: '夫妻', py: 'fū qī', desc: '気持ちを伝える、褒める、仲直りする。妻との距離が縮まる言葉。' },
+  { id: 'biz', name: 'ビジネス', zh: '商务', py: 'shāng wù', desc: '名刺交換から提案・価格交渉まで。仕事で信頼を得る言葉。' }
+];
+
+const SCENES = [
+  /* ---------------- 生活 ---------------- */
+  { id: 'a1', c: 'life', lv: 1, t: '朝のあいさつ', zt: '早上好', who: '妻', pg: 'f',
+    desc: '平日の朝。起きてきた妻と、出勤前に短い会話をします。',
+    L: [
+      ['p', '早上好，老公！', 'zǎo shang hǎo lǎo gōng', 'おはよう、あなた！'],
+      ['m', '早上好！你睡得好吗？', 'zǎo shang hǎo nǐ shuì de hǎo ma', 'おはよう！よく眠れた？'],
+      ['p', '睡得很好。你呢？', 'shuì de hěn hǎo nǐ ne', 'よく眠れたよ。あなたは？'],
+      ['m', '我也睡得不错。', 'wǒ yě shuì de bú cuò', '僕もよく眠れたよ。'],
+      ['p', '你想喝咖啡还是茶？', 'nǐ xiǎng hē kā fēi hái shi chá', 'コーヒーとお茶、どっちが飲みたい？'],
+      ['m', '我想喝咖啡，谢谢。', 'wǒ xiǎng hē kā fēi xiè xie', 'コーヒーが飲みたいな、ありがとう。'],
+      ['p', '今天几点下班？', 'jīn tiān jǐ diǎn xià bān', '今日は何時に仕事が終わる？'],
+      ['m', '六点左右。晚上见！', 'liù diǎn zuǒ yòu wǎn shang jiàn', '6時ごろ。また夜にね！']
+    ],
+    V: [['早上', 'zǎo shang', '朝'], ['睡', 'shuì', '眠る'], ['喝', 'hē', '飲む'], ['咖啡', 'kā fēi', 'コーヒー'], ['下班', 'xià bān', '退勤する'], ['左右', 'zuǒ yòu', '〜ごろ']],
+    G: { t: '程度補語「動詞＋得＋形容詞」', b: '動作の出来ばえや程度を言うときは、動詞の後ろに「得」を置いて形容詞を続けます。「睡得很好」は「眠り方が良い＝よく眠れた」。否定は「睡得不好」、疑問は「睡得好吗？」です。',
+      ex: [['你说得很好。', 'nǐ shuō de hěn hǎo', '話すのが上手ですね。'], ['他吃得很快。', 'tā chī de hěn kuài', '彼は食べるのが速い。']] } },
+
+  { id: 'a2', c: 'life', lv: 1, t: '義母にごあいさつ', zt: '妈妈，您好', who: '義母', pg: 'f',
+    desc: 'ビデオ通話で義母と話します。敬語の「您」を使って丁寧に。',
+    L: [
+      ['m', '妈妈，您好！', 'mā ma nín hǎo', 'お義母さん、こんにちは！'],
+      ['p', '你好！你的中文说得不错啊。', 'nǐ hǎo nǐ de zhōng wén shuō de bú cuò a', 'こんにちは！中国語が上手ね。'],
+      ['m', '哪里哪里，我还在学习。', 'nǎ2 li nǎ2 li wǒ hái zài xué xí', 'いえいえ、まだ勉強中です。'],
+      ['p', '你工作忙不忙？', 'nǐ gōng zuò máng bu máng', '仕事は忙しい？'],
+      ['m', '有点忙，不过很开心。', 'yǒu diǎn máng bú guò hěn kāi xīn', '少し忙しいですが、楽しいです。'],
+      ['p', '要注意身体啊。', 'yào zhù yì shēn tǐ a', '体に気をつけてね。'],
+      ['m', '谢谢妈妈。您身体好吗？', 'xiè xie mā ma nín shēn tǐ hǎo ma', 'ありがとうございます。お義母さんはお元気ですか？'],
+      ['p', '我很好，你们放心吧。', 'wǒ hěn hǎo nǐ men fàng xīn ba', '元気よ、安心してね。']
+    ],
+    V: [['您', 'nín', 'あなた(敬語)'], ['中文', 'zhōng wén', '中国語'], ['学习', 'xué xí', '勉強する'], ['忙', 'máng', '忙しい'], ['身体', 'shēn tǐ', '体'], ['放心', 'fàng xīn', '安心する']],
+    G: { t: '反復疑問文「A不A」', b: '形容詞や動詞を「肯定＋否定」で並べると疑問文になります。「吗」は付けません。間の「不」は軽く短く発音します。',
+      ex: [['你累不累？', 'nǐ lèi bu lèi', '疲れていますか？'], ['这个好不好？', 'zhè ge hǎo bu hǎo', 'これはいいですか？']] } },
+
+  { id: 'a3', c: 'life', lv: 2, t: '食卓で', zt: '吃饭了', who: '妻', pg: 'f',
+    desc: '妻が作ってくれた夕食。味を褒めて、おかわりを頼みます。',
+    L: [
+      ['p', '饭做好了，快来吃吧！', 'fàn zuò hǎo le kuài lái chī ba', 'ご飯できたよ、早く食べに来て！'],
+      ['m', '哇，看起来很好吃！', 'wā kàn qǐ lái hěn hǎo chī', 'わあ、おいしそう！'],
+      ['p', '你尝尝这个菜。', 'nǐ cháng chang zhè ge cài', 'この料理、食べてみて。'],
+      ['m', '真好吃！这是什么菜？', 'zhēn hǎo chī zhè shì shén me cài', '本当においしい！これは何の料理？'],
+      ['p', '这是西红柿炒鸡蛋。', 'zhè shì xī hóng shì chǎo jī dàn', 'トマトと卵の炒め物よ。'],
+      ['m', '我可以再来一碗米饭吗？', 'wǒ / kě yǐ zài lái yì wǎn mǐ fàn ma', 'ご飯をもう一杯もらってもいい？'],
+      ['p', '当然可以。多吃一点。', 'dāng rán kě yǐ duō chī yì diǎn', 'もちろん。たくさん食べてね。'],
+      ['m', '我吃饱了。谢谢你，辛苦了！', 'wǒ chī bǎo le xiè xie nǐ xīn kǔ le', 'お腹いっぱい。ありがとう、お疲れさま！']
+    ],
+    V: [['饭', 'fàn', 'ご飯・食事'], ['好吃', 'hǎo chī', 'おいしい'], ['尝', 'cháng', '味見する'], ['菜', 'cài', '料理・おかず'], ['碗', 'wǎn', '茶碗・〜杯'], ['饱', 'bǎo', '満腹だ']],
+    G: { t: '結果補語「做好」「吃饱」', b: '動詞のすぐ後ろに結果を表す語を付けます。「做＋好」で「作り終える」、「吃＋饱」で「食べて満腹になる」。動作と結果をひと言で言えます。',
+      ex: [['我听懂了。', 'wǒ tīng dǒng le', '聞いて分かりました。'], ['作业写完了。', 'zuò yè xiě wán le', '宿題を書き終えました。']] } },
+
+  { id: 'a4', c: 'life', lv: 2, t: 'スーパーで買い物', zt: '去超市', who: '妻', pg: 'f',
+    desc: '牛乳が切れたので二人でスーパーへ。値段を見ながら選びます。',
+    L: [
+      ['p', '冰箱里没有牛奶了。', 'bīng xiāng lǐ méi yǒu niú nǎi le', '冷蔵庫に牛乳がもうないよ。'],
+      ['m', '那我们去超市吧。', 'nà wǒ men qù chāo shì ba', 'じゃあスーパーに行こう。'],
+      ['p', '还要买什么？', 'hái yào mǎi shén me', 'ほかに何を買う？'],
+      ['m', '买点水果和鸡蛋吧。', 'mǎi diǎn / shuǐ guǒ hé jī dàn ba', '果物と卵を少し買おう。'],
+      ['p', '这个苹果多少钱一斤？', 'zhè ge píng guǒ duō shao qián yì jīn', 'このりんごは500グラムいくら？'],
+      ['m', '八块五，有点贵。', 'bā kuài wǔ yǒu diǎn guì', '8.5元、ちょっと高いね。'],
+      ['p', '那边的便宜一点。', 'nà biān de pián yi yì diǎn', 'あっちの方が少し安いよ。'],
+      ['m', '好，就买那个吧。', 'hǎo jiù mǎi nà ge ba', 'よし、それを買おう。']
+    ],
+    V: [['冰箱', 'bīng xiāng', '冷蔵庫'], ['超市', 'chāo shì', 'スーパー'], ['水果', 'shuǐ guǒ', '果物'], ['多少钱', 'duō shao qián', 'いくら'], ['贵', 'guì', '値段が高い'], ['便宜', 'pián yi', '安い']],
+    G: { t: '「有点＋形容詞」と「形容詞＋一点」', b: '「有点贵」は「ちょっと高い(困る)」と不満を表します。「便宜一点」は「(比べて)少し安い」。位置が逆なので、セットで覚えましょう。',
+      ex: [['今天有点冷。', 'jīn tiān yǒu diǎn lěng', '今日はちょっと寒い。'], ['请说慢一点。', 'qǐng shuō màn yì diǎn', '少しゆっくり話してください。']] } },
+
+  { id: 'a5', c: 'life', lv: 3, t: '週末の予定を立てる', zt: '周末的打算', who: '妻', pg: 'f',
+    desc: '週末のお出かけを提案します。行き先・所要時間・出発時刻を決めましょう。',
+    L: [
+      ['m', '这个周末你有什么打算？', 'zhè ge zhōu mò nǐ yǒu shén me dǎ suàn', '今週末は何か予定ある？'],
+      ['p', '还没想好。你呢？', 'hái méi xiǎng hǎo nǐ ne', 'まだ決めてない。あなたは？'],
+      ['m', '我想开车带你去看红叶。', 'wǒ xiǎng kāi chē dài nǐ qù kàn hóng yè', '車で紅葉を見に連れて行きたいな。'],
+      ['p', '太好了！远不远？', 'tài hǎo le yuǎn bu yuǎn', 'やった！遠い？'],
+      ['m', '不太远，开车大概两个小时。', 'bú tài yuǎn kāi chē dà gài liǎng gè xiǎo shí', 'そんなに遠くないよ。車でだいたい2時間。'],
+      ['p', '那我们几点出发？', 'nà wǒ men jǐ diǎn chū fā', 'じゃあ何時に出発する？'],
+      ['m', '早上八点怎么样？', 'zǎo shang bā diǎn zěn me yàng', '朝8時はどう？'],
+      ['p', '好的，我来准备便当。', 'hǎo de wǒ lái zhǔn bèi biàn dāng', 'いいよ、私がお弁当を用意するね。']
+    ],
+    V: [['周末', 'zhōu mò', '週末'], ['打算', 'dǎ suàn', '予定・〜するつもり'], ['开车', 'kāi chē', '車を運転する'], ['带', 'dài', '連れて行く'], ['出发', 'chū fā', '出発する'], ['准备', 'zhǔn bèi', '準備する']],
+    G: { t: '連動文：動作を起こる順に並べる', b: '「开车＋带你＋去＋看红叶」のように、動詞を実際の順番どおりに並べます。日本語の「〜して、〜して」をつなぐ言葉は要りません。',
+      ex: [['我坐电车去公司。', 'wǒ zuò diàn chē qù gōng sī', '電車で会社に行きます。'], ['我想去中国旅游。', 'wǒ xiǎng qù zhōng guó lǚ yóu', '中国へ旅行に行きたいです。']] } },
+
+  { id: 'a6', c: 'life', lv: 3, t: '体調が悪い日', zt: '不舒服', who: '妻', pg: 'f',
+    desc: '朝から頭が痛い日。症状を伝えて、休むことを決めます。',
+    L: [
+      ['p', '你怎么了？脸色不太好。', 'nǐ zěn me le liǎn sè bú tài hǎo', 'どうしたの？顔色があまり良くないよ。'],
+      ['m', '我有点不舒服，头很疼。', 'wǒ / yǒu diǎn bù shū fu tóu hěn téng', 'ちょっと具合が悪くて、頭が痛い。'],
+      ['p', '发烧了吗？量一下体温吧。', 'fā shāo le ma liáng yí xià tǐ wēn ba', '熱はある？体温を測ってみよう。'],
+      ['m', '三十七度八，有点烧。', 'sān shí qī dù bā yǒu diǎn shāo', '37度8分、少し熱がある。'],
+      ['p', '今天别去上班了，好好休息。', 'jīn tiān bié qù shàng bān le hǎo hǎo xiū xi', '今日は仕事に行かないで、ゆっくり休んで。'],
+      ['m', '好，我给公司打个电话。', 'hǎo wǒ gěi gōng sī dǎ gè diàn huà', 'うん、会社に電話するよ。'],
+      ['p', '我去给你买药，你多喝水。', 'wǒ qù gěi nǐ / mǎi yào nǐ duō hē shuǐ', '薬を買ってくるから、水をたくさん飲んでね。'],
+      ['m', '谢谢你照顾我。', 'xiè xie nǐ zhào gù wǒ', '看病してくれてありがとう。']
+    ],
+    V: [['舒服', 'shū fu', '気分がいい'], ['头疼', 'tóu téng', '頭が痛い'], ['发烧', 'fā shāo', '熱が出る'], ['休息', 'xiū xi', '休む'], ['药', 'yào', '薬'], ['照顾', 'zhào gù', '世話をする']],
+    G: { t: '禁止「别…了」と「動詞＋一下」', b: '「别＋動詞＋了」で「もう〜しないで」。「動詞＋一下」は「ちょっと〜する」と動作を軽く言う形で、依頼がやわらかくなります。',
+      ex: [['别担心。', 'bié dān xīn', '心配しないで。'], ['请等一下。', 'qǐng děng yí xià', '少しお待ちください。']] } },
+
+  { id: 'a7', c: 'life', lv: 4, t: '義母を日本に迎える', zt: '欢迎来日本', who: '義母', pg: 'f',
+    desc: '空港に義母を迎えに行きます。体調を気づかい、ゆっくり回る計画を伝えます。',
+    L: [
+      ['m', '妈妈，欢迎您来日本！', 'mā ma huān yíng nín lái rì běn', 'お義母さん、日本へようこそ！'],
+      ['p', '谢谢你来接我。', 'xiè xie nǐ lái jiē wǒ', '迎えに来てくれてありがとう。'],
+      ['m', '路上辛苦了。您累不累？', 'lù shang xīn kǔ le nín lèi bu lèi', '道中お疲れさまでした。お疲れではないですか？'],
+      ['p', '还好，飞机上睡了一觉。', 'hái hǎo fēi jī shang shuì le yí jiào', '大丈夫、飛行機でひと眠りしたから。'],
+      ['m', '行李我来拿，车就在外面。', 'xíng li wǒ lái ná chē jiù zài wài miàn', '荷物は私が持ちます。車はすぐ外にあります。'],
+      ['p', '你真体贴。', 'nǐ zhēn tǐ tiē', '本当に気が利くのね。'],
+      ['m', '明天我们慢慢逛，累了就休息。', 'míng tiān wǒ men màn màn guàng lèi le jiù xiū xi', '明日はゆっくり回りましょう。疲れたら休みましょう。'],
+      ['p', '好，都听你的安排。', 'hǎo dōu tīng nǐ de ān pái', 'ええ、あなたの計画にお任せするわ。']
+    ],
+    V: [['欢迎', 'huān yíng', 'ようこそ・歓迎する'], ['接', 'jiē', '迎える'], ['行李', 'xíng li', '荷物'], ['外面', 'wài miàn', '外'], ['体贴', 'tǐ tiē', '思いやりがある'], ['安排', 'ān pái', '手配・段取り']],
+    G: { t: '「…了就…」(〜したら〜する)', b: '前半の動作が済んだら後半をする、という流れを表します。「累了就休息」は「疲れたら休む」。提案や約束によく使います。',
+      ex: [['到了就给我打电话。', 'dào le jiù gěi wǒ dǎ diàn huà', '着いたら電話してね。'], ['饿了就吃吧。', 'è le jiù chī ba', 'お腹が空いたら食べてね。']] } },
+
+  { id: 'a8', c: 'life', lv: 4, t: '家事を分担する', zt: '一起做家务', who: '妻', pg: 'f',
+    desc: '休日の掃除。「把」を使って、何をどうするかをはっきり伝えます。',
+    L: [
+      ['p', '今天家里有点乱。', 'jīn tiān jiā lǐ yǒu diǎn luàn', '今日は家がちょっと散らかってるね。'],
+      ['m', '我们一起打扫吧。', 'wǒ men yì qǐ / dǎ sǎo ba', '一緒に掃除しよう。'],
+      ['p', '你能把垃圾扔一下吗？', 'nǐ néng bǎ lā jī rēng yí xià ma', 'ゴミを捨ててくれる？'],
+      ['m', '没问题。碗也交给我吧。', 'méi wèn tí wǎn yě jiāo gěi wǒ ba', 'いいよ。食器も僕に任せて。'],
+      ['p', '太好了。我把衣服洗了。', 'tài hǎo le wǒ bǎ yī fu xǐ le', '助かる。私は洗濯をするね。'],
+      ['m', '洗完以后，我来晾。', 'xǐ wán yǐ hòu wǒ lái liàng', '洗い終わったら、僕が干すよ。'],
+      ['p', '有你帮忙，真轻松。', 'yǒu nǐ bāng máng zhēn qīng sōng', 'あなたが手伝ってくれると、本当に楽。'],
+      ['m', '两个人一起做更快。', 'liǎng gè rén yì qǐ zuò gèng kuài', '二人でやればもっと早いよ。']
+    ],
+    V: [['乱', 'luàn', '散らかっている'], ['打扫', 'dǎ sǎo', '掃除する'], ['垃圾', 'lā jī', 'ゴミ'], ['扔', 'rēng', '捨てる'], ['洗', 'xǐ', '洗う'], ['帮忙', 'bāng máng', '手伝う']],
+    G: { t: '「把」構文：対象をどう処置するか', b: '「主語＋把＋対象＋動詞＋結果」の順で、「何を・どうしたか」を強調します。動詞は裸のままでは使えず、「一下」「了」「完」などを後ろに付けます。',
+      ex: [['请把门关上。', 'qǐng bǎ mén guān shàng', 'ドアを閉めてください。'], ['我把作业做完了。', 'wǒ bǎ zuò yè zuò wán le', '宿題をやり終えました。']] } },
+
+  /* ---------------- 夫婦 ---------------- */
+  { id: 'b1', c: 'love', lv: 1, t: '気持ちを伝える', zt: '我爱你', who: '妻', pg: 'f',
+    desc: '仕事から帰った玄関で。短い言葉で、まっすぐ気持ちを伝えます。',
+    L: [
+      ['m', '老婆，我回来了。', 'lǎo pó wǒ huí lái le', 'ただいま。'],
+      ['p', '你回来了！今天累了吧？', 'nǐ huí lái le jīn tiān lèi le ba', 'おかえり！今日は疲れたでしょ？'],
+      ['m', '看到你，我就不累了。', 'kàn dào nǐ wǒ jiù bú lèi le', '君の顔を見たら、疲れが飛んだよ。'],
+      ['p', '你的嘴真甜。', 'nǐ de zuǐ zhēn tián', '口がうまいんだから。'],
+      ['m', '我是认真的。我爱你。', 'wǒ shì rèn zhēn de wǒ ài nǐ', '本気だよ。愛してる。'],
+      ['p', '我也爱你。', 'wǒ yě ài nǐ', '私も愛してる。'],
+      ['m', '今天我一直在想你。', 'jīn tiān wǒ yì zhí zài xiǎng nǐ', '今日はずっと君のことを考えてた。'],
+      ['p', '我也想你了。', 'wǒ yě / xiǎng nǐ le', '私も会いたかった。']
+    ],
+    V: [['老婆', 'lǎo pó', '妻(呼びかけ)'], ['老公', 'lǎo gōng', '夫(呼びかけ)'], ['回来', 'huí lái', '帰ってくる'], ['累', 'lèi', '疲れている'], ['认真', 'rèn zhēn', '本気だ・まじめだ'], ['想', 'xiǎng', '恋しく思う・考える']],
+    G: { t: '「就」：〜すると、すぐ〜', b: '前のことが起きると、すぐ次のことが起きる流れを「就」でつなぎます。「一…就…」の形にすると「〜するとすぐ〜」とさらにはっきりします。',
+      ex: [['我一下班就回家。', 'wǒ yí xià bān jiù huí jiā', '仕事が終わったらすぐ帰るよ。'], ['一看就明白。', 'yí kàn jiù míng bai', '見ればすぐ分かる。']] } },
+
+  { id: 'b2', c: 'love', lv: 2, t: '褒める・感謝する', zt: '你真漂亮', who: '妻', pg: 'f',
+    desc: '出かける前の妻に。具体的に褒めて、日ごろの感謝を伝えます。',
+    L: [
+      ['m', '你今天真漂亮。', 'nǐ jīn tiān zhēn piào liang', '今日は本当にきれいだね。'],
+      ['p', '真的吗？这是新买的裙子。', 'zhēn de ma zhè shì xīn mǎi de qún zi', '本当？これ、新しく買ったスカートなの。'],
+      ['m', '很适合你，颜色也好看。', 'hěn shì hé nǐ yán sè yě hǎo kàn', 'よく似合ってる。色もいいね。'],
+      ['p', '谢谢，你今天怎么这么会说话？', 'xiè xie nǐ jīn tiān zěn me zhè me huì shuō huà', 'ありがとう。今日はどうしてそんなに口が上手なの？'],
+      ['m', '我只是说实话。', 'wǒ zhǐ shì shuō shí huà', '本当のことを言っただけだよ。'],
+      ['p', '那我今天做你最爱吃的菜。', 'nà wǒ jīn tiān zuò nǐ zuì ài chī de cài', 'じゃあ今日はあなたの大好物を作るね。'],
+      ['m', '太幸福了。每天都谢谢你。', 'tài xìng fú le měi tiān dōu xiè xie nǐ', '幸せだなあ。毎日ありがとう。'],
+      ['p', '有你在，我也很幸福。', 'yǒu nǐ zài wǒ yě hěn xìng fú', 'あなたがいて、私も幸せ。']
+    ],
+    V: [['漂亮', 'piào liang', 'きれいだ'], ['裙子', 'qún zi', 'スカート'], ['适合', 'shì hé', '似合う'], ['颜色', 'yán sè', '色'], ['实话', 'shí huà', '本当のこと'], ['幸福', 'xìng fú', '幸せだ']],
+    G: { t: '程度を強める「真」「太…了」「这么」', b: '「真＋形容詞」は実感をこめた「本当に」。「太…了」は「すごく〜だ」と感動を表します。「这么」は「こんなに」。褒め言葉に欠かせません。',
+      ex: [['太好吃了！', 'tài hǎo chī le', 'すごくおいしい！'], ['你真厉害。', 'nǐ zhēn lì hai', '本当にすごいね。']] } },
+
+  { id: 'b3', c: 'love', lv: 2, t: 'デートに誘う', zt: '今晚有空吗', who: '妻', pg: 'f',
+    desc: '特別な日でなくても、二人で外食に。誘い方と場所の決め方を練習します。',
+    L: [
+      ['m', '今晚你有空吗？', 'jīn wǎn nǐ yǒu kòng ma', '今夜、時間ある？'],
+      ['p', '有啊，怎么了？', 'yǒu a zěn me le', 'あるよ、どうしたの？'],
+      ['m', '我想请你吃晚饭。', 'wǒ xiǎng / qǐng nǐ chī wǎn fàn', '夕食をごちそうしたいんだ。'],
+      ['p', '今天是什么日子？', 'jīn tiān shì shén me rì zi', '今日は何の日？'],
+      ['m', '没什么，就是想和你约会。', 'méi shén me jiù shì xiǎng hé nǐ yuē huì', '何でもないよ、ただ君とデートしたいだけ。'],
+      ['p', '好浪漫啊！去哪里吃？', 'hǎo làng màn a qù nǎ2 li chī', 'ロマンチック！どこで食べる？'],
+      ['m', '去你喜欢的那家火锅店吧。', 'qù nǐ xǐ huan de nà jiā huǒ guō diàn ba', '君の好きなあの火鍋屋さんに行こう。'],
+      ['p', '太好了，我去换衣服！', 'tài hǎo le wǒ qù huàn yī fu', 'やった、着替えてくる！']
+    ],
+    V: [['有空', 'yǒu kòng', '時間がある'], ['请', 'qǐng', 'ごちそうする・どうぞ'], ['晚饭', 'wǎn fàn', '夕食'], ['约会', 'yuē huì', 'デートする'], ['浪漫', 'làng màn', 'ロマンチックだ'], ['火锅', 'huǒ guō', '火鍋']],
+    G: { t: '「想＋動詞」と「请＋人＋動詞」', b: '「想」は「〜したい」。「请你吃饭」は「あなたに食事をごちそうする」。「请」の後ろに相手、その後ろに相手がする動作を置きます。',
+      ex: [['我想见你。', 'wǒ xiǎng jiàn nǐ', '君に会いたい。'], ['我请你喝咖啡。', 'wǒ qǐng nǐ hē kā fēi', 'コーヒーをおごるよ。']] } },
+
+  { id: 'b4', c: 'love', lv: 3, t: '結婚記念日', zt: '纪念日快乐', who: '妻', pg: 'f',
+    desc: '記念日にプレゼントを渡します。お祝いと感謝の定番表現を身につけます。',
+    L: [
+      ['m', '老婆，结婚纪念日快乐！', 'lǎo pó jié hūn jì niàn rì kuài lè', '結婚記念日おめでとう！'],
+      ['p', '你还记得啊！', 'nǐ hái jì de a', '覚えててくれたの！'],
+      ['m', '当然记得。这是送给你的礼物。', 'dāng rán jì de zhè shì sòng gěi nǐ de lǐ wù', 'もちろん。これ、君へのプレゼント。'],
+      ['p', '哇，谢谢！我可以打开吗？', 'wā xiè xie wǒ / kě yǐ / dǎ kāi ma', 'わあ、ありがとう！開けてもいい？'],
+      ['m', '打开看看吧，希望你喜欢。', 'dǎ kāi kàn kan ba xī wàng nǐ xǐ huan', '開けてみて。気に入ってくれるといいな。'],
+      ['p', '好漂亮的项链！我很喜欢。', 'hǎo piào liang de xiàng liàn wǒ hěn xǐ huan', 'きれいなネックレス！すごく気に入った。'],
+      ['m', '谢谢你一直陪在我身边。', 'xiè xie nǐ yì zhí péi zài wǒ shēn biān', 'いつもそばにいてくれてありがとう。'],
+      ['p', '以后也要一直在一起。', 'yǐ hòu yě yào yì zhí zài yì qǐ', 'これからもずっと一緒にいようね。']
+    ],
+    V: [['结婚', 'jié hūn', '結婚する'], ['纪念日', 'jì niàn rì', '記念日'], ['记得', 'jì de', '覚えている'], ['礼物', 'lǐ wù', 'プレゼント'], ['项链', 'xiàng liàn', 'ネックレス'], ['陪', 'péi', 'そばにいる・付き添う']],
+    G: { t: '動詞の重ね型「看看」', b: '動詞を2回重ねると「ちょっと〜してみる」と軽い試しの意味になります。2つ目は軽く短く発音します。相手に勧めるときに便利です。',
+      ex: [['你尝尝。', 'nǐ cháng chang', '食べてみて。'], ['我们休息休息。', 'wǒ men xiū xi xiū xi', 'ちょっと休もう。']] } },
+
+  { id: 'b5', c: 'love', lv: 3, t: 'けんかの仲直り', zt: '对不起', who: '妻', pg: 'f',
+    desc: '約束を忘れて怒らせてしまいました。非を認めて、誠実に謝ります。',
+    L: [
+      ['m', '老婆，你还在生气吗？', 'lǎo pó nǐ hái zài shēng qì ma', 'まだ怒ってる？'],
+      ['p', '你说呢？', 'nǐ shuō ne', 'どう思う？'],
+      ['m', '对不起，是我不好。', 'duì bu qǐ shì wǒ bù hǎo', 'ごめん、僕が悪かった。'],
+      ['p', '你知道错在哪里吗？', 'nǐ zhī dào cuò zài nǎ2 li ma', 'どこが悪かったか分かってる？'],
+      ['m', '我不应该忘了我们的约定。', 'wǒ bù yīng gāi wàng le wǒ men de yuē dìng', '約束を忘れるべきじゃなかった。'],
+      ['p', '下次别再这样了。', 'xià cì bié zài zhè yàng le', '次はもうしないでね。'],
+      ['m', '我保证。原谅我，好吗？', 'wǒ bǎo zhèng yuán liàng wǒ hǎo ma', '約束する。許してくれる？'],
+      ['p', '好吧，这次就原谅你。', 'hǎo ba zhè cì jiù yuán liàng nǐ', '分かった、今回は許してあげる。']
+    ],
+    V: [['生气', 'shēng qì', '怒る'], ['对不起', 'duì bu qǐ', 'ごめんなさい'], ['错', 'cuò', '間違い・悪い点'], ['应该', 'yīng gāi', '〜すべきだ'], ['约定', 'yuē dìng', '約束'], ['原谅', 'yuán liàng', '許す']],
+    G: { t: '「不应该…」と「别再…了」', b: '「不应该＋動詞」は「〜すべきでなかった」と反省を表します。「别再…了」は「もう二度と〜しないで」。謝る側・許す側の両方で使う表現です。',
+      ex: [['你应该多休息。', 'nǐ yīng gāi duō xiū xi', 'もっと休んだ方がいいよ。'], ['别再迟到了。', 'bié zài chí dào le', 'もう遅刻しないでね。']] } },
+
+  { id: 'b6', c: 'love', lv: 4, t: 'これからの夢を語る', zt: '我们的将来', who: '妻', pg: 'f',
+    desc: '二人の将来について。中国語を学ぶ理由を、自分の言葉で伝えます。',
+    L: [
+      ['p', '你将来有什么梦想？', 'nǐ jiāng lái yǒu shén me mèng xiǎng', '将来の夢は何？'],
+      ['m', '我想和你一起去很多地方旅行。', 'wǒ xiǎng hé nǐ yì qǐ qù hěn duō dì fang lǚ xíng', '君と一緒にいろんな所へ旅行したい。'],
+      ['p', '最想去哪里？', 'zuì xiǎng qù nǎ2 li', '一番行きたいのはどこ？'],
+      ['m', '先回你的老家，看看妈妈。', 'xiān huí nǐ de lǎo jiā kàn kan mā ma', 'まずは君の実家に帰って、お義母さんに会いたい。'],
+      ['p', '妈妈一定会很高兴的。', 'mā ma yí dìng huì hěn gāo xìng de', 'お母さん、きっとすごく喜ぶよ。'],
+      ['m', '所以我在努力学中文。', 'suǒ yǐ / wǒ zài nǔ lì xué zhōng wén', 'だから中国語を頑張って勉強してるんだ。'],
+      ['p', '你进步得很快，我为你骄傲。', 'nǐ jìn bù de hěn kuài wǒ wèi nǐ jiāo ào', '上達が早いね。あなたを誇りに思う。'],
+      ['m', '只要有你在，我什么都能做到。', 'zhǐ yào yǒu nǐ zài wǒ shén me dōu néng zuò dào', '君がいれば、僕は何だってできる。']
+    ],
+    V: [['将来', 'jiāng lái', '将来'], ['梦想', 'mèng xiǎng', '夢'], ['旅行', 'lǚ xíng', '旅行する'], ['老家', 'lǎo jiā', '実家・故郷'], ['努力', 'nǔ lì', '努力する'], ['骄傲', 'jiāo ào', '誇りに思う']],
+    G: { t: '「只要…就…」と「一定会…的」', b: '「只要A，(就)B」は「AさえすればB」。条件はそれだけで十分、という気持ちです。「一定会…的」は「きっと〜するはずだ」と確信を伝えます。',
+      ex: [['只要努力，就能成功。', 'zhǐ yào nǔ lì jiù néng chéng gōng', '努力さえすれば成功できる。'], ['明天一定会下雨的。', 'míng tiān yí dìng huì xià yǔ de', '明日はきっと雨が降る。']] } },
+
+  /* ---------------- ビジネス ---------------- */
+  { id: 'c1', c: 'biz', lv: 1, t: '自己紹介と名刺交換', zt: '初次见面', who: '取引先の王経理', pg: 'm',
+    desc: '初めての訪問。名乗り、名刺を渡し、担当領域を伝えます。',
+    L: [
+      ['m', '您好，初次见面，请多关照。', 'nín hǎo chū cì jiàn miàn qǐng duō guān zhào', 'はじめまして、どうぞよろしくお願いします。'],
+      ['p', '您好，欢迎欢迎。我姓王。', 'nín hǎo huān yíng huān yíng wǒ xìng wáng', 'こんにちは、ようこそ。王と申します。'],
+      ['m', '王经理，这是我的名片。', 'wáng jīng lǐ zhè shì wǒ de míng piàn', '王マネージャー、こちらが私の名刺です。'],
+      ['p', '谢谢。您是部长啊，请多指教。', 'xiè xie nín shì bù zhǎng a qǐng duō zhǐ jiào', 'ありがとうございます。部長でいらっしゃるのですね。ご指導ください。'],
+      ['m', '我负责系统运维和自动化。', 'wǒ fù zé xì tǒng yùn wéi hé zì dòng huà', 'システム運用と自動化を担当しております。'],
+      ['p', '我们公司正好需要这方面的支持。', 'wǒ men gōng sī zhèng hǎo xū yào zhè fāng miàn de zhī chí', '弊社はちょうどその分野の支援を必要としています。'],
+      ['m', '那太好了，希望我们合作愉快。', 'nà tài hǎo le xī wàng wǒ men hé zuò yú kuài', 'それは良かったです。良い協力関係を築けますように。'],
+      ['p', '合作愉快！请坐，请喝茶。', 'hé zuò yú kuài qǐng zuò qǐng hē chá', 'よろしくお願いします！どうぞお掛けください、お茶をどうぞ。']
+    ],
+    V: [['初次见面', 'chū cì jiàn miàn', 'はじめまして'], ['名片', 'míng piàn', '名刺'], ['经理', 'jīng lǐ', 'マネージャー'], ['负责', 'fù zé', '担当する'], ['合作', 'hé zuò', '協力・提携する'], ['愉快', 'yú kuài', '楽しい・円満だ']],
+    G: { t: '名乗り方と敬語「您」「请」', b: 'ビジネスではまず姓を名乗ります。「我姓＋姓」。相手の姓を尋ねるときは「您贵姓？」。「请＋動詞」で「どうぞ〜してください」と丁寧な依頼になります。',
+      ex: [['我姓田中。', 'wǒ xìng tián zhōng', '田中と申します。'], ['请问，您贵姓？', 'qǐng wèn nín guì xìng', '失礼ですが、お名前(姓)は？']] } },
+
+  { id: 'c2', c: 'biz', lv: 2, t: '電話でアポイント', zt: '约时间', who: '取引先の李さん', pg: 'm',
+    desc: '電話で会議の日時を決めます。曜日・時刻の言い方を確認しましょう。',
+    L: [
+      ['m', '喂，您好，请问李先生在吗？', 'wéi nín hǎo qǐng wèn lǐ xiān sheng zài ma', 'もしもし、李さんはいらっしゃいますか？'],
+      ['p', '我就是。请问您是哪位？', 'wǒ jiù shì qǐng wèn nín shì nǎ wèi', '私です。どちら様でしょうか？'],
+      ['m', '我是日本的合作伙伴，上周见过面。', 'wǒ shì rì běn de hé zuò huǒ bàn shàng zhōu jiàn guo miàn', '日本のパートナー企業の者です。先週お会いしました。'],
+      ['p', '啊，想起来了！有什么事吗？', 'a xiǎng qǐ lái le yǒu shén me shì ma', 'ああ、思い出しました！どんなご用件ですか？'],
+      ['m', '我想跟您约个时间开会。', 'wǒ xiǎng gēn nín yuē gè shí jiān kāi huì', '会議のお時間をいただきたいのですが。'],
+      ['p', '下周三下午两点方便吗？', 'xià zhōu sān xià wǔ liǎng diǎn fāng biàn ma', '来週水曜の午後2時はご都合いかがですか？'],
+      ['m', '没问题。那下周三见。', 'méi wèn tí nà xià zhōu sān jiàn', '問題ありません。では来週水曜に。'],
+      ['p', '好的，到时候见。再见！', 'hǎo de dào shí hou jiàn zài jiàn', '承知しました、ではその時に。失礼します！']
+    ],
+    V: [['请问', 'qǐng wèn', 'お尋ねします'], ['哪位', 'nǎ wèi', 'どちら様'], ['约', 'yuē', '約束を取り付ける'], ['时间', 'shí jiān', '時間'], ['开会', 'kāi huì', '会議をする'], ['方便', 'fāng biàn', '都合が良い']],
+    G: { t: '「跟＋人＋動詞」と経験の「过」', b: '「跟您开会」は「あなたと会議をする」。相手は動詞の前に置きます。「動詞＋过」は「〜したことがある」。「见过面」で「会ったことがある」です。',
+      ex: [['我跟他商量一下。', 'wǒ gēn tā shāng liang yí xià', '彼とちょっと相談します。'], ['我去过上海。', 'wǒ qù guo shàng hǎi', '上海に行ったことがあります。']] } },
+
+  { id: 'c3', c: 'biz', lv: 3, t: '会議で進捗を確認する', zt: '项目进展', who: '現地のプロジェクトマネージャー', pg: 'f',
+    desc: '定例会議。進捗を聞き、課題に対してその場で打ち手を決めます。',
+    L: [
+      ['m', '我们开始开会吧。项目进展怎么样？', 'wǒ men kāi shǐ kāi huì ba xiàng mù jìn zhǎn zěn me yàng', '会議を始めましょう。プロジェクトの進捗はいかがですか？'],
+      ['p', '目前进展顺利，已经完成了百分之七十。', 'mù qián jìn zhǎn shùn lì yǐ jīng wán chéng le bǎi fēn zhī qī shí', '現在順調で、すでに70％完了しています。'],
+      ['m', '很好。有没有什么问题？', 'hěn hǎo yǒu méi yǒu shén me wèn tí', 'いいですね。何か問題はありますか？'],
+      ['p', '测试的时间有点紧张。', 'cè shì de shí jiān yǒu diǎn jǐn zhāng', 'テストの期間が少しタイトです。'],
+      ['m', '需要我们增加人手吗？', 'xū yào wǒ men zēng jiā rén shǒu ma', 'こちらで人員を増やす必要がありますか？'],
+      ['p', '如果能增加两个人，就没问题了。', 'rú guǒ néng zēng jiā liǎng gè rén jiù méi wèn tí le', '2名増やしていただければ、問題ありません。'],
+      ['m', '明白了，我今天就安排。', 'míng bai le wǒ jīn tiān jiù ān pái', '分かりました。本日中に手配します。'],
+      ['p', '太感谢了。下周我再向您汇报。', 'tài gǎn xiè le xià zhōu wǒ zài xiàng nín huì bào', '大変助かります。来週またご報告します。']
+    ],
+    V: [['项目', 'xiàng mù', 'プロジェクト'], ['进展', 'jìn zhǎn', '進捗'], ['顺利', 'shùn lì', '順調だ'], ['完成', 'wán chéng', '完了する'], ['测试', 'cè shì', 'テスト'], ['汇报', 'huì bào', '報告する']],
+    G: { t: '「如果…就…」(もし〜なら〜)', b: '条件と結果をつなぐ基本形です。「如果」は省略できますが、「就」は残します。提案や交渉で、条件を示して話を前に進めるときに使います。',
+      ex: [['如果有问题，就告诉我。', 'rú guǒ yǒu wèn tí jiù gào su wǒ', '問題があれば教えてください。'], ['如果明天下雨，我们就不去了。', 'rú guǒ míng tiān xià yǔ wǒ men jiù bú qù le', '明日雨なら行くのをやめます。']] } },
+
+  { id: 'c4', c: 'biz', lv: 3, t: '会食と乾杯', zt: '干杯', who: '取引先の王経理', pg: 'm',
+    desc: '商談後の会食。お酒の受け方、乾杯のあいさつ、料理の褒め方を練習します。',
+    L: [
+      ['p', '今天辛苦了，我们边吃边聊吧。', 'jīn tiān xīn kǔ le wǒ men biān chī biān liáo ba', '本日はお疲れさまでした。食べながら話しましょう。'],
+      ['m', '谢谢您的招待。', 'xiè xie nín de zhāo dài', 'おもてなしありがとうございます。'],
+      ['p', '您能喝酒吗？', 'nín néng hē jiǔ ma', 'お酒は飲めますか？'],
+      ['m', '能喝一点，不过酒量不大。', 'néng hē yì diǎn bú guò jiǔ liàng bú dà', '少しなら飲めますが、強くはありません。'],
+      ['p', '那我们随意。来，为我们的合作干杯！', 'nà wǒ men suí yì lái wèi wǒ men de hé zuò gān bēi', 'では無理せずに。さあ、私たちの協力に乾杯！'],
+      ['m', '干杯！祝贵公司生意兴隆。', 'gān bēi zhù guì gōng sī shēng yi xīng lóng', '乾杯！御社のご繁盛をお祈りします。'],
+      ['p', '这是我们这里的特色菜，您尝尝。', 'zhè shì wǒ men zhè lǐ de tè sè cài nín cháng chang', 'こちらは当地の名物料理です。どうぞ召し上がってみてください。'],
+      ['m', '味道非常好，我很喜欢。', 'wèi dào fēi cháng hǎo wǒ hěn xǐ huan', 'とてもおいしいです。大変気に入りました。']
+    ],
+    V: [['招待', 'zhāo dài', 'もてなし'], ['酒量', 'jiǔ liàng', '酒量'], ['随意', 'suí yì', '無理せず自由に'], ['干杯', 'gān bēi', '乾杯'], ['生意', 'shēng yi', '商売'], ['特色菜', 'tè sè cài', '名物料理']],
+    G: { t: '「边…边…」と「为…干杯」', b: '「边A边B」は「AしながらBする」。2つの動作が同時に進みます。「为＋対象＋干杯」は「〜のために乾杯」。会食の締めにも使えます。',
+      ex: [['我边走边听音乐。', 'wǒ biān zǒu biān tīng yīn yuè', '歩きながら音楽を聞きます。'], ['为大家的健康干杯！', 'wèi dà jiā de jiàn kāng gān bēi', '皆さんの健康に乾杯！']] } },
+
+  { id: 'c5', c: 'biz', lv: 4, t: '見積と価格交渉', zt: '谈价格', who: '取引先の購買担当', pg: 'f',
+    desc: '見積への値下げ要請。価値を説明し、条件付きの譲歩案を出します。',
+    L: [
+      ['p', '贵公司的报价我们看过了。', 'guì gōng sī de bào jià wǒ men kàn guo le', '御社のお見積りを拝見しました。'],
+      ['m', '您觉得怎么样？', 'nín jué de zěn me yàng', 'いかがでしょうか？'],
+      ['p', '内容很好，不过价格有点高。', 'nèi róng hěn hǎo bú guò jià gé yǒu diǎn gāo', '内容は良いのですが、価格が少し高いです。'],
+      ['m', '我们的服务质量很高，包括二十四小时支持。', 'wǒ men de fú wù zhì liàng hěn gāo bāo kuò èr shí sì xiǎo shí zhī chí', '弊社のサービス品質は高く、24時間サポートも含まれます。'],
+      ['p', '能不能再便宜一点？', 'néng bu néng zài pián yi yì diǎn', 'もう少し安くなりませんか？'],
+      ['m', '如果签三年合同，可以打九折。', 'rú guǒ qiān sān nián hé tong kě yǐ / dǎ jiǔ zhé', '3年契約でしたら、1割引きにできます。'],
+      ['p', '这个条件不错，我们内部商量一下。', 'zhè ge tiáo jiàn bú cuò wǒ men nèi bù shāng liang yí xià', 'その条件は良いですね。社内で相談します。'],
+      ['m', '好的，期待您的好消息。', 'hǎo de qī dài nín de hǎo xiāo xi', '承知しました。良いお返事をお待ちしております。']
+    ],
+    V: [['报价', 'bào jià', '見積り'], ['价格', 'jià gé', '価格'], ['质量', 'zhì liàng', '品質'], ['合同', 'hé tong', '契約'], ['打折', 'dǎ zhé', '割引する'], ['商量', 'shāng liang', '相談する']],
+    G: { t: '「能不能…」と「打…折」', b: '「能不能＋動詞」は「〜できませんか」という丁寧な打診。「打九折」は「元値の9割＝1割引き」です。数字が小さいほど割引が大きい点に注意しましょう。',
+      ex: [['能不能快一点？', 'néng bu néng kuài yì diǎn', 'もう少し早くできませんか？'], ['这件衣服打八折。', 'zhè jiàn yī fu dǎ bā zhé', 'この服は2割引きです。']] } },
+
+  { id: 'c6', c: 'biz', lv: 5, t: '運用自動化を提案する', zt: '自动化方案', who: '取引先の情報システム部長', pg: 'm',
+    desc: '運用業務の自動化を提案します。現状確認、効果の数字、安全性の説明まで。',
+    L: [
+      ['m', '今天我想介绍一下我们的自动化方案。', 'jīn tiān wǒ xiǎng jiè shào yí xià wǒ men de zì dòng huà fāng àn', '本日は弊社の自動化ソリューションをご紹介します。'],
+      ['p', '好的，我们很感兴趣。', 'hǎo de wǒ men hěn gǎn xìng qù', 'はい、大変興味があります。'],
+      ['m', '目前贵公司的运维工作主要靠人工吗？', 'mù qián guì gōng sī de yùn wéi gōng zuò zhǔ yào kào rén gōng ma', '現在、御社の運用業務は主に手作業でしょうか？'],
+      ['p', '是的，每个月要花很多时间。', 'shì de měi gè yuè yào huā hěn duō shí jiān', 'はい、毎月多くの時間がかかっています。'],
+      ['m', '通过自动化，可以减少百分之五十的工作量。', 'tōng guò zì dòng huà kě yǐ / jiǎn shǎo / bǎi fēn zhī wǔ shí de gōng zuò liàng', '自動化により、作業量を50％削減できます。'],
+      ['p', '效果很明显。安全方面有保障吗？', 'xiào guǒ hěn míng xiǎn ān quán fāng miàn yǒu bǎo zhàng ma', '効果は明らかですね。セキュリティ面は保証されますか？'],
+      ['m', '有的。所有操作都有记录，可以随时检查。', 'yǒu de suǒ yǒu cāo zuò dōu yǒu jì lù kě yǐ suí shí jiǎn chá', 'はい。すべての操作は記録され、いつでも確認できます。'],
+      ['p', '听起来不错。请发一份详细的资料给我们。', 'tīng qǐ lái bú cuò qǐng fā yí fèn xiáng xì de zī liào gěi wǒ men', '良さそうですね。詳しい資料を送ってください。']
+    ],
+    V: [['介绍', 'jiè shào', '紹介する'], ['方案', 'fāng àn', '案・ソリューション'], ['人工', 'rén gōng', '手作業・人手'], ['减少', 'jiǎn shǎo', '減らす'], ['效果', 'xiào guǒ', '効果'], ['资料', 'zī liào', '資料']],
+    G: { t: '「通过…」と「百分之…」', b: '「通过＋手段」は「〜を通じて／〜によって」。提案の根拠を示すときの定番です。パーセントは「百分之＋数字」。50％は「百分之五十」と読みます。',
+      ex: [['通过学习，我进步了。', 'tōng guò xué xí wǒ jìn bù le', '学習を通じて上達しました。'], ['成功率是百分之九十。', 'chéng gōng lǜ shì bǎi fēn zhī jiǔ shí', '成功率は90％です。']] } }
+];
+
+/* 発音ラボ */
+const LAB = {
+  tones: [
+    { n: 1, name: '第1声', zh: '妈', py: 'mā', ja: 'お母さん', tip: '高く平らに伸ばす。音程を最後まで下げないのがコツ。時報の「ピー」のイメージ。' },
+    { n: 2, name: '第2声', zh: '麻', py: 'má', ja: '麻', tip: '中くらいの高さから一気に上げる。「えぇ？」と聞き返すときの上がり方。' },
+    { n: 3, name: '第3声', zh: '马', py: 'mǎ', ja: '馬', tip: '低く抑える。単独や文末では最後に少し上がるが、会話ではほぼ「低いまま」。' },
+    { n: 4, name: '第4声', zh: '骂', py: 'mà', ja: '叱る', tip: '高い所から一気に落とす。「さぁ！」と強く言い切る感じで、短く鋭く。' },
+    { n: 0, name: '軽声', zh: '吗', py: 'ma', ja: '〜か(疑問)', tip: '軽く短く添えるだけ。高さは直前の声調で決まる。' }
+  ],
+  pairs: [
+    ['今天', 'jīn tiān', '今日'], ['中国', 'zhōng guó', '中国'], ['喝水', 'hē shuǐ', '水を飲む'], ['高兴', 'gāo xìng', 'うれしい'], ['妈妈', 'mā ma', 'お母さん'],
+    ['明天', 'míng tiān', '明日'], ['学习', 'xué xí', '勉強する'], ['牛奶', 'niú nǎi', '牛乳'], ['学校', 'xué xiào', '学校'], ['朋友', 'péng you', '友達'],
+    ['老师', 'lǎo shī', '先生'], ['旅游', 'lǚ yóu', '旅行する'], ['你好', 'nǐ hǎo', 'こんにちは'], ['好看', 'hǎo kàn', 'きれいだ'], ['喜欢', 'xǐ huan', '好きだ'],
+    ['大家', 'dà jiā', 'みんな'], ['问题', 'wèn tí', '問題'], ['电脑', 'diàn nǎo', 'パソコン'], ['再见', 'zài jiàn', 'さようなら'], ['谢谢', 'xiè xie', 'ありがとう']
+  ],
+  sandhi: [
+    { t: '第3声が続くとき：前が第2声に変わる', b: '第3声＋第3声は、前の音節を第2声で発音します。ピンインの表記は第3声のままなので、グラフで実際の動きを確認しましょう。',
+      items: [['你好', 'nǐ hǎo', 'こんにちは'], ['很好', 'hěn hǎo', 'とても良い'], ['可以', 'kě yǐ', '〜してよい'], ['水果', 'shuǐ guǒ', '果物']] },
+    { t: '半三声：後ろに音が続くと「低いまま」', b: '第3声の後ろに第1・2・4声や軽声が続くと、最後の上昇がなくなり、低く抑えたまま次へ進みます。会話の第3声はほとんどがこの形です。',
+      items: [['老师', 'lǎo shī', '先生'], ['很忙', 'hěn máng', '忙しい'], ['好看', 'hǎo kàn', 'きれいだ'], ['喜欢', 'xǐ huan', '好きだ']] },
+    { t: '「不」の変調：第4声の前では第2声', b: '「不」は本来第4声(bù)ですが、後ろが第4声のときだけ第2声(bú)になります。',
+      items: [['不是', 'bú shì', '〜ではない'], ['不去', 'bú qù', '行かない'], ['不吃', 'bù chī', '食べない'], ['不好', 'bù hǎo', '良くない']] },
+    { t: '「一」の変調：後ろの声調で3通り', b: '「一」は後ろが第4声なら第2声(yí)、第1・2・3声なら第4声(yì)。順番や数字を単独で言うときは第1声(yī)のままです。',
+      items: [['一个', 'yí gè', '1つ'], ['一下', 'yí xià', 'ちょっと'], ['一天', 'yì tiān', '1日'], ['一起', 'yì qǐ', '一緒に'], ['第一', 'dì yī', '1番目']] }
+  ],
+  sounds: [
+    { t: 'そり舌音 zh / ch / sh / r', b: '舌先を上あごの奥に向けてそらせたまま発音します。日本語の「ジ・チ・シ」より口の奥で響かせます。',
+      items: [['知', 'zhī', '知る'], ['吃', 'chī', '食べる'], ['是', 'shì', '〜である'], ['日', 'rì', '日'], ['热', 'rè', '暑い']] },
+    { t: '舌面音 j / q / x', b: '舌先を下の歯の裏に付け、口を横に引いて発音します。日本語の「ジ・チ・シ」に近い音です。そり舌音と聞き比べましょう。',
+      items: [['鸡', 'jī', 'ニワトリ'], ['七', 'qī', '7'], ['西', 'xī', '西'], ['谢', 'xiè', '感謝する']] },
+    { t: '無気音と有気音 b-p / d-t / g-k', b: '違いは濁りではなく息の強さです。p・t・k は息を強く吐き出し、b・d・g は息を抑えます。口の前に手をかざして確かめましょう。',
+      items: [['爸', 'bà', 'お父さん'], ['怕', 'pà', '怖がる'], ['大', 'dà', '大きい'], ['他', 'tā', '彼'], ['哥', 'gē', '兄'], ['课', 'kè', '授業']] },
+    { t: 'ü の音', b: '「イ」と言いながら唇を「ウ」の形に丸めます。j・q・x の後ろの u は実際は ü です(去 = qü)。',
+      items: [['去', 'qù', '行く'], ['女', 'nǚ', '女'], ['绿', 'lǜ', '緑'], ['路', 'lù', '道'], ['鱼', 'yú', '魚']] },
+    { t: '-n と -ng', b: '-n は舌先を上の歯ぐきに付けて止めます(案内の「ん」)。-ng は舌の奥を上げ、鼻に響かせます(案外の「ん」)。',
+      items: [['饭', 'fàn', 'ご飯'], ['放', 'fàng', '置く'], ['民', 'mín', '民'], ['明', 'míng', '明るい'], ['山', 'shān', '山'], ['上', 'shàng', '上']] },
+    { t: 'あいまいな母音 e', b: '日本語の「エ」ではありません。口を軽く開け、「オ」の口の形で「ウ」と言うつもりで喉の奥から出します。',
+      items: [['饿', 'è', 'お腹が空いた'], ['喝', 'hē', '飲む'], ['车', 'chē', '車'], ['可乐', 'kě lè', 'コーラ']] }
+  ]
+};
+
+if (typeof module !== 'undefined') module.exports = { COURSES, SCENES, LAB };
+
+/* ピンイン解析・声調の実現形・ピッチ分析(純粋関数) */
+const TONE_MARKS = { 'ā': 'a1', 'á': 'a2', 'ǎ': 'a3', 'à': 'a4', 'ē': 'e1', 'é': 'e2', 'ě': 'e3', 'è': 'e4', 'ī': 'i1', 'í': 'i2', 'ǐ': 'i3', 'ì': 'i4', 'ō': 'o1', 'ó': 'o2', 'ǒ': 'o3', 'ò': 'o4', 'ū': 'u1', 'ú': 'u2', 'ǔ': 'u3', 'ù': 'u4', 'ǖ': 'ü1', 'ǘ': 'ü2', 'ǚ': 'ü3', 'ǜ': 'ü4' };
+const PUNCT_RE = /[，。？！、；：,.?!…\s]/;
+
+function parseSyl(tok) {
+  let ov = null;
+  const m = tok.match(/^(.*?)(\d)$/);
+  if (m) { tok = m[1]; ov = +m[2]; }
+  let tone = 0, base = '';
+  for (const ch of tok) {
+    const t = TONE_MARKS[ch];
+    if (t) { base += t[0]; tone = +t[1]; } else base += ch;
+  }
+  return { py: tok, base: base.toLowerCase(), tone, ov };
+}
+
+/* 漢字とピンインを1字ずつ対応させ、変調後の実際の形(kind)を決める */
+function parseLine(zh, py) {
+  const toks = py.trim().split(/\s+/);
+  const items = [];
+  let ti = 0, err = null;
+  for (const ch of zh) {
+    if (PUNCT_RE.test(ch)) {
+      if (items.length) { items[items.length - 1].punct += ch; items[items.length - 1].gap = 2; }
+      continue;
+    }
+    while (toks[ti] === '/') { if (items.length && items[items.length - 1].gap < 1) items[items.length - 1].gap = 1; ti++; }
+    if (ti >= toks.length) { err = 'ピンイン不足'; break; }
+    items.push(Object.assign({ ch, gap: 0, punct: '', sandhi: false }, parseSyl(toks[ti++])));
+  }
+  if (!err && ti !== toks.length) err = 'ピンイン過多';
+  for (let i = 0; i < items.length; i++) {
+    const s = items[i];
+    const n = s.gap === 2 ? null : items[i + 1];
+    const soft = s.gap === 1;
+    const t = s.tone;
+    let kind;
+    if (s.ov != null) { kind = String(s.ov); s.sandhi = s.ov !== t; }
+    else if (t === 3) {
+      if (!n) kind = '3';
+      else if (soft) kind = '3h';
+      else if (n.tone === 3) { kind = '2'; s.sandhi = true; }
+      else kind = '3h';
+    } else if (t === 4) kind = (n && !soft && n.tone === 4) ? '4h' : '4';
+    else kind = String(t);
+    s.kind = kind;
+    s.real = +kind[0];
+    s.prevKind = i > 0 && items[i - 1].gap !== 2 ? items[i - 1].kind : (i > 0 ? items[i - 1].kind : null);
+  }
+  items.err = err;
+  return items;
+}
+
+/* 5段階の高さ(1=低 5=高)で表した声調の形 */
+function contour(kind, prevKind) {
+  switch (kind) {
+    case '1': return [[0.05, 5], [0.95, 5]];
+    case '2': return [[0.05, 3], [0.4, 3.25], [0.95, 5]];
+    case '3': return [[0.05, 2.3], [0.5, 1], [0.95, 4]];
+    case '3h': return [[0.05, 2.3], [0.6, 1.1], [0.95, 1]];
+    case '4': return [[0.05, 5], [0.95, 1]];
+    case '4h': return [[0.05, 5], [0.95, 2.7]];
+    default: {
+      const p = prevKind ? prevKind[0] : '';
+      const l = p === '1' ? 2.4 : p === '2' ? 3 : p === '3' ? 3.8 : p === '4' ? 1.3 : 2.5;
+      return [[0.3, l], [0.7, l - 0.25]];
+    }
+  }
+}
+const KIND_TARGET = { '1': 'high', '2': 'rise', '3': 'dip', '3h': 'low', '4': 'fall', '4h': 'fall', '0': null };
+
+/* 1フレーム分のピッチ推定 (NSDF / McLeod)。[周波数, 明瞭度] を返す。無声なら [0, 0] */
+function nsdfPitch(x, o, W, fs, tMin, tMax, nsdf) {
+  let gmax = 0;
+  for (let tau = tMin - 1; tau <= tMax + 1; tau++) {
+    let ac = 0, m = 0;
+    for (let j = 0; j < W; j++) { const a = x[o + j], b = x[o + j + tau]; ac += a * b; m += a * a + b * b; }
+    nsdf[tau] = m > 0 ? 2 * ac / m : 0;
+  }
+  for (let tau = tMin; tau <= tMax; tau++) if (nsdf[tau] > nsdf[tau - 1] && nsdf[tau] >= nsdf[tau + 1] && nsdf[tau] > gmax) gmax = nsdf[tau];
+  if (gmax < 0.5) return [0, 0];
+  let pick = -1;
+  for (let tau = tMin; tau <= tMax; tau++) {
+    if (nsdf[tau] > nsdf[tau - 1] && nsdf[tau] >= nsdf[tau + 1] && nsdf[tau] >= 0.88 * gmax) { pick = tau; break; }
+  }
+  if (pick < 0) return [0, 0];
+  const a = nsdf[pick - 1], b = nsdf[pick], c = nsdf[pick + 1];
+  const den = a - 2 * b + c;
+  const shift = den !== 0 ? 0.5 * (a - c) / den : 0;
+  return [fs / (pick + shift), b];
+}
+
+/* 録音中に届いた音声を順に受け取り、10msごとの声の高さをその場で求める */
+function livePitch(sr) {
+  const dec = Math.max(1, Math.round(sr / 16000)), fs = sr / dec;
+  const W = Math.round(fs * 0.04), H = Math.round(fs * 0.01), tMin = Math.floor(fs / 480), tMax = Math.ceil(fs / 70);
+  const x = new Float32Array(Math.ceil(fs * 16)), nsdf = new Float32Array(tMax + 2), frames = [];
+  let n = 0, pos = 0, carry = new Float32Array(0), peak = 0, prev = 0, prevAt = -9;
+  return {
+    frames, hop: H / fs,
+    time() { return n / fs; },
+    push(chunk) {
+      let src = chunk;
+      if (carry.length) { src = new Float32Array(carry.length + chunk.length); src.set(carry); src.set(chunk, carry.length); }
+      const m = Math.floor(src.length / dec);
+      for (let k = 0; k < m && n < x.length; k++) { let q = 0; for (let j = 0; j < dec; j++) q += src[k * dec + j]; x[n++] = q / dec; }
+      carry = src.slice(m * dec);
+      while (pos + W + tMax + 1 <= n) {
+        let e = 0;
+        for (let j = 0; j < W; j++) e += x[pos + j] * x[pos + j];
+        const rms = Math.sqrt(e / W);
+        if (rms > peak) peak = rms;
+        let f = 0;
+        if (rms >= Math.max(0.008, 0.1 * peak)) {
+          const r = nsdfPitch(x, pos, W, fs, tMin, tMax, nsdf);
+          if (r[1] >= 0.6) {
+            f = r[0];
+            const i = frames.length;
+            if (prev && i - prevAt <= 1) {
+              const ratio = f / prev;
+              if (ratio > 1.75 && Math.abs(f / 2 / prev - 1) < 0.22) f /= 2;
+              else if (ratio < 0.58 && Math.abs(f * 2 / prev - 1) < 0.22) f *= 2;
+            }
+            prev = f; prevAt = i;
+          }
+        }
+        frames.push({ t: pos / fs, f0: f, rms });
+        pos += H;
+      }
+    }
+  };
+}
+/* リアルタイム表示用: 各フレームを5段階の高さに直す。分析本体と同じ基準(声域の学習値があればそれを使う) */
+function liveLevels(frames, profile) {
+  const st = frames.map(q => q.f0 > 0 ? 12 * Math.log2(q.f0 / 55) : null);
+  const v = st.filter(q => q != null).sort((p, q) => p - q);
+  if (!v.length) return st;
+  let L = pct(v, 0.05), Hh = pct(v, 0.95);
+  if (profile) { L = Math.min(L, profile.lo * 0.7 + L * 0.3); Hh = Math.max(Hh, profile.hi * 0.7 + Hh * 0.3); }
+  if (Hh - L < 6) { const c = (Hh + L) / 2; L = c - 3; Hh = c + 3; }
+  return st.map(q => q == null ? null : Math.max(0.4, Math.min(5.6, 1 + 4 * (q - L) / (Hh - L))));
+}
+
+/* ---------- ピッチ抽出 (NSDF / McLeod) ---------- */
+function pitchTrack(pcm, sr) {
+  const dec = Math.max(1, Math.round(sr / 16000));
+  const fs = sr / dec;
+  const N = Math.floor(pcm.length / dec);
+  const x = new Float32Array(N);
+  for (let i = 0; i < N; i++) { let s = 0; for (let k = 0; k < dec; k++) s += pcm[i * dec + k]; x[i] = s / dec; }
+  const W = Math.round(fs * 0.04), H = Math.round(fs * 0.01);
+  const tMin = Math.floor(fs / 480), tMax = Math.ceil(fs / 70);
+  const nF = Math.max(0, Math.floor((N - W - tMax) / H));
+  const f0 = new Float32Array(nF), rms = new Float32Array(nF), clar = new Float32Array(nF);
+  const nsdf = new Float32Array(tMax + 2);
+  for (let f = 0; f < nF; f++) {
+    const o = f * H;
+    let e = 0;
+    for (let j = 0; j < W; j++) e += x[o + j] * x[o + j];
+    rms[f] = Math.sqrt(e / W);
+    if (rms[f] < 0.004) continue;
+    const r = nsdfPitch(x, o, W, fs, tMin, tMax, nsdf);
+    f0[f] = r[0]; clar[f] = r[1];
+  }
+  // 有声判定
+  const sorted = Array.from(rms).sort((p, q) => p - q);
+  const p95 = sorted[Math.floor(sorted.length * 0.95)] || 0;
+  const thr = Math.max(0.006, 0.12 * p95);
+  for (let f = 0; f < nF; f++) if (rms[f] < thr || clar[f] < 0.55) f0[f] = 0;
+  // オクターブ誤り補正(直前のフレームとの連続性で判定)
+  const v = Array.from(f0).filter(q => q > 0).sort((p, q) => p - q);
+  if (v.length) {
+    const med = v[Math.floor(v.length / 2)];
+    let prev = 0, prevAt = -99;
+    for (let f = 0; f < nF; f++) {
+      if (!f0[f]) continue;
+      if (f0[f] > med * 2.7 || f0[f] < med * 0.36) { f0[f] = 0; continue; }
+      if (prev && f - prevAt <= 1) {
+        const r = f0[f] / prev;
+        if (r > 1.75 && Math.abs(f0[f] / 2 / prev - 1) < 0.22) f0[f] /= 2;
+        else if (r < 0.58 && Math.abs(f0[f] * 2 / prev - 1) < 0.22) f0[f] *= 2;
+      }
+      prev = f0[f]; prevAt = f;
+    }
+  }
+  // メディアンフィルタ
+  const out = new Float32Array(nF);
+  for (let f = 0; f < nF; f++) {
+    if (!f0[f]) continue;
+    const w = [];
+    for (let k = -2; k <= 2; k++) if (f + k >= 0 && f + k < nF && f0[f + k]) w.push(f0[f + k]);
+    w.sort((p, q) => p - q);
+    out[f] = w[Math.floor(w.length / 2)];
+  }
+  // 孤立した短い有声区間を除去
+  let s = -1;
+  for (let f = 0; f <= nF; f++) {
+    const on = f < nF && out[f] > 0;
+    if (on && s < 0) s = f;
+    if (!on && s >= 0) { if (f - s < 3) for (let k = s; k < f; k++) out[k] = 0; s = -1; }
+  }
+  return { f0: out, rms, hop: H / fs, thr, p95 };
+}
+
+function pct(sorted, p) { return sorted[Math.min(sorted.length - 1, Math.max(0, Math.floor(sorted.length * p)))]; }
+function mean(a) { let s = 0; for (const q of a) s += q; return a.length ? s / a.length : 0; }
+
+const SHAPE_NAME = { high: '高く平ら', mid: '中くらいで平ら', low: '低め', rise: '上がる', fall: '下がる', dip: '下げてから上げる' };
+const TARGET_NAME = { high: '高く平らに', rise: '下から上へ', dip: '低く抑える', low: '低く抑える', fall: '高い所から下へ' };
+const TONE_TIP = {
+  high: '音程を落とさず、最後まで高いまま伸ばします。',
+  rise: '中くらいの高さから始めて、後半で一気に上げます。',
+  dip: '思い切って低く。上げようとせず、喉の奥で低く抑えます。',
+  low: '次の音まで低いまま。上げずに抑えます。',
+  fall: '高い所から始めて、強く短く落とします。'
+};
+
+/* 発話を音節に分け、各音節の形を目標の声調と比べる */
+function analyzeUtterance(tr, items, profile) {
+  const n = tr.f0.length;
+  const st = new Float32Array(n);
+  const vals = [];
+  let a = -1, b = -1;
+  for (let i = 0; i < n; i++) if (tr.f0[i] > 0) { st[i] = 12 * Math.log2(tr.f0[i] / 55); vals.push(st[i]); if (a < 0) a = i; b = i; }
+  if (vals.length < 8) return { ok: false };
+  vals.sort((p, q) => p - q);
+  const uLo = pct(vals, 0.06), uHi = pct(vals, 0.94);
+  let L = uLo, Hh = uHi;
+  const narrow = !profile && (uHi - uLo) < 5;
+  if (profile) { L = Math.min(uLo, profile.lo * 0.7 + uLo * 0.3); Hh = Math.max(uHi, profile.hi * 0.7 + uHi * 0.3); }
+  if (Hh - L < 6) { const c = (Hh + L) / 2; L = c - 3; Hh = c + 3; }
+  const lev = i => Math.max(0.4, Math.min(5.6, 1 + 4 * (st[i] - L) / (Hh - L)));
+
+  // 音節境界
+  const thrA = Math.max(tr.thr * 0.6, 0.004);
+  const act = [];
+  for (let i = a; i <= b; i++) if (tr.f0[i] > 0 || tr.rms[i] >= thrA) act.push(i);
+  const w = items.map(s => s.kind === '0' ? 0.6 : 1);
+  const sumW = w.reduce((p, q) => p + q, 0);
+  const avgLen = act.length / items.length;
+  const bounds = [a];
+  let cum = 0;
+  for (let k = 0; k < items.length - 1; k++) {
+    cum += w[k];
+    let f = act[Math.min(act.length - 1, Math.round(act.length * cum / sumW))];
+    const win = Math.max(2, Math.round(avgLen * 0.35));
+    let best = f, bestV = Infinity;
+    for (let j = Math.max(bounds[bounds.length - 1] + 2, f - win); j <= Math.min(b - 1, f + win); j++) {
+      const jump = (tr.f0[j] > 0 && tr.f0[j - 1] > 0) ? Math.min(6, Math.abs(st[j] - st[j - 1])) : 0;
+      const v = tr.rms[j] + (tr.f0[j] > 0 ? tr.p95 * 0.15 : 0) + Math.abs(j - f) * tr.p95 * 0.004 - (jump > 1.5 ? jump * tr.p95 * 0.08 : 0);
+      if (v < bestV) { bestV = v; best = j; }
+    }
+    bounds.push(Math.max(best, bounds[bounds.length - 1] + 1));
+  }
+  bounds.push(b + 1);
+
+  const segs = [];
+  let sum = 0, cnt = 0;
+  for (let k = 0; k < items.length; k++) {
+    const s0 = bounds[k], s1 = bounds[k + 1];
+    let idx = [];
+    for (let i = s0; i < s1; i++) if (tr.f0[i] > 0) idx.push(i);
+    const pts = idx.map(i => [(i - s0) / Math.max(1, s1 - s0), lev(i)]);
+    const target = KIND_TARGET[items[k].kind];
+    const seg = { pts, target, shape: null, score: null, t0: s0 * tr.hop, t1: s1 * tr.hop };
+    if (idx.length >= 4) {
+      if (idx.length >= 8) idx = idx.slice(Math.floor(idx.length * 0.15), Math.ceil(idx.length * 0.92));
+      const lv = idx.map(lev);
+      const third = Math.max(1, Math.round(lv.length * 0.3));
+      const sM = mean(lv.slice(0, third)), eM = mean(lv.slice(-third)), m = mean(lv);
+      let mn = Infinity, mnI = 0;
+      lv.forEach((q, i) => { if (q < mn) { mn = q; mnI = i; } });
+      const pos = mnI / lv.length, d = eM - sM;
+      let shape;
+      if (d >= 0.85) shape = (pos > 0.12 && pos < 0.75 && sM - mn >= 0.35) ? 'dip' : 'rise';
+      else if (d <= -0.85) shape = (sM < 2.7 && d > -1.5) ? 'low' : 'fall';
+      else if (pos > 0.25 && pos < 0.75 && sM - mn >= 0.7 && eM - mn >= 0.7) shape = 'dip';
+      else shape = m >= 3.3 ? 'high' : m <= 2.6 ? 'low' : 'mid';
+      seg.shape = shape; seg.d = d; seg.m = m; seg.mn = mn;
+      if (target) {
+        let sc = 0;
+        if (target === 'high') sc = shape === 'high' ? 1 : shape === 'mid' ? (narrow ? 1 : 0.6) : (shape === 'low' && narrow) ? 0.8 : (Math.abs(d) < 1.2 && m >= 3.2) ? 0.6 : 0;
+        else if (target === 'rise') sc = (shape === 'rise' || shape === 'dip') ? 1 : d >= 0.45 ? 0.6 : 0;
+        else if (target === 'dip') sc = (shape === 'low' || shape === 'dip') ? 1 : (shape === 'fall' && eM <= 2.6) ? 0.8 : (shape === 'mid' && narrow) ? 0.6 : (shape === 'rise' && mn <= 2.3) ? 0.9 : 0;
+        else if (target === 'low') sc = shape === 'low' ? 1 : (shape === 'fall' && sM <= 3.8) ? 1 : (shape === 'fall' && eM <= 2.2) ? 0.5 : shape === 'dip' ? 0.7 : (shape === 'mid' && (narrow || m <= 3)) ? 0.6 : 0;
+        else if (target === 'fall') sc = shape === 'fall' ? 1 : d <= -0.45 ? 0.6 : (shape === 'low' && d < 0) ? 0.5 : 0;
+        seg.score = sc; sum += sc; cnt++;
+        if (sc < 0.8) seg.advice = 'あなたの声は「' + SHAPE_NAME[shape] + '」。目標は「' + TARGET_NAME[target] + '」。' + TONE_TIP[target];
+      }
+    }
+    segs.push(seg);
+  }
+  const wide = (uHi - uLo) >= 6;
+  return { ok: cnt > 0, segs, score: cnt ? Math.round(100 * sum / cnt) : 0, judged: cnt, range: wide ? { lo: uLo, hi: uHi } : null, dur: (b - a + 1) * tr.hop, narrow };
+}
+
+/* 聞き取られた文字列とお手本の一致度(同音字は一致扱い) */
+function compareText(items, heard, pyMap) {
+  const key = c => (pyMap && pyMap[c]) || c;
+  const H = Array.from(heard).filter(c => /[㐀-鿿]/.test(c));
+  const T = items.map(s => s.ch);
+  const n = T.length, m = H.length;
+  const dp = Array.from({ length: n + 1 }, () => new Uint16Array(m + 1));
+  for (let i = 1; i <= n; i++) for (let j = 1; j <= m; j++) dp[i][j] = key(T[i - 1]) === key(H[j - 1]) ? dp[i - 1][j - 1] + 1 : Math.max(dp[i - 1][j], dp[i][j - 1]);
+  const hit = new Array(n).fill(false);
+  let i = n, j = m;
+  while (i > 0 && j > 0) {
+    if (key(T[i - 1]) === key(H[j - 1]) && dp[i][j] === dp[i - 1][j - 1] + 1) { hit[i - 1] = true; i--; j--; }
+    else if (dp[i - 1][j] >= dp[i][j - 1]) i--; else j--;
+  }
+  return { hit, score: n ? Math.round(100 * dp[n][m] / Math.max(n, m)) : 0, heard: H.join('') };
+}
+
+if (typeof module !== 'undefined') module.exports = { parseSyl, parseLine, contour, pitchTrack, analyzeUtterance, compareText, KIND_TARGET, livePitch, liveLevels };
+
+/* 状態・音声・録音・声調グラフ・練習カード */
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const el = html => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
+const dstr = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+const today = () => dstr(new Date());
+const addDays = (s, n) => { const d = new Date(s + 'T12:00:00'); d.setDate(d.getDate() + n); return dstr(d); };
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const IC = {
+  play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>',
+  slow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
+  stop: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>',
+  star: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.2 6.6.8-4.9 4.6 1.3 6.6L12 17.4l-5.9 3.3 1.3-6.6L2.5 9.5l6.6-.8z"/></svg>',
+  flame: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 3.5 5 6 5 11a5 5 0 0 1-10 0c0-1.8.7-3.2 1.7-4.3.3 1.8 1.3 2.3 1.8 3.3.5-3 0-7 1.5-10z"/></svg>',
+  next: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>',
+  prev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
+  lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4m0 0l-4 4m4-4l4 4M5 20h14"/></svg>'
+};
+
+/* ================= 状態 ================= */
+const DEF = () => ({
+  v: 1, rev: 0, xp: 0, streak: { last: '', n: 0, best: 0 }, days: {}, sc: {}, srs: {}, pr: {}, hist: [], lab: {}, badges: {}, range: null,
+  set: { gender: 'f', engine: 'auto', vF: '', vM: '', cvF: 'airy', cvM: 'buttery', rate: 0.9, duo: true, sr: location.protocol !== 'file:', unlock: false, goal: 50, py: true, ja: true }
+});
+const LSKEY = 'shuoshuo-v1';
+let S = DEF();
+const Store = {
+  ref: null, timer: 0, saving: false, pending: false, mode: 'local',
+  loadLocal() {
+    try { const raw = localStorage.getItem(LSKEY); if (raw) S = this.merge(JSON.parse(raw)); } catch (e) { /* 保存領域が使えない環境 */ }
+  },
+  merge(d) { const b = DEF(); const o = Object.assign(b, d); o.set = Object.assign(DEF().set, d.set || {}); o.streak = Object.assign({ last: '', n: 0, best: 0 }, d.streak || {}); return o; },
+  save() {
+    S.rev = Date.now();
+    const keys = Object.keys(S.days).sort();
+    if (keys.length > 150) keys.slice(0, keys.length - 150).forEach(k => delete S.days[k]);
+    try { localStorage.setItem(LSKEY, JSON.stringify(S)); } catch (e) { /* 無視 */ }
+    if (this.ref) { clearTimeout(this.timer); this.timer = setTimeout(() => this.flush(), 2500); }
+  },
+  async flush() {
+    if (!this.ref) return;
+    if (this.saving) { this.pending = true; return; }
+    this.saving = true;
+    try { await this.ref.set(JSON.parse(JSON.stringify(S))); this.mode = 'cloud'; }
+    catch (e) { if (e && e.code === 'invalid_argument') { this.ref = null; this.mode = 'local'; } }
+    this.saving = false;
+    if (this.pending) { this.pending = false; this.flush(); }
+  },
+  async initCloud() {
+    try {
+      if (!window.claude || !window.claude.use) return;
+      const [db, user] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
+      if (!db || !user) return;
+      const id = await user.id();
+      if (!id) return;
+      const ref = db.doc('data/users/' + id + '/progress');
+      const snap = await ref.get();
+      this.ref = ref; this.mode = 'cloud';
+      if (snap.exists) {
+        const d = snap.data();
+        if ((d.rev || 0) > (S.rev || 0)) { S = this.merge(JSON.parse(JSON.stringify(d))); try { localStorage.setItem(LSKEY, JSON.stringify(S)); } catch (e) { /* 無視 */ } if (window.App) App.refresh(); }
+        else if ((S.rev || 0) > (d.rev || 0)) this.flush();
+      } else if (S.xp > 0) this.flush();
+      if (window.App) App.header();
+    } catch (e) { /* クラウド保存なしで続行 */ }
+  }
+};
+
+function levelOf(xp) { let L = 1, need = 100; while (xp >= need) { xp -= need; L++; need = 100 + (L - 1) * 40; } return { L, cur: xp, need }; }
+const TITLES = [[1, 'はじめの一歩'], [3, 'あいさつ上手'], [5, '食卓の話し相手'], [8, '家族の通訳いらず'], [12, '義母のお気に入り'], [16, '商談デビュー'], [20, 'ネイティブの耳']];
+const titleOf = L => TITLES.filter(t => L >= t[0]).pop()[1];
+const todayXP = () => S.days[today()] || 0;
+
+const BADGES = [
+  { id: 'first', seal: '始', name: '最初の一歩', desc: '初めてXPを獲得', test: () => S.xp > 0 },
+  { id: 's3', seal: '三', name: '3日連続', desc: '3日続けて学習', test: () => S.streak.best >= 3 },
+  { id: 's7', seal: '七', name: '7日連続', desc: '1週間続けて学習', test: () => S.streak.best >= 7 },
+  { id: 's30', seal: '月', name: '30日連続', desc: '1か月続けて学習', test: () => S.streak.best >= 30 },
+  { id: 'p90', seal: '声', name: '声調名人', desc: '発音スコア90点以上', test: () => S.hist.some(h => h.s >= 90) },
+  { id: 'w30', seal: '词', name: '単語30', desc: '単語を30語覚えた', test: () => Object.values(S.srs).filter(x => x.b >= 1).length >= 30 },
+  { id: 'c1', seal: '星', name: '初の三つ星', desc: 'シーンを1つ完全制覇', test: () => SCENES.some(s => starsOf(s.id) >= 3) },
+  { id: 'life', seal: '家', name: '生活マスター', desc: '生活コースを全て三つ星', test: () => SCENES.filter(s => s.c === 'life').every(s => starsOf(s.id) >= 3) },
+  { id: 'love', seal: '爱', name: '夫婦マスター', desc: '夫婦コースを全て三つ星', test: () => SCENES.filter(s => s.c === 'love').every(s => starsOf(s.id) >= 3) },
+  { id: 'biz', seal: '商', name: 'ビジネスマスター', desc: 'ビジネスコースを全て三つ星', test: () => SCENES.filter(s => s.c === 'biz').every(s => starsOf(s.id) >= 3) }
+];
+const STEPS = ['dialog', 'vocab', 'speak', 'role', 'quiz'];
+function stepsOf(id) { return (S.sc[id] && S.sc[id].st) || {}; }
+function starsOf(id) { const n = STEPS.filter(k => stepsOf(id)[k]).length; return n >= 5 ? 3 : n >= 4 ? 2 : n >= 2 ? 1 : 0; }
+function unlocked(sc) { if (S.set.unlock) return true; const list = SCENES.filter(s => s.c === sc.c); const i = list.indexOf(sc); return i === 0 || starsOf(list[i - 1].id) >= 1; }
+
+function toast(msg, cls) {
+  const t = el('<div class="toast ' + (cls || '') + '">' + esc(msg) + '</div>');
+  $('#toasts').appendChild(t); setTimeout(() => t.remove(), 2300);
+}
+function addXP(n, why) {
+  if (n <= 0) return;
+  const before = levelOf(S.xp).L, t = today();
+  S.xp += n; S.days[t] = (S.days[t] || 0) + n;
+  if (S.streak.last !== t) {
+    S.streak.n = S.streak.last === addDays(t, -1) ? S.streak.n + 1 : 1;
+    S.streak.last = t; S.streak.best = Math.max(S.streak.best, S.streak.n);
+    if (S.streak.n > 1) setTimeout(() => toast(S.streak.n + '日連続！'), 700);
+  }
+  toast('+' + n + ' XP' + (why ? '  ' + why : ''), 'xp');
+  const prevGoal = (S.days[t] - n) < S.set.goal && S.days[t] >= S.set.goal;
+  if (prevGoal) setTimeout(() => { toast('今日の目標を達成！'); confetti(60); }, 900);
+  checkBadges();
+  Store.save();
+  if (window.App) App.header();
+  const after = levelOf(S.xp).L;
+  if (after > before) setTimeout(() => levelUp(after), 600);
+}
+function checkBadges() {
+  for (const b of BADGES) if (!S.badges[b.id] && b.test()) { S.badges[b.id] = today(); setTimeout(() => toast('バッジ獲得「' + b.name + '」'), 1400); }
+}
+function markStep(id, step) {
+  const sc = S.sc[id] = S.sc[id] || { st: {} };
+  if (sc.st[step]) return false;
+  const b = starsOf(id); sc.st[step] = 1; const a = starsOf(id);
+  checkBadges(); Store.save();
+  if (a > b) { setTimeout(() => toast('★'.repeat(a) + ' 獲得！'), 500); if (a === 3) confetti(90); }
+  return true;
+}
+
+function confetti(n, canvas) {
+  if (REDUCED) return;
+  const own = !canvas;
+  const c = canvas || document.body.appendChild(Object.assign(document.createElement('canvas'), { style: 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:55' }));
+  const W = c.width = innerWidth, H = c.height = innerHeight, g = c.getContext('2d');
+  const cs = getComputedStyle(document.documentElement);
+  const cols = ['--t1', '--t2', '--t3', '--t4', '--gold', '--accent'].map(k => cs.getPropertyValue(k).trim());
+  const ps = Array.from({ length: n || 80 }, () => ({ x: W / 2 + (Math.random() - .5) * W * .3, y: H * .45, vx: (Math.random() - .5) * 14, vy: -Math.random() * 14 - 4, r: Math.random() * 6 + 3, c: cols[Math.floor(Math.random() * cols.length)], a: Math.random() * 6, va: (Math.random() - .5) * .4 }));
+  const t0 = performance.now();
+  (function step(t) {
+    const k = (t - t0) / 2400;
+    g.clearRect(0, 0, W, H);
+    for (const p of ps) { p.vy += .45; p.x += p.vx; p.y += p.vy; p.a += p.va; g.save(); g.translate(p.x, p.y); g.rotate(p.a); g.globalAlpha = Math.max(0, 1 - k); g.fillStyle = p.c; g.fillRect(-p.r, -p.r / 2.5, p.r * 2, p.r / 1.2); g.restore(); }
+    if (k < 1) requestAnimationFrame(step); else if (own) c.remove(); else g.clearRect(0, 0, W, H);
+  })(t0);
+}
+function levelUp(L) {
+  const o = el('<div id="lvup" role="dialog" aria-label="レベルアップ"><canvas></canvas><div class="card lvbox"><div class="zh">升级！</div><p class="eyebrow">レベルアップ</p><div class="n num">Lv ' + L + '</div><p><b>' + esc(titleOf(L)) + '</b></p><button class="btn pri" id="lvok">続ける</button></div></div>');
+  document.body.appendChild(o);
+  confetti(140, $('canvas', o));
+  const close = () => o.remove();
+  $('#lvok', o).addEventListener('click', close);
+  o.addEventListener('click', e => { if (e.target === o) close(); });
+  $('#lvok', o).focus();
+}
+
+/* ================= 端末 ================= */
+const IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const HOSTED = /^https?:$/.test(location.protocol) && !(window.claude && window.claude.use);   // 公開ページ版(Claudeの外)
+/* iPhoneは、指で触れた瞬間に一度鳴らさないと音声が出ない。最初のタップで無音を流して解禁する */
+function unlockAudio() {
+  try {
+    if ('speechSynthesis' in window) { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; u.lang = 'zh-CN'; speechSynthesis.speak(u); }
+  } catch (e) { /* 無視 */ }
+}
+function audioSession(type) { try { if (navigator.audioSession) navigator.audioSession.type = type; } catch (e) { /* 無視 */ } }
+
+/* ================= 音声(お手本) ================= */
+const F_RE = /ting-?ting|lili|lilian|shan-?shan|shasha|tian-?tian|dongmei|fangfang|lanlan|yu-?shu|mei-?jia|xiaoxiao|xiaoyi|xiaomeng|xiaohan|xiaomo|xiaoqiu|xiaorui|xiaoshuang|xiaoxuan|xiaoyan|xiaoyou|xiaozhen|xiaobei|xiaoni|huihui|yaoyao|hanhan|hsiao|flo|sandy|shelley|grandma|google|female|女/i;
+const M_RE = /yunxi|yunyang|yunjian|yunye|yunfeng|yunhao|yunze|yunxia|kangkang|haohao|lisheng|li-?mu|bobo|binbin|\bhan\b|eddy|reed|rocko|grandpa|\bmale|男/i;
+const ELO_RE = /^(eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley)\b/i;   // macOSの旧式合成音。中国語が不自然なので自動では選ばない
+const Voice = {
+  dev: [], tts: null, ttsZh: false, ttsLangs: null, token: 0, waited: false, lastWarn: 0,
+  load() {
+    if (!('speechSynthesis' in window)) return;
+    let vs = [];
+    try { vs = speechSynthesis.getVoices(); } catch (e) { /* 無視 */ }
+    vs = vs.filter(v => /^(zh|cmn)/i.test(v.lang) && !/HK|MO|yue/i.test(v.lang) && !/sin-?ji|cantonese|粤|粵|廣東|广东/i.test(v.name));
+    vs.sort((a, b) => this.rank(a) - this.rank(b));
+    this.dev = vs;
+  },
+  isElo(v) { return ELO_RE.test(v.name); },
+  rank(v) {
+    const n = v.name.toLowerCase();
+    let r = 5;
+    if (this.isElo(v)) r = 9;
+    else if (/natural|neural|premium|enhanced|拡張|プレミアム/.test(n)) r = 1;
+    else if (/xiaoxiao|yunxi|xiaoyi|yunjian|yunyang/.test(n)) r = 2;
+    else if (/ting|lili|shan-?shan|yu-?shu|tian-?tian|li-?mu|\bhan\b|haohao|google/.test(n)) r = 3;
+    if (!/CN|Hans/i.test(v.lang)) r += 0.5;
+    return r;
+  },
+  genderOf(v) { return M_RE.test(v.name) ? 'm' : F_RE.test(v.name) ? 'f' : '?'; },
+  /* 性別 g に使う音声。自然な音声が無い性別は、別の自然な音声の高さを変えて代用する */
+  pick(g) {
+    const want = g === 'm' ? S.set.vM : S.set.vF;
+    const chosen = this.dev.find(v => v.voiceURI === want);
+    if (chosen) return { voice: chosen, pitch: 1, how: 'chosen' };
+    const good = this.dev.filter(v => !this.isElo(v));
+    const same = good.find(v => this.genderOf(v) === g) || (g === 'f' && good.find(v => this.genderOf(v) === '?'));
+    if (same) return { voice: same, pitch: 1, how: 'native' };
+    if (good.length) return { voice: good[0], pitch: g === 'm' ? 0.7 : 1.3, how: 'pseudo' };
+    const elo = this.dev.find(v => this.genderOf(v) === g) || this.dev[0];
+    return elo ? { voice: elo, pitch: 1, how: 'elo' } : { voice: null, pitch: 1, how: 'none' };
+  },
+  ttsOK() { return !!(this.tts && this.ttsZh); },
+  /* 端末の音声一覧は遅れて届くことがあるので、中国語音声が見つかるまで少し待つ */
+  waitVoices() {
+    if (this._ready) return this._ready;
+    return this._ready = new Promise(res => {
+      const done = () => { this.waited = true; res(); };
+      if (!('speechSynthesis' in window)) return done();
+      this.load(); if (this.dev.length) return done();
+      let n = 0; const iv = setInterval(() => { this.load(); if (this.dev.length || ++n >= 12) { clearInterval(iv); done(); } }, 200);
+    });
+  },
+  /* 中国語の音声が確実に使える手段だけを選ぶ。言語を指定しない既定の音声(日本語)では決して読まない */
+  engine() {
+    const e = S.set.engine;
+    if (e === 'claude' && this.tts) return 'claude';
+    if (this.dev.length) return 'device';
+    if (this.tts && this.ttsZh) return 'claude';
+    return 'none';
+  },
+  warn() { if (window.App) App.header(); },
+  stop() { this.token++; try { speechSynthesis.cancel(); } catch (e) { /* 無視 */ } if (this.tts) this.tts.stop().catch(() => {}); },
+  /* 読み上げ。終わったら true、中断・失敗なら false */
+  async speak(text, o = {}) {
+    const my = ++this.token;
+    await this.waitVoices();
+    if (my !== this.token) return false;
+    const eng = this.engine(), g = o.gender || S.set.gender;
+    const rate = (o.rate || S.set.rate) * (o.slow ? 0.62 : 1);
+    this.warn();
+    return new Promise(res => {
+      let done = false;
+      const fin = ok => { if (done) return; done = true; if (o.onEnd) o.onEnd(); res(ok && my === this.token); };
+      if (eng === 'none') { if (!this._told || Date.now() - this._told > 6000) { this._told = Date.now(); toast('この画面では中国語の音声を再生できません'); } return fin(false); }
+      if (eng === 'claude') {
+        try { speechSynthesis.cancel(); } catch (e) { /* 無視 */ }
+        let started = false;
+        const off = this.tts.onState(e => { if (e.state === 'speaking' && !started) { started = true; if (o.onStart) o.onStart(); } });
+        const lang = 'zh-CN';
+        this.tts.speak([{ text, language: lang }], { voice: g === 'm' ? S.set.cvM : S.set.cvF, rate: clamp(rate + 0.1, 0.7, 1.5), language: lang })
+          .then(() => { off(); fin(true); })
+          .catch(e => { off(); if (e && (e.code === 'not_granted' || e.code === 'unavailable')) { this.tts = null; this.warn(); } fin(false); });
+        return;
+      }
+      const p = this.pick(g);
+      if (!p.voice || !/^(zh|cmn)/i.test(p.voice.lang)) { toast('中国語の音声が見つかりません'); return fin(false); }
+      const u = new SpeechSynthesisUtterance(text);
+      u.voice = p.voice; u.lang = p.voice.lang;
+      u.rate = clamp(rate, 0.4, 1.6); u.pitch = p.pitch;
+      u.onstart = () => { if (my === this.token && o.onStart) o.onStart(); };
+      u.onend = () => fin(true); u.onerror = () => fin(false);
+      if (!this._said) { this._said = true; toast('音声：' + p.voice.name); }
+      const go = () => { if (my !== this.token) return fin(false); speechSynthesis.speak(u); this._u = u; };
+      if (speechSynthesis.speaking || speechSynthesis.pending) { speechSynthesis.cancel(); setTimeout(go, 80); } else go();
+      setTimeout(() => fin(my === this.token), 4000 + text.length * 900 / u.rate);
+    });
+  }
+};
+
+/* ================= 録音 ================= */
+const Mic = {
+  stream: null, ctx: null, blocked: false, stopFn: null,
+  allowed() {
+    if (this.blocked || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return false;
+    try { const fp = document.featurePolicy || document.permissionsPolicy; if (fp && fp.allowsFeature && !fp.allowsFeature('microphone')) return false; } catch (e) { /* 判定不能なら試す */ }
+    return true;
+  },
+  async open() {
+    // タップの直後(許可ダイアログより前)に音声処理を起こす。iPhoneは後からでは起動できないことがある
+    if (!this.ctx || this.ctx.state === 'closed') this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const woke = this.ctx.state === 'suspended' ? this.ctx.resume().catch(() => {}) : null;
+    if (IOS) audioSession('play-and-record');
+    if (!this.stream || !this.stream.active) this.stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } });
+    if (woke) await Promise.race([woke, new Promise(r => setTimeout(r, 800))]);
+    if (this.ctx.state === 'suspended') await Promise.race([this.ctx.resume().catch(() => {}), new Promise(r => setTimeout(r, 800))]);
+    if (this.ctx.state !== 'running') throw new Error('audio-not-running');
+  },
+  /* iPhoneはマイクを握ったままだと、お手本の音が小さく(受話口から)鳴る。録音のたびに手放す */
+  release() {
+    if (!IOS) return;
+    try { if (this.stream) this.stream.getTracks().forEach(t => t.stop()); } catch (e) { /* 無視 */ }
+    this.stream = null; audioSession('auto');
+    try { if (this.ctx && this.ctx.state === 'running') this.ctx.suspend().catch(() => {}); } catch (e) { /* 無視 */ }
+  },
+  record({ maxMs = 12000, onChunk } = {}) {
+    return new Promise(res => {
+      const ctx = this.ctx, src = ctx.createMediaStreamSource(this.stream), proc = ctx.createScriptProcessor(1024, 1, 1), mute = ctx.createGain();
+      mute.gain.value = 0; src.connect(proc); proc.connect(mute); mute.connect(ctx.destination);
+      const chunks = []; let n = 0, speech = 0, silent = 0, done = false; const t0 = performance.now();
+      const guard = setTimeout(() => { if (!n) stop(); }, 2500);   // 音声が1つも届かないときは止める
+      const stop = () => {
+        if (done) return; done = true; this.stopFn = null; clearTimeout(guard);
+        proc.onaudioprocess = null; try { src.disconnect(); proc.disconnect(); mute.disconnect(); } catch (e) { /* 無視 */ }
+        const pcm = new Float32Array(n); let o = 0; for (const c of chunks) { pcm.set(c, o); o += c.length; }
+        res({ pcm, sr: ctx.sampleRate });
+      };
+      this.stopFn = stop;
+      proc.onaudioprocess = e => {
+        const d = new Float32Array(e.inputBuffer.getChannelData(0)); chunks.push(d); n += d.length;
+        let s = 0; for (let i = 0; i < d.length; i++) s += d[i] * d[i];
+        const rms = Math.sqrt(s / d.length), dt = d.length / ctx.sampleRate;
+        if (rms > 0.02) { speech += dt; silent = 0; } else if (rms < 0.012) silent += dt;
+        if (onChunk) onChunk(d, rms);
+        if ((speech > 0.25 && silent > 1.1) || performance.now() - t0 > maxMs) stop();
+      };
+    });
+  }
+};
+let Dict = null;   // Claudeの音声入力(文字起こし)
+function recMode() { return Mic.allowed() ? 'mic' : Dict ? 'dict' : 'none'; }
+function startSR() {
+  const R = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!R || !S.set.sr || IOS) return null;
+  try {
+    const r = new R(); let txt = '';
+    r.lang = 'zh-CN'; r.interimResults = true; r.continuous = true;
+    r.onresult = e => { txt = Array.from(e.results).map(x => x[0].transcript).join(''); };
+    r.onerror = () => {};
+    r.start();
+    return { stop: () => new Promise(res => { let d = false; const f = () => { if (!d) { d = true; res(txt); } }; r.onend = f; try { r.stop(); } catch (e) { f(); } setTimeout(f, 1600); }) };
+  } catch (e) { return null; }
+}
+async function decodeFile(file) {
+  const AC = window.AudioContext || window.webkitAudioContext;
+  const ctx = Mic.ctx || (Mic.ctx = new AC());
+  const buf = await ctx.decodeAudioData(await file.arrayBuffer());
+  return { pcm: buf.getChannelData(0), sr: buf.sampleRate };
+}
+
+/* 全教材から漢字→読み(声調なし)の対応表を作る。同音字を一致と見なすために使う */
+const PYMAP = {};
+function buildPyMap() {
+  const add = (zh, py) => parseLine(zh, py).forEach(s => { if (!PYMAP[s.ch]) PYMAP[s.ch] = s.base; });
+  SCENES.forEach(s => { s.L.forEach(l => add(l[1], l[2])); s.V.forEach(v => add(v[0], v[1])); s.G.ex.forEach(v => add(v[0], v[1])); });
+  LAB.pairs.forEach(p => add(p[0], p[1])); LAB.tones.forEach(t => add(t.zh, t.py));
+  LAB.sandhi.concat(LAB.sounds).forEach(g => g.items.forEach(p => add(p[0], p[1])));
+  Object.assign(PYMAP, { '她': 'ta', '它': 'ta', '的': 'de', '地': 'de', '得': 'de', '在': 'zai', '再': 'zai', '做': 'zuo', '作': 'zuo', '座': 'zuo', '坐': 'zuo' });
+}
+
+/* ================= 声調グラフ ================= */
+const TG = { lg: { col: 62, gh: 104, py: 15, hz: 30 }, md: { col: 50, gh: 78, py: 13, hz: 24 }, sm: { col: 42, gh: 56, py: 12, hz: 20 } };
+function smoothPath(p) {
+  if (p.length === 2) return 'M' + p[0][0].toFixed(1) + ' ' + p[0][1].toFixed(1) + 'L' + p[1][0].toFixed(1) + ' ' + p[1][1].toFixed(1);
+  let d = 'M' + p[0][0].toFixed(1) + ' ' + p[0][1].toFixed(1);
+  for (let i = 0; i < p.length - 1; i++) {
+    const p0 = p[i - 1] || p[i], p1 = p[i], p2 = p[i + 1], p3 = p[i + 2] || p2;
+    d += 'C' + (p1[0] + (p2[0] - p0[0]) / 6).toFixed(1) + ' ' + (p1[1] + (p2[1] - p0[1]) / 6).toFixed(1) + ' ' + (p2[0] - (p3[0] - p1[0]) / 6).toFixed(1) + ' ' + (p2[1] - (p3[1] - p1[1]) / 6).toFixed(1) + ' ' + p2[0].toFixed(1) + ' ' + p2[1].toFixed(1);
+  }
+  return d;
+}
+function mountGraph(box, items, o) {
+  o = Object.assign({ size: 'md' }, o || {});
+  box._tg = { items, o };
+  const g = TG[o.size], AX = 22, PG = 12, top = 16, bottom = g.py + g.hz + 22;
+  const avail = Math.max(240, (box.clientWidth || box.parentElement && box.parentElement.clientWidth || 600));
+  const maxW = avail - AX - 4;
+  // 行分割: 少しのはみ出しは縮小で収め、分けるときは句読点を優先して行の長さをそろえる
+  const N = items.length, totalW = items.reduce((q, it) => q + g.col + (it.gap === 2 ? PG : 0), 0);
+  const nRows = Math.max(1, Math.ceil(totalW / (maxW * 1.16)));
+  const rows = []; let from = 0;
+  for (let r = 0; r < nRows; r++) {
+    let to = r === nRows - 1 ? N : Math.round(N * (r + 1) / nRows);
+    if (r < nRows - 1) {
+      let best = -1;
+      for (let k = Math.max(from + 2, to - 3); k <= Math.min(N - 2, to + 2); k++) if (items[k - 1].gap === 2 && (best < 0 || Math.abs(k - to) < Math.abs(best - to))) best = k;
+      if (best > 0) to = best;
+    }
+    const row = []; for (let k = from; k < to; k++) row.push(k);
+    if (row.length) rows.push(row); from = to;
+  }
+  const Y = l => top + (5.35 - l) / 4.7 * g.gh;
+  const H = top + g.gh + bottom;
+  let html = '';
+  rows.forEach(row => {
+    let x = AX; const W = AX + row.reduce((a, q) => a + g.col + (items[q].gap === 2 ? PG : 0), 0) + 4;
+    let body = '';
+    for (let l = 1; l <= 5; l++) body += '<line class="staff' + (l % 2 === 0 ? ' mid' : '') + '" x1="' + AX + '" x2="' + (W - 2) + '" y1="' + Y(l).toFixed(1) + '" y2="' + Y(l).toFixed(1) + '"/>';
+    body += '<text class="ax" x="2" y="' + (Y(5) + 3.5) + '">高</text><text class="ax" x="2" y="' + (Y(1) + 3.5) + '">低</text>';
+    row.forEach(i => {
+      const s = items[i], pts = contour(s.kind, s.prevKind).map(p => [x + p[0] * g.col, Y(p[1])]);
+      const seg = o.user && o.user[i];
+      let h = '<g class="sy t' + s.real + '" data-i="' + i + '" style="--i:' + i + '">';
+      h += '<rect class="colbg" x="' + (x + 2) + '" y="4" width="' + (g.col - 4) + '" height="' + (H - 8) + '" rx="8"/>';
+      h += '<path class="curve" pathLength="1" d="' + smoothPath(pts) + '"/>';
+      h += '<circle class="nd" cx="' + pts[0][0].toFixed(1) + '" cy="' + pts[0][1].toFixed(1) + '" r="' + (s.kind === '0' ? 3 : 4.2) + '"/>';
+      if (s.sandhi) h += '<text class="sd" x="' + (x + g.col / 2) + '" y="11">' + s.tone + '→' + s.real + '声</text>';
+      if (seg && seg.pts.length > 1) {
+        const up = seg.pts.map(p => [x + (0.05 + 0.9 * p[0]) * g.col, Y(p[1])]);
+        h += '<polyline class="usr" pathLength="40" points="' + up.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ') + '"/>';
+        h += '<circle class="usrd" r="3" cx="' + up[up.length - 1][0].toFixed(1) + '" cy="' + up[up.length - 1][1].toFixed(1) + '"/>';
+      }
+      const ty = top + g.gh + g.py + 6;
+      h += '<text class="pyt" x="' + (x + g.col / 2) + '" y="' + ty + '" font-size="' + g.py + '">' + esc(s.py) + '</text>';
+      h += '<text class="hzt" lang="zh-CN" x="' + (x + g.col / 2) + '" y="' + (ty + g.hz + 2) + '" font-size="' + g.hz + '">' + esc(s.ch) + '</text>';
+      if (seg && seg.score != null) { const c = seg.score >= 0.8 ? 'ok' : seg.score >= 0.4 ? 'mid' : 'ng'; h += '<text class="mk ' + c + '" x="' + (x + g.col / 2) + '" y="' + (H - 2) + '">' + (c === 'ok' ? '○' : c === 'mid' ? '△' : '×') + '</text>'; }
+      if (o.hit && o.hit[i] === false) h += '<line x1="' + (x + 10) + '" x2="' + (x + g.col - 10) + '" y1="' + (ty + g.hz + 7) + '" y2="' + (ty + g.hz + 7) + '" stroke="var(--bad)" stroke-width="2.5" stroke-linecap="round"/>';
+      h += '</g>';
+      x += g.col;
+      if (s.gap === 2) { h += '<text class="pct" lang="zh-CN" x="' + (x + PG / 2 - 3) + '" y="' + (ty + g.hz + 2) + '" font-size="' + (g.hz * 0.8) + '">' + esc(s.punct[0] || '') + '</text>'; x += PG; }
+      body += h;
+    });
+    html += '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" role="img" aria-label="声調の高さの変化">' + body + '</svg>';
+  });
+  box.classList.add('tg');
+  box.classList.toggle('nopy', o.py === false);
+  box.innerHTML = html;
+}
+let rzT = 0;
+addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(() => $$('.tg').forEach(b => { if (b._tg && b.clientWidth) { const w = b.clientWidth; if (b._w !== w) { b._w = w; mountGraph(b, b._tg.items, b._tg.o); } } }), 200); });
+
+/* 再生に合わせて音節を順に光らせ、点を曲線に沿って走らせる */
+function runCursor(box, items, rate) {
+  let stopped = false, timers = [];
+  const per = 235 / rate; let t = 120;
+  items.forEach((s, i) => {
+    const d = s.kind === '0' ? per * 0.65 : per;
+    timers.push(setTimeout(() => {
+      if (stopped) return;
+      $$('.sy.on', box).forEach(n => n.classList.remove('on'));
+      const gEl = $('.sy[data-i="' + i + '"]', box); if (!gEl) return;
+      gEl.classList.add('on');
+      if (!REDUCED) {
+        $$('.runner', box).forEach(n => n.remove());
+        const path = $('.curve', gEl);
+        try {
+          const L = path.getTotalLength(), c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          c.setAttribute('class', 'runner'); c.setAttribute('r', '5.5'); gEl.appendChild(c);
+          const t0 = performance.now();
+          (function mv(now) { if (stopped || !c.isConnected) return; const k = Math.min(1, (now - t0) / d), p = path.getPointAtLength(L * k); c.setAttribute('cx', p.x); c.setAttribute('cy', p.y); if (k < 1) requestAnimationFrame(mv); })(t0);
+        } catch (e) { /* 無視 */ }
+      }
+    }, t));
+    t += d + (s.gap === 2 ? 300 / rate : 0);
+  });
+  return () => { stopped = true; timers.forEach(clearTimeout); $$('.sy.on', box).forEach(n => n.classList.remove('on')); $$('.runner', box).forEach(n => n.remove()); };
+}
+async function speakLine(box, zh, items, o = {}) {
+  let stopCur = null;
+  const rate = (o.rate || S.set.rate) * (o.slow ? 0.62 : 1);
+  const ok = await Voice.speak(zh, Object.assign({}, o, { onStart: () => { if (box) stopCur = runCursor(box, items, rate); }, onEnd: () => { if (stopCur) stopCur(); } }));
+  return ok;
+}
+
+/* ================= 練習カード ================= */
+function scoreRing(score, cls) {
+  const C = 2 * Math.PI * 34;
+  return '<div class="ring s ' + (cls || '') + '"><svg viewBox="0 0 80 80"><circle class="bg" cx="40" cy="40" r="34"/><circle class="fg" cx="40" cy="40" r="34" stroke-dasharray="' + C.toFixed(1) + '" stroke-dashoffset="' + (C * (1 - score / 100)).toFixed(1) + '"/></svg><div class="in"><b class="num">' + score + '</b><span>点</span></div></div>';
+}
+/* 録音中の声の高さを、5段階の目盛りの上に折れ線で描く(横軸は時間) */
+function drawLive(cv, lp, profile, done) {
+  const dpr = devicePixelRatio || 1, cw = cv.clientWidth, ch = cv.clientHeight;
+  if (!cw || !ch) return;
+  if (cv.width !== Math.round(cw * dpr) || cv.height !== Math.round(ch * dpr)) { cv.width = Math.round(cw * dpr); cv.height = Math.round(ch * dpr); }
+  const g = cv.getContext('2d'), cs = getComputedStyle(document.documentElement), col = k => cs.getPropertyValue(k).trim();
+  g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, cw, ch);
+  const L = 26, R = 8, top = 12, gh = ch - 30, now = lp.time(), T = Math.max(3.5, now + 0.35);
+  const X = t => L + (cw - L - R) * t / T, Y = l => top + (5.35 - l) / 4.7 * gh;
+  g.lineWidth = 1; g.strokeStyle = col('--line');
+  for (let l = 1; l <= 5; l++) { g.setLineDash(l % 2 === 0 ? [2, 4] : []); g.beginPath(); g.moveTo(L, Y(l)); g.lineTo(cw - R, Y(l)); g.stroke(); }
+  g.setLineDash([]);
+  g.fillStyle = col('--muted'); g.font = '700 10px ' + (cs.getPropertyValue('--ui') || 'sans-serif'); g.textBaseline = 'middle';
+  g.fillText('高', 4, Y(5)); g.fillText('低', 4, Y(1));
+  g.textBaseline = 'alphabetic';
+  for (let t = 1; t < T; t++) g.fillText(t + '秒', X(t) - 8, ch - 4);
+  const fr = lp.frames, lv = liveLevels(fr, profile);
+  // 3フレーム未満の孤立した点は雑音として描かない(いま鳴っている末尾は除く)
+  const runs = []; let st = -1;
+  for (let i = 0; i <= fr.length; i++) { const on = i < fr.length && lv[i] != null; if (on && st < 0) st = i; if (!on && st >= 0) { if (i - st >= 3 || i === fr.length) runs.push([st, i]); st = -1; } }
+  g.strokeStyle = col('--gold'); g.fillStyle = col('--gold'); g.lineWidth = 3.2; g.lineJoin = 'round'; g.lineCap = 'round';
+  let last = null;
+  for (const [a, b] of runs) {
+    g.beginPath();
+    for (let i = a; i < b; i++) { const x = X(fr[i].t), y = Y(lv[i]); i === a ? g.moveTo(x, y) : g.lineTo(x, y); last = [x, y, fr[i].t]; }
+    g.stroke();
+  }
+  if (!done) {
+    g.strokeStyle = col('--muted'); g.lineWidth = 1; g.setLineDash([3, 3]); g.beginPath(); g.moveTo(X(now), top - 6); g.lineTo(X(now), top + gh + 4); g.stroke(); g.setLineDash([]);
+    if (last && now - last[2] < 0.2) { g.fillStyle = col('--gold'); g.beginPath(); g.arc(last[0], last[1], 6, 0, 6.3); g.fill(); g.strokeStyle = col('--surface'); g.lineWidth = 2; g.stroke(); }
+  }
+}
+/* item: {zh, py, ja}  o: {key, size, gender, onScore(score), compact} */
+function practiceCard(item, o = {}) {
+  const items = parseLine(item.zh, item.py);
+  const mode = recMode();
+  const pc = el('<div class="pc"><div class="tgbox"></div>' + (item.ja ? '<p class="ja">' + esc(item.ja) + '</p>' : '') +
+    '<div class="row pc-btns"><button class="btn pri" data-a="play">' + IC.play + 'お手本</button><button class="btn" data-a="slow">' + IC.slow + 'ゆっくり</button>' +
+    (mode !== 'none' ? '<button class="btn rec" data-a="rec">' + IC.mic + '録音して判定</button>' : '') +
+    '<label class="btn" title="録音した音声ファイルを分析します">' + IC.file + '録音ファイルを分析<input type="file" accept="audio/*,video/*,.m4a,.mp3,.wav,.aac,.caf,.mov,.mp4" hidden></label>' +
+    (o.key && S.pr[o.key] != null ? '<span class="pill gold num">自己ベスト ' + S.pr[o.key] + '点</span>' : '') + '</div>' +
+    '<div class="pc-live" hidden><canvas aria-label="録音中の声の高さ"></canvas><div class="live-foot"><span class="small muted">聞いています…</span><button class="btn sm" data-a="stop">' + IC.stop + '止める</button></div></div>' +
+    '<div class="pc-res" hidden></div>' +
+    (mode === 'none' ? '<p class="note">' + (IOS ? 'この表示ではマイクを使えません。iPhoneでは、Safariで開く公開ページ版なら、その場で録音して声の高さを折れ線にできます。' : 'この表示ではマイクを使えません。Chromeで開くファイル版なら、その場で録音して声の高さを分析できます。') + 'ここでは「録音ファイルを分析」で音声ファイルを読み込めます。</p>' : mode === 'dict' ? '<p class="note">この表示では「聞き取り判定」(話した内容が中国語として正しく聞き取れるか)が使えます。声の高さをその場で折れ線にするリアルタイム表示は、Chromeで開くファイル版で使えます(録音済みの音声は「録音ファイルを分析」で分析できます)。</p>' : '') + '</div>');
+  const box = $('.tgbox', pc), live = $('.pc-live', pc), res = $('.pc-res', pc), cv = $('canvas', pc);
+  const draw = extra => mountGraph(box, items, Object.assign({ size: o.size || 'lg', py: S.set.py }, extra || {}));
+  requestAnimationFrame(() => draw());
+  const btn = a => $('[data-a="' + a + '"]', pc);
+  let busy = false;
+
+  async function play(slow) {
+    const b = btn(slow ? 'slow' : 'play'); b.classList.add('speaking');
+    await speakLine(box, item.zh, items, { slow, gender: o.gender });
+    b.classList.remove('speaking');
+  }
+  function finish(result) {
+    // result: {tone, text} のどちらか、または両方
+    const tone = result.tone, text = result.text;
+    let score = 0;
+    if (tone && tone.ok && text) score = Math.round(tone.score * 0.6 + text.score * 0.4);
+    else if (tone && tone.ok) score = tone.score; else if (text) score = text.score;
+    draw({ user: tone && tone.ok ? tone.segs : null, hit: text ? text.hit : null });
+    const verdict = score >= 85 ? 'バッチリです！' : score >= 65 ? 'いい流れです' : 'もう一度いきましょう';
+    let h = '<div class="res-top">' + scoreRing(score) + '<div><h3>' + verdict + '</h3>';
+    if (tone && tone.ok) h += '<p class="small muted">声調スコア ' + tone.score + '点(判定 ' + tone.judged + '音節)。金色の点線があなたの声です。</p>';
+    else if (tone) h += '<p class="small muted">声をうまく拾えませんでした。マイクに近づいて、もう一度お願いします。</p>';
+    h += '</div></div>';
+    if (text) h += '<div><p class="small muted">聞き取られた中国語(一致 ' + text.score + '％)</p><p class="heard" lang="zh-CN">' + (text.heard ? esc(text.heard) : '<span class="muted small">(聞き取れませんでした)</span>') + '</p></div>';
+    if (tone && tone.ok) {
+      const bad = tone.segs.map((s, i) => ({ s, i })).filter(q => q.s.advice);
+      if (bad.length) h += '<ul class="adv">' + bad.slice(0, 5).map(q => '<li><span class="w" lang="zh-CN" style="color:var(--t' + items[q.i].real + ')">' + esc(items[q.i].ch) + '<small>' + esc(items[q.i].py) + '</small></span><span>' + esc(q.s.advice) + '</span></li>').join('') + '</ul>';
+      else h += '<p class="small">すべての音節で、目標の形に近い高さの動きが出ています。</p>';
+      h += '<p class="small muted">声の高さから形を推定する簡易分析です。目安としてお使いください。</p>';
+    }
+    res.innerHTML = h; res.hidden = false;
+    if ((tone && tone.ok) || text) {
+      if (tone && tone.range) { S.range = S.range ? { lo: S.range.lo * 0.7 + tone.range.lo * 0.3, hi: S.range.hi * 0.7 + tone.range.hi * 0.3 } : tone.range; }
+      S.hist.push({ t: Date.now(), s: score }); if (S.hist.length > 60) S.hist.shift();
+      let bonus = '';
+      if (o.key) { const prev = S.pr[o.key]; if (prev == null || score > prev) { S.pr[o.key] = score; if (prev != null) bonus = '自己ベスト更新'; } }
+      addXP(Math.max(2, Math.round(score / 10)), bonus);
+      if (score >= 90) confetti(40);
+      if (o.onScore) o.onScore(score);
+    }
+  }
+  async function analyzePcm(rec, textP) {
+    const tr = pitchTrack(rec.pcm, rec.sr);
+    const tone = analyzeUtterance(tr, items, S.range);
+    let text = null;
+    if (textP) { const heard = await textP; if (heard) text = compareText(items, heard, PYMAP); }
+    finish({ tone, text });
+  }
+  async function recMic() {
+    try { await Mic.open(); }
+    catch (e) {
+      Mic.release();
+      const denied = e && (e.name === 'NotAllowedError' || e.name === 'SecurityError');
+      if (denied || !IOS) Mic.blocked = !IOS;   // iPhoneは設定を直せば再挑戦できるので、ボタンは残す
+      toast('マイクを使えませんでした');
+      res.innerHTML = '<p class="small">' + (IOS
+        ? (denied ? 'マイクが許可されていません。iPhoneの「設定」→「アプリ」→「Safari」(Chromeの場合は「Chrome」)→「マイク」を「許可」または「確認」にして、このページを読み込み直してください。' : 'マイクを開始できませんでした。ページを読み込み直して、もう一度お試しください。')
+        : 'マイクへのアクセスが許可されませんでした。ブラウザのアドレスバーからマイクを許可するか、「録音ファイルを分析」をお使いください。') + '</p>';
+      res.hidden = false; return;
+    }
+    Voice.stop();
+    const lp = livePitch(Mic.ctx.sampleRate), cap = $('.live-foot span', live);
+    live.classList.add('pitch'); live.classList.remove('done'); live.hidden = false; res.hidden = true; btn('rec').classList.add('live');
+    cap.textContent = '話してください。声の高さがその場で線になります(金色の線＝あなたの声)';
+    drawLive(cv, lp, S.range, false);
+    const sr = startSR();
+    const rec = await Mic.record({ onChunk: d => { lp.push(d); drawLive(cv, lp, S.range, false); } });
+    Mic.release();
+    btn('rec').classList.remove('live');
+    if (!rec.pcm.length) { live.hidden = true; res.innerHTML = '<p class="small">マイクから音が届きませんでした。ほかのアプリがマイクを使っていないか確認して、もう一度お試しください。</p>'; res.hidden = false; return; }
+    live.classList.add('done'); cap.textContent = 'いまの録音の声の高さ(横軸は時間)';
+    drawLive(cv, lp, S.range, true);
+    await analyzePcm(rec, sr ? sr.stop() : null);
+  }
+  function recDict() {
+    let finalT = '', partial = '', idle = 0, ended = false;
+    const offs = [];
+    const end = async () => {
+      if (ended) return; ended = true; clearInterval(tick);
+      try { await Dict.stop(); } catch (e) { /* 無視 */ }
+      offs.forEach(f => f()); live.hidden = true; btn('rec').classList.remove('live'); busy = false;
+      finish({ text: compareText(items, finalT + partial, PYMAP) });
+    };
+    const p = Dict.start({ language: 'zh' });   // クリックから同期的に呼ぶ
+    Voice.stop();
+    live.classList.remove('pitch', 'done'); live.hidden = false; res.hidden = true; btn('rec').classList.add('live');
+    const lab = $('span', live); lab.textContent = '聞いています…';
+    offs.push(Dict.onPartial(e => { partial = e.text; idle = 0; lab.textContent = (finalT + partial) || '聞いています…'; }));
+    offs.push(Dict.onFinal(e => { finalT += e.text; partial = ''; idle = 0; lab.textContent = finalT; }));
+    offs.push(Dict.onState(e => { if (e.state === 'idle' && !ended) end(); }));
+    const t0 = Date.now();
+    const tick = setInterval(() => { idle += 0.25; const got = (finalT + partial).length; if ((got && idle > 1.6) || Date.now() - t0 > 14000) end(); }, 250);
+    live._end = end;
+    p.catch(e => {
+      if (ended) return;
+      ended = true; clearInterval(tick); offs.forEach(f => f()); live.hidden = true; btn('rec').classList.remove('live'); busy = false;
+      const code = e && e.code;
+      if (code === 'not_granted' || code === 'unavailable') { Dict = null; btn('rec').hidden = true; }
+      res.innerHTML = '<p class="small">' + (code === 'unavailable' ? 'この環境では中国語の聞き取りが使えません。「録音ファイルを分析」をお使いください。' : code === 'not_granted' ? '音声入力が許可されていません。' : '聞き取りを開始できませんでした。もう一度お試しください。') + '</p>'; res.hidden = false;
+    });
+  }
+  pc.addEventListener('click', async e => {
+    const b = e.target.closest('[data-a]'); if (!b) return;
+    const a = b.dataset.a;
+    if (a === 'stop') { if (Mic.stopFn) Mic.stopFn(); if (live._end) live._end(); return; }
+    if (busy) return;   // 録音中はほかの操作を受け付けない(再生中の録音開始は可)
+    if (a === 'rec') {
+      if (recMode() === 'dict') { busy = true; recDict(); return; }
+      busy = true; try { await recMic(); } finally { busy = false; }
+      return;
+    }
+    play(a === 'slow');
+  });
+  $('input[type=file]', pc).addEventListener('change', async e => {
+    const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+    try { const rec = await decodeFile(f); await analyzePcm(rec, null); }
+    catch (err) { res.innerHTML = '<p class="small">この音声ファイルは読み込めませんでした。m4a・mp3・wav などの形式でお試しください。</p>'; res.hidden = false; }
+  });
+  pc._play = play;
+  return pc;
+}
+
+/* 画面 */
+const WORDS = {};
+SCENES.forEach(s => s.V.forEach(v => { if (!WORDS[v[0]]) WORDS[v[0]] = { zh: v[0], py: v[1], ja: v[2], sc: s.id }; }));
+const findScene = id => SCENES.find(s => s.id === id);
+const lineGender = (sc, role) => (S.set.duo && role === 'p') ? sc.pg : S.set.gender;
+const whoLabel = (sc, role) => role === 'm' ? 'あなた' : sc.who;
+const starsHtml = (n, fresh) => '<span class="stars" aria-label="星' + n + 'つ">' + [0, 1, 2].map(i => '<span class="' + (i < n ? 'on' + (fresh ? ' new' : '') : '') + '">' + IC.star + '</span>').join('') + '</span>';
+const dueWords = () => Object.keys(S.srs).filter(k => WORDS[k] && S.srs[k].d <= today());
+function srsUpdate(zh, known) {
+  const c = S.srs[zh] || { b: 0, d: today() };
+  if (known) { c.b = Math.min(5, c.b + 1); c.d = addDays(today(), [1, 2, 4, 8, 16, 30][c.b]); } else { c.b = 0; c.d = today(); }
+  S.srs[zh] = c; Store.save();
+}
+function nextScene() {
+  for (const c of COURSES) for (const s of SCENES.filter(x => x.c === c.id)) if (unlocked(s) && starsOf(s.id) < 3) return s;
+  return SCENES[0];
+}
+const VOWELS = { a: 'āáǎà', e: 'ēéěè', i: 'īíǐì', o: 'ōóǒò', u: 'ūúǔù', 'ü': 'ǖǘǚǜ' };
+function markPy(base, tone) {
+  if (!tone) return base;
+  let pos = base.indexOf('a'); if (pos < 0) pos = base.indexOf('e'); if (pos < 0) pos = base.indexOf('ou') >= 0 ? base.indexOf('o') : -1;
+  if (pos < 0) for (let i = base.length - 1; i >= 0; i--) if (VOWELS[base[i]]) { pos = i; break; }
+  if (pos < 0) return base;
+  return base.slice(0, pos) + VOWELS[base[pos]][tone - 1] + base.slice(pos + 1);
+}
+const SEGDICT = new Set(('我们 你们 什么 怎么 这个 那个 今天 明天 谢谢 可以 一起 一下 一点 有点 没有 不过 喜欢 时间 公司 没问题 怎么样 妈妈 老婆 早上 晚上 咖啡 米饭 中文 日本 休息 电话 希望 合作 名片 礼物 打开 看看 身边 约定 原谅 保证 当然 记得 对不起 应该 认真 回来 一直 出发 开车 红叶 大概 小时 几点 水果 鸡蛋 超市 上班 照顾 行李 外面 安排 打扫 垃圾 以后 两个 纪念日 结婚 快乐 老家 努力 所以 只要 初次 见面 关照 经理 负责 系统 运维 自动化 愉快 先生 请问 伙伴 上周 开会 下周三 项目 进展 开始 需要 增加 人手 明白 招待 酒量 干杯 生意 兴隆 味道 非常 觉得 服务 质量 包括 支持 合同 期待 消息 介绍 方案 目前 主要 人工 通过 减少 百分之 工作量 所有 操作 记录 随时 检查 实话 每天 幸福 适合 颜色 好看 今晚 有空 晚饭 约会 火锅店 生气 旅行 地方 很多 不错 左右 学习 身体 开心 好吃 辛苦 便当 准备 发烧 舒服 体温 欢迎 慢慢 周末 打算 您好 你好 再见 哪里').split(' ').concat(Object.keys(WORDS)));
+function segment(zh) {
+  const cs = Array.from(zh).filter(c => !PUNCT_RE.test(c)); const out = [];
+  for (let i = 0; i < cs.length;) { let hit = 1; for (let n = 4; n >= 2; n--) if (SEGDICT.has(cs.slice(i, i + n).join(''))) { hit = n; break; } out.push(cs.slice(i, i + hit).join('')); i += hit; }
+  return out;
+}
+
+const App = {
+  ui: { tab: {}, lab: 'tones' },
+  name() { const h = (location.hash || '#home').slice(1); return /^[a-z0-9-]+$/.test(h) ? h : 'home'; },
+  header() {
+    const lv = levelOf(S.xp), active = S.streak.last === today() || S.streak.last === addDays(today(), -1);
+    const n = active ? S.streak.n : 0;
+    $('#st-streak').className = 'stat streak' + (n ? '' : ' zero');
+    $('#st-streak').innerHTML = '<span class="' + (n ? 'flame' : '') + '">' + IC.flame + '</span><span class="num">' + n + '日連続</span>';
+    $('#st-lv').innerHTML = '<span class="num">Lv ' + lv.L + '</span><span class="xpbar" title="次のレベルまで ' + (lv.need - lv.cur) + ' XP"><i style="width:' + Math.round(100 * lv.cur / lv.need) + '%"></i></span>';
+    const nv = $('#novoice'); if (nv) nv.hidden = !(Voice.waited && Voice.engine() === 'none');
+    const r = this.name(), top = r.startsWith('course') || r.startsWith('s-') ? 'courses' : r;
+    const due = dueWords().length;
+    $('#nav').innerHTML = [['home', 'ホーム'], ['courses', 'コース'], ['lab', '発音ラボ'], ['review', '復習' + (due ? '<span class="dot num">' + due + '</span>' : '')], ['record', '記録'], ['voice', '音声と設定']]
+      .map(x => '<a href="#' + x[0] + '" class="' + (top === x[0] ? 'on' : '') + '">' + x[1] + '</a>').join('');
+  },
+  refresh() { this.header(); this.render(); },
+  render() {
+    Voice.stop(); if (Mic.stopFn) Mic.stopFn();
+    const v = $('#view'), r = this.name();
+    v.innerHTML = '';
+    if (r === 'courses') vCourses(v);
+    else if (r.startsWith('course-')) vCourse(v, r.slice(7));
+    else if (r.startsWith('s-') && findScene(r.slice(2))) vScene(v, findScene(r.slice(2)));
+    else if (r === 'lab') vLab(v);
+    else if (r === 'review') vReview(v);
+    else if (r === 'record') vRecord(v);
+    else if (r === 'voice') vVoice(v);
+    else vHome(v);
+    this.header();
+  }
+};
+window.App = App;
+
+/* ---------- ホーム ---------- */
+function vHome(v) {
+  const lv = levelOf(S.xp), tx = todayXP(), goal = S.set.goal, C = 2 * Math.PI * 56;
+  const pool = []; SCENES.forEach(s => s.L.forEach((l, i) => { if (l[0] === 'm' && Array.from(l[1]).length <= 11) pool.push({ s, i, l }); }));
+  const d = new Date(), doy = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5);
+  const pick = pool[doy % pool.length], nx = nextScene(), due = dueWords().length;
+  const hello = d.getHours() < 11 ? '早上好' : d.getHours() < 18 ? '你好' : '晚上好';
+  v.innerHTML =
+    '<section class="hero"><div class="card hero-main"><h1>今日のひとこと<span class="pill" style="margin-left:8px">' + esc(pick.s.t) + '</span></h1><div id="potd"></div></div>' +
+    '<div class="card goal"><p class="eyebrow"><span class="hz" lang="zh-CN" style="font-size:20px;letter-spacing:.05em;color:var(--ink)">' + hello + '</span>　今日の目標</p>' +
+    '<div class="ring"><svg viewBox="0 0 132 132"><circle class="bg" cx="66" cy="66" r="56"/><circle class="fg" cx="66" cy="66" r="56" stroke-dasharray="' + C.toFixed(1) + '" stroke-dashoffset="' + (C * (1 - Math.min(1, tx / goal))).toFixed(1) + '"/></svg><div class="in"><b class="num">' + tx + '</b><span>/ ' + goal + ' XP</span></div></div>' +
+    '<p class="small"><b>Lv ' + lv.L + '　' + esc(titleOf(lv.L)) + '</b><br><span class="muted">次のレベルまで <span class="num">' + (lv.need - lv.cur) + '</span> XP</span></p></div></section>' +
+    '<section class="card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><div style="flex:1;min-width:220px"><p class="eyebrow">続きから</p><h2 style="font-size:20px"><span class="hz" lang="zh-CN" style="font-size:26px;margin-right:10px">' + esc(nx.zt) + '</span>' + esc(nx.t) + '</h2><p class="small muted">' + esc(COURSES.find(c => c.id === nx.c).name) + 'コース　レベル' + nx.lv + '　相手：' + esc(nx.who) + '</p></div>' + starsHtml(starsOf(nx.id)) + '<a class="btn pri" href="#s-' + nx.id + '">このシーンを始める' + IC.next + '</a></section>' +
+    '<section class="grid"><div class="sec-h"><h2>コース</h2><span class="small muted">会話シーンでレベルを上げていきます</span></div><div class="grid g3" id="cs"></div></section>' +
+    '<section class="grid g2"><a class="card course" href="#lab"><p class="eyebrow">発音ラボ</p><div class="zh" lang="zh-CN">声调<small>shēng diào</small></div><p class="small muted">四声・変調・日本人が苦手な音を、グラフと録音で集中的に鍛えます。</p></a>' +
+    '<a class="card course" href="#review"><p class="eyebrow">復習</p><div class="zh" lang="zh-CN">复习<small>fù xí</small></div><p class="small muted">' + (due ? '今日の復習は <b class="num" style="color:var(--t1)">' + due + '</b> 語あります。' : '覚えた単語は、忘れかけた頃にここへ戻ってきます。') + '</p></a></section>';
+  $('#potd').appendChild(practiceCard({ zh: pick.l[1], py: pick.l[2], ja: pick.l[3] }, { key: pick.s.id + '-' + pick.i, size: 'lg' }));
+  courseCards($('#cs'));
+}
+function courseCards(box) {
+  box.innerHTML = COURSES.map(c => {
+    const list = SCENES.filter(s => s.c === c.id), got = list.reduce((a, s) => a + starsOf(s.id), 0), max = list.length * 3;
+    return '<a class="card course" href="#course-' + c.id + '"><p class="eyebrow">' + esc(c.name) + 'コース</p><div class="zh" lang="zh-CN">' + c.zh + '<small>' + c.py + '</small></div><p class="small muted">' + esc(c.desc) + '</p><div class="bar"><i style="width:' + Math.round(100 * got / max) + '%"></i></div><p class="small num"><b>' + got + '</b> / ' + max + ' ★　全' + list.length + 'シーン</p></a>';
+  }).join('');
+}
+function vCourses(v) {
+  v.innerHTML = '<div class="sec-h"><h2>コース</h2><span class="small muted">各シーンは「会話→単語→発音→ロールプレイ→クイズ」の5ステップ</span></div><div class="grid g3" id="cs"></div>';
+  courseCards($('#cs'));
+}
+function vCourse(v, id) {
+  const c = COURSES.find(x => x.id === id); if (!c) return vCourses(v);
+  const list = SCENES.filter(s => s.c === id);
+  let h = '<a class="back" href="#courses">← コース一覧</a><div class="scene-h"><p class="eyebrow">' + esc(c.name) + 'コース</p><div class="zt" lang="zh-CN">' + c.zh + ' <span class="py muted" style="font-size:16px;font-weight:600">' + c.py + '</span></div><p class="muted">' + esc(c.desc) + '</p></div>';
+  let lv = 0;
+  list.forEach(s => {
+    if (s.lv !== lv) { lv = s.lv; h += '<div class="lvh">レベル ' + lv + '</div>'; }
+    const ok = unlocked(s);
+    h += '<a class="card scn flat' + (ok ? '' : ' lock') + '" ' + (ok ? 'href="#s-' + s.id + '"' : 'aria-disabled="true" title="前のシーンで★を1つ取ると開きます"') + '><span class="zt" lang="zh-CN">' + esc(s.zt) + '</span><span><h3>' + esc(s.t) + '</h3><span class="small muted">相手：' + esc(s.who) + '</span></span>' + (ok ? starsHtml(starsOf(s.id)) : '<span class="muted" style="width:22px">' + IC.lock + '</span>') + '</a>';
+  });
+  v.innerHTML = h;
+}
+
+/* ---------- シーン ---------- */
+const TABS = [['dialog', '会話'], ['vocab', '単語'], ['grammar', '文法'], ['speak', '発音'], ['role', 'ロールプレイ'], ['quiz', 'クイズ']];
+function vScene(v, sc) {
+  if (!unlocked(sc)) { location.hash = '#course-' + sc.c; return; }
+  const c = COURSES.find(x => x.id === sc.c);
+  v.innerHTML = '<a class="back" href="#course-' + sc.c + '">← ' + esc(c.name) + 'コース</a><div class="scene-h"><p class="eyebrow">レベル ' + sc.lv + '　相手：' + esc(sc.who) + '</p><div class="row" style="justify-content:space-between"><div class="zt" lang="zh-CN">' + esc(sc.zt) + '</div><span id="scstars"></span></div><h2 style="font-size:20px">' + esc(sc.t) + '</h2><p class="muted">' + esc(sc.desc) + '</p></div><div class="tabs" id="tabs" role="tablist"></div><div id="tab" class="grid"></div>';
+  const draw = () => {
+    const cur = App.ui.tab[sc.id] || 'dialog', st = stepsOf(sc.id);
+    $('#scstars').innerHTML = starsHtml(starsOf(sc.id));
+    $('#tabs').innerHTML = TABS.map(t => '<button role="tab" aria-selected="' + (cur === t[0]) + '" class="' + (cur === t[0] ? 'on' : '') + '" data-t="' + t[0] + '">' + t[1] + (st[t[0]] ? '<span class="ck">✓</span>' : '') + '</button>').join('');
+    Voice.stop(); if (Mic.stopFn) Mic.stopFn();
+    const box = $('#tab'); box.innerHTML = '';
+    ({ dialog: tDialog, vocab: tVocab, grammar: tGrammar, speak: tSpeak, role: tRole, quiz: tQuiz })[cur](box, sc, draw);
+  };
+  $('#tabs').addEventListener('click', e => { const b = e.target.closest('[data-t]'); if (b) { App.ui.tab[sc.id] = b.dataset.t; draw(); } });
+  draw();
+}
+function viewToggles() {
+  return '<label class="sw"><input type="checkbox" id="tg-py" ' + (S.set.py ? 'checked' : '') + '>ピンイン</label><label class="sw"><input type="checkbox" id="tg-ja" ' + (S.set.ja ? 'checked' : '') + '>日本語訳</label>';
+}
+const LEGEND = '<div class="legend"><span><i style="background:var(--t1)"></i>第1声</span><span><i style="background:var(--t2)"></i>第2声</span><span><i style="background:var(--t3)"></i>第3声</span><span><i style="background:var(--t4)"></i>第4声</span><span><i style="background:var(--t0)"></i>軽声</span><span style="color:var(--gold)">金色の表示＝変調(実際の発音)</span></div>';
+function tDialog(box, sc, redraw) {
+  box.innerHTML = '<div class="row"><button class="btn pri" id="all">' + IC.play + '全文を通して聞く</button>' + viewToggles() + '</div>' + LEGEND + '<div class="grid' + (S.set.ja ? '' : ' noja') + '" id="lines"></div>';
+  const wrap = $('#lines'), parsed = [];
+  sc.L.forEach((l, i) => {
+    const items = parseLine(l[1], l[2]); parsed.push(items);
+    const n = el('<div class="card flat line ' + (l[0] === 'm' ? 'me' : '') + '"><div class="line-h"><span class="pill ' + (l[0] === 'm' ? 'me' : '') + '">' + esc(whoLabel(sc, l[0])) + '</span><span class="sp"><button class="btn ico sm" data-p="' + i + '" aria-label="再生">' + IC.play + '</button><button class="btn ico sm" data-p="' + i + '" data-slow="1" aria-label="ゆっくり再生">' + IC.slow + '</button></span></div><div class="tgbox"></div><p class="ja">' + esc(l[3]) + '</p></div>');
+    wrap.appendChild(n);
+  });
+  requestAnimationFrame(() => $$('.tgbox', wrap).forEach((b, i) => mountGraph(b, parsed[i], { size: 'md', py: S.set.py })));
+  const playOne = (i, slow) => speakLine($$('.tgbox', wrap)[i], sc.L[i][1], parsed[i], { slow, gender: lineGender(sc, sc.L[i][0]) });
+  wrap.addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (b) playOne(+b.dataset.p, !!b.dataset.slow); });
+  let running = false;
+  $('#all').addEventListener('click', async () => {
+    const btn = $('#all');
+    if (running) { Voice.stop(); return; }
+    running = true; btn.innerHTML = IC.stop + '止める';
+    let ok = true;
+    for (let i = 0; i < sc.L.length && ok; i++) {
+      const card = wrap.children[i]; if (!card.isConnected) { ok = false; break; }
+      card.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
+      ok = await playOne(i, false);
+      if (ok) await new Promise(r => setTimeout(r, 350));
+    }
+    running = false;
+    if (!btn.isConnected) return;
+    btn.innerHTML = IC.play + '全文を通して聞く';
+    if (ok) { const first = markStep(sc.id, 'dialog'); addXP(first ? 10 : 3, first ? '会話を聞き終えました' : ''); redraw(); }
+  });
+  $('#tg-py').addEventListener('change', e => { S.set.py = e.target.checked; Store.save(); $$('.tgbox', wrap).forEach((b, i) => mountGraph(b, parsed[i], { size: 'md', py: S.set.py })); });
+  $('#tg-ja').addEventListener('change', e => { S.set.ja = e.target.checked; Store.save(); wrap.classList.toggle('noja', !S.set.ja); });
+}
+
+/* 単語カード(シーンの単語タブと復習で共用) */
+function flashDeck(box, words, onDone) {
+  let i = 0, known = 0;
+  const show = () => {
+    if (i >= words.length) { onDone(known); return; }
+    const w = words[i];
+    box.innerHTML = '<p class="small muted num" style="text-align:center">' + (i + 1) + ' / ' + words.length + '　カードを押すと意味が出ます</p>' +
+      '<button class="flip" aria-label="カードを裏返す"><span class="flip-in"><span class="face"><span class="zh" lang="zh-CN">' + esc(w.zh) + '</span><span class="pyl">' + esc(w.py) + '</span></span><span class="face b"><span class="jl">' + esc(w.ja) + '</span><span class="hz" lang="zh-CN" style="font-size:22px">' + esc(w.zh) + '</span><span class="pyl">' + esc(w.py) + '</span></span></span></button>' +
+      '<div class="row" style="justify-content:center"><button class="btn" id="fc-play">' + IC.play + '発音を聞く</button><button class="btn" id="fc-no">まだ</button><button class="btn pri" id="fc-yes">覚えた</button></div>';
+    const f = $('.flip', box);
+    f.addEventListener('click', () => f.classList.toggle('on'));
+    $('#fc-play', box).addEventListener('click', () => Voice.speak(w.zh, {}));
+    const next = ok => { srsUpdate(w.zh, ok); if (ok) known++; f.style.setProperty('--dx', ok ? '80px' : '-80px'); f.style.setProperty('--rot', ok ? '8deg' : '-8deg'); f.classList.add('fc-out'); setTimeout(() => { i++; show(); }, REDUCED ? 0 : 260); };
+    $('#fc-no', box).addEventListener('click', () => next(false));
+    $('#fc-yes', box).addEventListener('click', () => next(true));
+    Voice.speak(w.zh, {});
+  };
+  show();
+}
+function tVocab(box, sc, redraw) {
+  const words = sc.V.map(v => ({ zh: v[0], py: v[1], ja: v[2] }));
+  const list = '<div class="card flat"><p class="eyebrow">このシーンの単語</p><div class="chips" style="margin-top:8px">' + words.map((w, i) => '<button class="chipb" data-w="' + i + '"><span class="zh" lang="zh-CN">' + esc(w.zh) + '</span><span class="pyl">' + esc(w.py) + '</span><span class="small">' + esc(w.ja) + '</span></button>').join('') + '</div></div>';
+  const start = () => {
+    box.innerHTML = '<div id="deck" class="grid"></div>';
+    flashDeck($('#deck'), shuffle(words), known => {
+      const first = markStep(sc.id, 'vocab');
+      addXP(known * 2 + (first ? 6 : 0), known + '語を覚えました');
+      redraw();
+    });
+  };
+  box.innerHTML = list + '<div class="row"><button class="btn pri" id="go">' + IC.play + 'カードで覚える</button><span class="small muted">「覚えた」単語は、日をあけて復習に出ます。</span></div>';
+  box.addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (b) Voice.speak(words[+b.dataset.w].zh, {}); });
+  $('#go').addEventListener('click', start);
+}
+function tGrammar(box, sc) {
+  box.innerHTML = '<div class="card flat grid"><p class="eyebrow">文法のポイント</p><h3 style="font-size:20px">' + esc(sc.G.t) + '</h3><p style="max-width:65ch">' + esc(sc.G.b) + '</p></div><div class="grid g2" id="exs"></div>';
+  sc.G.ex.forEach(x => { const c = el('<div class="card flat"></div>'); c.appendChild(practiceCard({ zh: x[0], py: x[1], ja: x[2] }, { size: 'md' })); $('#exs').appendChild(c); });
+}
+function tSpeak(box, sc, redraw) {
+  const order = sc.L.map((l, i) => i).filter(i => sc.L[i][0] === 'm').concat(sc.L.map((l, i) => i).filter(i => sc.L[i][0] === 'p'));
+  let k = App.ui['sp-' + sc.id] || 0;
+  const rec = () => (S.sc[sc.id] = S.sc[sc.id] || { st: {} });
+  const done = i => { const r = rec(); r.sp = r.sp || {}; if (!r.sp[i]) { r.sp[i] = 1; Store.save(); } if (Object.keys(r.sp).length >= 3 && markStep(sc.id, 'speak')) { addXP(10, '発音ステップ完了'); redraw(); return true; } return false; };
+  const show = () => {
+    App.ui['sp-' + sc.id] = k;
+    const i = order[k], l = sc.L[i], sp = rec().sp || {};
+    box.innerHTML = '<p class="small muted">自分のセリフ4つから順に練習します。3つ以上練習するとステップ完了です。</p><div class="dots">' + order.map((q, n) => '<button class="num ' + (n === k ? 'on ' : '') + (sp[q] ? 'done' : '') + '" data-k="' + n + '" aria-label="' + (n + 1) + '番目">' + (n + 1) + '</button>').join('') + '</div><div class="card grid" id="pcw"><div class="row"><span class="pill ' + (l[0] === 'm' ? 'me' : '') + '">' + esc(whoLabel(sc, l[0])) + 'のセリフ</span></div></div>' + LEGEND + '<div class="pager"><button class="btn" id="pv" ' + (k === 0 ? 'disabled' : '') + '>' + IC.prev + '前へ</button>' + (recMode() === 'none' ? '<button class="btn" id="self">声に出して練習した</button>' : '') + '<button class="btn" id="nx" ' + (k === order.length - 1 ? 'disabled' : '') + '>次へ' + IC.next + '</button></div>';
+    $('#pcw').appendChild(practiceCard({ zh: l[1], py: l[2], ja: l[3] }, { key: sc.id + '-' + i, size: 'lg', gender: lineGender(sc, l[0]), onScore: () => { if (!done(i)) { const d = $$('.dots button', box)[k]; if (d) d.classList.add('done'); } } }));
+    $('#pv').addEventListener('click', () => { k--; show(); });
+    $('#nx').addEventListener('click', () => { k++; show(); });
+    if ($('#self')) $('#self').addEventListener('click', () => { addXP(3); if (!done(i)) { if (k < order.length - 1) k++; show(); } });
+    $('.dots', box).addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (b) { k = +b.dataset.k; show(); } });
+  };
+  show();
+}
+function tRole(box, sc, redraw) {
+  box.innerHTML = '<div class="card flat grid"><p class="eyebrow">ロールプレイ</p><h3 style="font-size:20px">' + esc(sc.who) + 'と実際に会話します</h3><p class="muted" style="max-width:65ch">相手のセリフは音声で流れます。あなたの番では日本語だけが出るので、中国語で答えてください。思い出せないときは「答えを見る」を押せます。</p><div class="row"><button class="btn pri" id="start">' + IC.play + '会話を始める</button></div></div>';
+  $('#start').addEventListener('click', () => {
+    box.innerHTML = '<div class="chat" id="chat"></div>';
+    const chat = $('#chat'), scores = []; let idx = 0;
+    const alive = () => chat.isConnected;
+    const end = () => {
+      const avg = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : null;
+      const first = markStep(sc.id, 'role');
+      chat.appendChild(el('<div class="card grid" style="text-align:center;align-items:center;justify-items:center"><p class="eyebrow">会話終了</p>' + (avg != null ? scoreRing(avg) + '<p>平均スコア <b class="num">' + avg + '</b> 点</p>' : '<p>最後まで会話できました。</p>') + '<div class="row" style="justify-content:center"><button class="btn" id="again">もう一度</button><button class="btn pri" id="toquiz">クイズへ進む' + IC.next + '</button></div></div>'));
+      addXP(first ? 20 : 8, 'ロールプレイ完了');
+      $('#again').addEventListener('click', () => redraw());
+      $('#toquiz').addEventListener('click', () => { App.ui.tab[sc.id] = 'quiz'; redraw(); });
+      chat.lastElementChild.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
+    };
+    const step = async () => {
+      if (!alive()) return;
+      if (idx >= sc.L.length) return end();
+      const l = sc.L[idx];
+      if (l[0] === 'p') {
+        const b = el('<div class="bub"><span class="who">' + esc(sc.who) + '</span><span class="zh" lang="zh-CN">' + esc(l[1]) + '</span>' + (S.set.py ? '<span class="pyl">' + esc(l[2].replace(/ \/ /g, ' ').replace(/(\D)\d/g, '$1')) + '</span>' : '') + (S.set.ja ? '<span class="small muted">' + esc(l[3]) + '</span>' : '') + '<span><button class="btn ico sm" aria-label="もう一度聞く">' + IC.play + '</button></span></div>');
+        chat.appendChild(b); b.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
+        $('button', b).addEventListener('click', () => Voice.speak(l[1], { gender: lineGender(sc, 'p') }));
+        await Voice.speak(l[1], { gender: lineGender(sc, 'p') });
+        idx++; setTimeout(step, 300);
+      } else {
+        const b = el('<div class="bub me veil"><span class="who">あなたの番</span><b>' + esc(l[3]) + '</b><div class="pcw"></div><div class="row"><button class="btn sm" data-r="hint">答えを見る</button><button class="btn sm pri" data-r="next">次へ' + IC.next + '</button></div></div>');
+        chat.appendChild(b);
+        $('.pcw', b).appendChild(practiceCard({ zh: l[1], py: l[2] }, { key: sc.id + '-' + idx, size: 'md', gender: S.set.gender, onScore: s => { scores.push(s); b.classList.remove('veil'); } }));
+        b.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
+        b.addEventListener('click', e => { const r = e.target.closest('[data-r]'); if (!r) return; if (r.dataset.r === 'hint') { b.classList.remove('veil'); r.remove(); } else { $$('[data-r]', b).forEach(x => x.remove()); b.classList.remove('veil'); Voice.stop(); idx++; step(); } });
+      }
+    };
+    step();
+  });
+}
+
+/* ---------- クイズ ---------- */
+function buildQuiz(sc) {
+  const others = SCENES.filter(s => s.id !== sc.id);
+  const otherJa = shuffle([].concat(...others.map(s => s.V.map(v => v[2]))));
+  const qs = [];
+  shuffle(sc.V).slice(0, 2).forEach(v => { qs.push({ type: 'mean', h: 'この単語の意味は？', zh: v[0], py: v[1], opts: shuffle([v[2]].concat(shuffle(sc.V.filter(x => x[2] !== v[2]).map(x => x[2])).slice(0, 2), otherJa.filter(j => j !== v[2]).slice(0, 1))), ans: v[2] }); });
+  const ln = shuffle(sc.L)[0];
+  qs.push({ type: 'listen', h: '音声を聞いて、意味を選んでください', zh: ln[1], gender: lineGender(sc, ln[0]), opts: shuffle([ln[3]].concat(shuffle(sc.L.filter(x => x !== ln).map(x => x[3])).slice(0, 3))), ans: ln[3] });
+  const two = shuffle(sc.V.filter(v => Array.from(v[0]).length === 2))[0] || sc.V[0];
+  const syl = parseLine(two[0], two[1]), right = syl.map(s => s.py).join(' '), set = new Set([right]);
+  let guard = 0;
+  while (set.size < 4 && guard++ < 60) set.add(syl.map(s => markPy(s.base, Math.random() < 0.15 ? s.tone : 1 + Math.floor(Math.random() * 4))).join(' '));
+  qs.push({ type: 'tone', h: '正しい声調はどれ？', zh: two[0], sub: two[2], opts: shuffle([...set]), ans: right, py: two[1] });
+  const cand = shuffle(sc.L.filter(l => { const n = segment(l[1]).length; return n >= 3 && n <= 7; })).sort((a, b) => (a[0] === 'm' ? 0 : 1) - (b[0] === 'm' ? 0 : 1)).slice(0, 2);
+  cand.forEach(l => qs.push({ type: 'order', h: '並べ替えて中国語の文を作ってください', ja: l[3], segs: segment(l[1]), zh: l[1], py: l[2] }));
+  return qs;
+}
+function tQuiz(box, sc, redraw) {
+  const qs = buildQuiz(sc), marks = []; let i = 0;
+  const show = () => {
+    if (i >= qs.length) {
+      const ok = marks.filter(Boolean).length, pass = ok >= Math.ceil(qs.length * 0.66);
+      const first = pass && markStep(sc.id, 'quiz');
+      box.innerHTML = '<div class="card grid" style="text-align:center;justify-items:center">' + scoreRing(Math.round(100 * ok / qs.length), 'acc') + '<h3>' + qs.length + '問中 ' + ok + '問 正解</h3><p class="muted">' + (pass ? (ok === qs.length ? '全問正解です！' : '合格です。') : 'あと少しです。もう一度挑戦しましょう。') + '</p><div class="row" style="justify-content:center"><button class="btn" id="again">もう一度</button><a class="btn pri" href="#course-' + sc.c + '">コースに戻る</a></div></div>';
+      if (ok === qs.length) { confetti(80); addXP(10, '全問正解ボーナス'); } else if (first) addXP(5, 'クイズ合格');
+      $('#again').addEventListener('click', () => redraw());
+      $('#scstars').innerHTML = starsHtml(starsOf(sc.id), !!first);
+      return;
+    }
+    const q = qs[i];
+    let h = '<div class="qprog">' + qs.map((_, n) => '<i class="' + (n < i ? (marks[n] ? 'ok' : 'ng') : n === i ? 'cur' : '') + '"></i>').join('') + '</div><div class="card q"><h3>' + esc(q.h) + '</h3>';
+    if (q.type === 'mean') h += '<div class="big" lang="zh-CN">' + esc(q.zh) + '</div><p class="py muted" style="text-align:center;font-weight:600">' + esc(q.py) + '</p>';
+    if (q.type === 'listen') h += '<div class="row" style="justify-content:center"><button class="btn pri" id="qplay">' + IC.play + 'もう一度聞く</button></div>';
+    if (q.type === 'tone') h += '<div class="big" lang="zh-CN">' + esc(q.zh) + '</div><p class="muted" style="text-align:center">' + esc(q.sub) + '</p>';
+    if (q.type === 'order') h += '<p style="font-size:18px;font-weight:700">' + esc(q.ja) + '</p><div class="tiles" id="ans" aria-label="あなたの答え"></div><div class="tiles pool" id="pool"></div><div class="row"><button class="btn pri" id="chk" disabled>答え合わせ</button></div>';
+    else h += '<div class="opts">' + q.opts.map(o => '<button class="opt' + (q.type === 'tone' ? ' py' : '') + '" data-o="' + esc(o) + '">' + esc(o) + '</button>').join('') + '</div>';
+    h += '<div id="fb"></div></div>';
+    box.innerHTML = h;
+    const done = (ok, reveal) => {
+      marks[i] = ok; if (ok) addXP(5);
+      const fb = $('#fb', box); fb.innerHTML = '<div class="grid"><p style="font-weight:700;color:var(--' + (ok ? 'good' : 'bad') + ')">' + (ok ? '正解です！' : '正解はこちら') + '</p><div class="tgbox"></div>' + (reveal.ja ? '<p class="ja">' + esc(reveal.ja) + '</p>' : '') + '<div class="row"><button class="btn pri" id="qn">' + (i === qs.length - 1 ? '結果を見る' : '次の問題') + IC.next + '</button></div></div>';
+      const it = parseLine(reveal.zh, reveal.py); mountGraph($('.tgbox', fb), it, { size: 'md' });
+      speakLine($('.tgbox', fb), reveal.zh, it, { gender: q.gender });
+      $('#qn').addEventListener('click', () => { Voice.stop(); i++; show(); }); $('#qn').focus();
+    };
+    if (q.type === 'order') {
+      const pool = $('#pool'), ans = $('#ans');
+      shuffle(q.segs).forEach(s => pool.appendChild(el('<button class="tile" lang="zh-CN">' + esc(s) + '</button>')));
+      const mv = e => { const t = e.target.closest('.tile'); if (!t || $('#chk').hidden) return; (t.parentElement === pool ? ans : pool).appendChild(t); $('#chk').disabled = pool.children.length > 0; };
+      pool.addEventListener('click', mv); ans.addEventListener('click', mv);
+      $('#chk').addEventListener('click', () => { const got = $$('.tile', ans).map(t => t.textContent).join(''); const ok = got === q.segs.join(''); ans.style.borderColor = 'var(--' + (ok ? 'good' : 'bad') + ')'; $('#chk').hidden = true; done(ok, { zh: q.zh, py: q.py, ja: q.ja }); });
+    } else {
+      if (q.type === 'listen') { const p = () => Voice.speak(q.zh, { gender: q.gender }); $('#qplay').addEventListener('click', p); p(); }
+      $('.opts', box).addEventListener('click', e => {
+        const b = e.target.closest('.opt'); if (!b || b.disabled) return;
+        const ok = b.dataset.o === q.ans;
+        $$('.opt', box).forEach(o => { o.disabled = true; if (o.dataset.o === q.ans) o.classList.add('ok'); });
+        if (!ok) b.classList.add('ng');
+        const src = q.type === 'listen' ? sc.L.find(l => l[1] === q.zh) : null;
+        done(ok, q.type === 'listen' ? { zh: src[1], py: src[2], ja: src[3] } : q.type === 'tone' ? { zh: q.zh, py: q.py, ja: q.sub } : { zh: q.zh, py: q.py, ja: q.ans });
+      });
+    }
+  };
+  show();
+}
+
+/* ---------- 発音ラボ ---------- */
+function vLab(v) {
+  const subs = [['tones', '四声'], ['pairs', '声調の組み合わせ'], ['sandhi', '変調ルール'], ['sounds', '苦手な音'], ['ear', '聞き分けクイズ']];
+  v.innerHTML = '<div class="scene-h"><p class="eyebrow">発音ラボ</p><div class="zt" lang="zh-CN">声调 <span class="py muted" style="font-size:16px;font-weight:600">shēng diào</span></div><p class="muted" style="max-width:65ch">中国語は、声の高さの動きで意味が変わります。グラフは5段階の高さ(上が高い)で、1音節ごとの動きを示しています。お手本を聞き、同じ線をなぞるつもりで声を出しましょう。</p></div><div class="tabs" id="ltabs"></div>' + LEGEND + '<div id="lab" class="grid"></div>';
+  const mark = k => { if (!S.lab[k]) { S.lab[k] = 1; Store.save(); } };
+  const draw = () => {
+    Voice.stop();
+    $('#ltabs').innerHTML = subs.map(s => '<button class="' + (App.ui.lab === s[0] ? 'on' : '') + '" data-l="' + s[0] + '">' + s[1] + '</button>').join('');
+    const box = $('#lab'); box.innerHTML = '';
+    const cur = App.ui.lab;
+    if (cur === 'tones') {
+      const g = el('<div class="grid g2"></div>'); box.appendChild(g);
+      LAB.tones.forEach(t => { const c = el('<div class="card flat grid"><div class="row"><span class="pill" style="background:var(--t' + t.n + ');color:#fff">' + t.name + '</span></div><p class="small" style="max-width:65ch">' + esc(t.tip) + '</p></div>'); c.appendChild(practiceCard({ zh: t.zh, py: t.py, ja: t.ja }, { key: 'lab-t' + t.n, size: 'lg', onScore: () => mark('t' + t.n) })); g.appendChild(c); });
+    } else if (cur === 'pairs') {
+      let sel = App.ui.pair || 0;
+      box.innerHTML = '<p class="small muted">2音節の組み合わせは全部で20通り。左から「後ろが第1声・第2声・第3声・第4声・軽声」、上から「前が第1声〜第4声」の順に並んでいます。</p><div class="pairgrid">' + LAB.pairs.map((p, i) => '<button class="chipb ' + (i === sel ? 'on ' : '') + (S.lab['p' + i] ? 'done' : '') + '" data-i="' + i + '"><span class="zh" lang="zh-CN">' + p[0] + '</span><span class="pyl">' + p[1] + '</span></button>').join('') + '</div><div class="card" id="pp"></div>';
+      const showP = () => { const p = LAB.pairs[sel]; const h = $('#pp'); h.innerHTML = ''; h.appendChild(practiceCard({ zh: p[0], py: p[1], ja: p[2] }, { key: 'lab-p' + sel, size: 'lg', onScore: () => { mark('p' + sel); $$('.chipb', box)[sel].classList.add('done'); } })); };
+      $('.pairgrid', box).addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; sel = App.ui.pair = +b.dataset.i; $$('.chipb', box).forEach((c, i) => c.classList.toggle('on', i === sel)); showP(); const pc = $('#pp .pc'); if (pc && pc._play) pc._play(false); });
+      showP();
+    } else if (cur === 'sandhi' || cur === 'sounds') {
+      LAB[cur].forEach((grp, gi) => {
+        const c = el('<div class="card flat grid"><h3 style="font-size:18px">' + esc(grp.t) + '</h3><p style="max-width:65ch" class="small">' + esc(grp.b) + '</p><div class="chips">' + grp.items.map((p, i) => '<button class="chipb ' + (i === 0 ? 'on' : '') + '" data-i="' + i + '"><span class="zh" lang="zh-CN">' + p[0] + '</span><span class="pyl">' + p[1] + '</span></button>').join('') + '</div><div class="pph"></div></div>');
+        box.appendChild(c);
+        const showP = (i, play) => { const p = grp.items[i], h = $('.pph', c); h.innerHTML = ''; const pc = practiceCard({ zh: p[0], py: p[1], ja: p[2] }, { key: 'lab-' + cur + gi + '-' + i, size: 'lg', onScore: () => mark(cur + gi + '-' + i) }); h.appendChild(pc); if (play) pc._play(false); };
+        $('.chips', c).addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; $$('.chipb', c).forEach(x => x.classList.toggle('on', x === b)); showP(+b.dataset.i, true); });
+        showP(0, false);
+      });
+    } else earQuiz(box);
+  };
+  $('#ltabs').addEventListener('click', e => { const b = e.target.closest('[data-l]'); if (b) { App.ui.lab = b.dataset.l; draw(); } });
+  draw();
+}
+function earQuiz(box) {
+  const N = 8; let n = 0, ok = 0;
+  const sig = p => parseLine(p[0], p[1]).map(s => s.tone).join('');
+  const start = () => { n = 0; ok = 0; next(); };
+  const next = () => {
+    if (n >= N) { box.innerHTML = '<div class="card grid" style="text-align:center;justify-items:center">' + scoreRing(Math.round(100 * ok / N), 'acc') + '<h3>' + N + '問中 ' + ok + '問 正解</h3><button class="btn pri" id="eq">もう一度</button></div>'; if (ok === N) confetti(70); $('#eq').addEventListener('click', start); return; }
+    const p = LAB.pairs[Math.floor(Math.random() * LAB.pairs.length)], right = sig(p);
+    const opts = shuffle([p].concat(shuffle(LAB.pairs.filter(q => sig(q) !== right)).filter((q, i, a) => a.findIndex(z => sig(z) === sig(q)) === i).slice(0, 3)));
+    box.innerHTML = '<div class="qprog">' + Array.from({ length: N }, (_, i) => '<i class="' + (i < n ? 'ok' : i === n ? 'cur' : '') + '"></i>').join('') + '</div><div class="card q"><h3>音声を聞いて、声の動きが合うグラフを選んでください</h3><div class="row" style="justify-content:center"><button class="btn pri" id="ep">' + IC.play + 'もう一度聞く</button></div><div class="opts" id="eo"></div><div id="fb"></div></div>';
+    opts.forEach(o => { const b = el('<button class="opt" data-s="' + sig(o) + '"><div class="tgbox bare"></div></button>'); $('#eo').appendChild(b); const it = parseLine(o[0], o[1]); requestAnimationFrame(() => { mountGraph($('.tgbox', b), it, { size: 'sm' }); $('.tgbox', b).classList.add('bare'); }); });
+    const play = () => Voice.speak(p[0], {}); $('#ep').addEventListener('click', play); play();
+    $('#eo').addEventListener('click', e => {
+      const b = e.target.closest('.opt'); if (!b || b.disabled) return;
+      const good = b.dataset.s === right; if (good) { ok++; addXP(3); }
+      $$('.opt', box).forEach(o => { o.disabled = true; if (o.dataset.s === right) o.classList.add('ok'); $('.tgbox', o).classList.remove('bare'); });
+      if (!good) b.classList.add('ng');
+      $('#fb').innerHTML = '<div class="row"><p style="font-weight:700;color:var(--' + (good ? 'good' : 'bad') + ')">' + (good ? '正解です！' : '正解は') + '　<span class="hz" lang="zh-CN" style="font-size:22px">' + p[0] + '</span> <span class="py">' + p[1] + '</span>　' + esc(p[2]) + '</p><button class="btn pri" id="en">次へ' + IC.next + '</button></div>';
+      $('#en').addEventListener('click', () => { n++; next(); }); $('#en').focus();
+    });
+  };
+  box.innerHTML = '<div class="card flat grid"><h3 style="font-size:18px">耳で声調を聞き分ける</h3><p class="small muted" style="max-width:65ch">漢字もピンインも見ずに、音だけで声の動きを当てます。全' + N + '問。聞き取れる音は、発音もしやすくなります。</p><div class="row"><button class="btn pri" id="es">' + IC.play + '始める</button></div></div>';
+  $('#es').addEventListener('click', start);
+}
+
+/* ---------- 復習 ---------- */
+function vReview(v) {
+  const due = dueWords();
+  const weak = Object.keys(S.pr).filter(k => /^[abc]\d-\d$/.test(k) && S.pr[k] < 70).sort((a, b) => S.pr[a] - S.pr[b]).slice(0, 6);
+  v.innerHTML = '<div class="sec-h"><h2>復習</h2><span class="small muted">覚えた単語は 1日→2日→4日→8日… と間隔をあけて出題します</span></div><div id="rv" class="grid"></div><div class="sec-h"><h2>もう一度練習したいフレーズ</h2><span class="small muted">発音スコアが70点未満のもの</span></div><div id="wk" class="grid"></div>';
+  const rv = $('#rv');
+  if (due.length) {
+    rv.innerHTML = '<div class="card flat row" style="justify-content:space-between"><p>今日の復習は <b class="num" style="font-size:22px">' + due.length + '</b> 語です。</p><button class="btn pri" id="go">' + IC.play + '復習を始める</button></div><div id="deck" class="grid"></div>';
+    $('#go').addEventListener('click', () => { $('#go').closest('.card').remove(); flashDeck($('#deck'), shuffle(due.map(k => WORDS[k])), known => { addXP(known * 2 + 5, '復習完了'); App.refresh(); }); });
+  } else {
+    const all = Object.keys(S.srs).filter(k => WORDS[k]);
+    const nx = all.map(k => S.srs[k].d).sort()[0];
+    rv.innerHTML = '<div class="card flat"><p>' + (all.length ? '今日の復習はありません。次回は <b class="num">' + nx.slice(5).replace('-', '/') + '</b> です。' : 'まだ復習する単語がありません。シーンの「単語」タブでカードを覚えると、ここに戻ってきます。') + '</p></div>';
+  }
+  const wk = $('#wk');
+  if (!weak.length) wk.innerHTML = '<div class="card flat"><p class="muted">いまのところありません。発音の録音判定をすると、苦手なフレーズがここに集まります。</p></div>';
+  weak.forEach(k => { const [sid, i] = k.split('-'), sc = findScene(sid), l = sc && sc.L[+i]; if (!l) return; const c = el('<div class="card flat grid"><div class="row"><span class="pill">' + esc(sc.t) + '</span></div></div>'); c.appendChild(practiceCard({ zh: l[1], py: l[2], ja: l[3] }, { key: k, size: 'md', gender: lineGender(sc, l[0]) })); wk.appendChild(c); });
+}
+
+/* ---------- 記録 ---------- */
+function vRecord(v) {
+  const lv = levelOf(S.xp), C = 2 * Math.PI * 56, t = today();
+  const days = []; const start = addDays(t, -(34 + new Date().getDay()));
+  for (let d = start; d <= t; d = addDays(d, 1)) days.push(d);
+  const learned = Object.values(S.srs).filter(x => x.b >= 1).length, stars = SCENES.reduce((a, s) => a + starsOf(s.id), 0);
+  const hs = S.hist.slice(-24), avg = hs.length ? Math.round(hs.reduce((a, h) => a + h.s, 0) / hs.length) : null;
+  let sp = '<p class="muted small">録音判定をすると、スコアの推移がここに出ます。</p>';
+  if (hs.length >= 2) {
+    const W = 600, H = 90, X = i => 8 + i * (W - 16) / (hs.length - 1), Yv = s => 8 + (100 - s) / 100 * (H - 16);
+    const pts = hs.map((h, i) => X(i).toFixed(1) + ',' + Yv(h.s).toFixed(1)).join(' ');
+    sp = '<svg class="spark" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" role="img" aria-label="発音スコアの推移"><line x1="0" x2="' + W + '" y1="' + Yv(80) + '" y2="' + Yv(80) + '" stroke="var(--line)" stroke-dasharray="3 5"/><polygon points="8,' + (H - 4) + ' ' + pts + ' ' + (W - 8) + ',' + (H - 4) + '" fill="var(--accent-soft)"/><polyline points="' + pts + '" fill="none" stroke="var(--accent)" stroke-width="2.5" vector-effect="non-scaling-stroke"/><circle cx="' + X(hs.length - 1) + '" cy="' + Yv(hs[hs.length - 1].s) + '" r="5" fill="var(--gold)"/></svg><p class="small muted">直近' + hs.length + '回の発音スコア(点線は80点)</p>';
+  }
+  v.innerHTML = '<div class="sec-h"><h2>学習の記録</h2><span class="small muted">' + (Store.mode === 'cloud' ? '記録はこのアカウントに保存されています' : '記録はこのブラウザに保存されています') + '</span></div>' +
+    '<section class="hero"><div class="card grid"><div class="kpis"><div class="kpi"><b class="num">' + S.xp + '</b><span>累計XP</span></div><div class="kpi"><b class="num">' + S.streak.best + '<small style="font-size:14px">日</small></b><span>最長連続</span></div><div class="kpi"><b class="num">' + stars + '<small style="font-size:14px"> / ' + SCENES.length * 3 + '</small></b><span>獲得した★</span></div><div class="kpi"><b class="num">' + learned + '</b><span>覚えた単語</span></div><div class="kpi"><b class="num">' + (avg == null ? '–' : avg) + '</b><span>発音スコア平均</span></div></div><div><p class="eyebrow" style="margin-bottom:8px">直近5週間の学習</p><div class="heat">' + days.map(d => { const x = S.days[d] || 0; return '<i class="' + (x >= S.set.goal ? 'l3' : x >= S.set.goal / 2 ? 'l2' : x > 0 ? 'l1' : '') + (d === t ? ' today' : '') + '" title="' + d + '：' + x + ' XP"></i>'; }).join('') + '</div><p class="small muted" style="margin-top:6px">濃い色＝1日の目標(' + S.set.goal + ' XP)を達成した日</p></div></div>' +
+    '<div class="card goal"><p class="eyebrow">現在のレベル</p><div class="ring acc"><svg viewBox="0 0 132 132"><circle class="bg" cx="66" cy="66" r="56"/><circle class="fg" cx="66" cy="66" r="56" stroke-dasharray="' + C.toFixed(1) + '" stroke-dashoffset="' + (C * (1 - lv.cur / lv.need)).toFixed(1) + '"/></svg><div class="in"><span>Lv</span><b class="num">' + lv.L + '</b></div></div><p><b>' + esc(titleOf(lv.L)) + '</b><br><span class="small muted">次のレベルまで <span class="num">' + (lv.need - lv.cur) + '</span> XP</span></p></div></section>' +
+    '<section class="card grid"><p class="eyebrow">発音スコアの推移</p>' + sp + '</section>' +
+    '<section class="grid"><div class="sec-h"><h2>コースの進み具合</h2></div><div class="grid g3" id="cs"></div></section>' +
+    '<section class="grid"><div class="sec-h"><h2>バッジ</h2><span class="small muted num">' + Object.keys(S.badges).length + ' / ' + BADGES.length + '</span></div><div class="badges">' + BADGES.map(b => '<div class="badge ' + (S.badges[b.id] ? 'on' : '') + '" title="' + esc(b.desc) + '"><span class="seal" lang="zh-CN">' + b.seal + '</span>' + esc(b.name) + '<span class="small muted" style="font-weight:500">' + esc(b.desc) + '</span></div>').join('') + '</div></section>';
+  courseCards($('#cs'));
+}
+
+/* ---------- 音声と設定 ---------- */
+function vVoice(v) {
+  const eng = Voice.engine(), devs = Voice.dev;
+  const how = g => { const p = Voice.pick(g); return p.how === 'none' ? 'なし' : esc(p.voice.name) + ({ chosen: '', native: '', pseudo: (g === 'm' ? '（声を低くして男性の声として代用）' : '（声を高くして女性の声として代用）'), elo: '（旧式の合成音）' })[p.how]; };
+  const optV = g => '<option value="">自動で選ぶ(おすすめ)</option>' + devs.map(x => '<option value="' + esc(x.voiceURI) + '" ' + ((g === 'm' ? S.set.vM : S.set.vF) === x.voiceURI ? 'selected' : '') + '>' + esc(x.name) + '（' + ({ m: '男性', f: '女性', '?': '性別不明' })[Voice.genderOf(x)] + '・' + esc(x.lang) + (Voice.isElo(x) ? '・旧式の合成音' : '') + '）</option>').join('');
+  const optC = g => ['airy', 'buttery', 'glassy', 'rounded'].map(n => '<option ' + ((g === 'm' ? S.set.cvM : S.set.cvF) === n ? 'selected' : '') + '>' + n + '</option>').join('');
+  const mode = recMode();
+  const noNatM = devs.length && Voice.pick('m').how !== 'native' && Voice.pick('m').how !== 'chosen';
+  v.innerHTML = '<div class="sec-h"><h2>音声と設定</h2></div>' +
+    '<section class="card grid"><p class="eyebrow">お手本の声</p>' +
+    (eng === 'none' ? '<p class="note" style="border-color:var(--bad);color:var(--ink)"><b>この画面では中国語の音声を再生できません。</b>端末に中国語(普通話)の音声が見つからないためです。日本語の音声で読み上げると誤った発音になるので、再生を止めています。' + (IOS ? 'iPhoneの「設定 → アクセシビリティ → 読み上げコンテンツ → 声」で中国語(中国本土)の音声を追加してから、このページを読み込み直してください。' : 'Chromeで開くファイル版をお使いください。') + '</p>' : '') +
+    '<div class="row"><div class="seg" id="gender"><button data-g="f" class="' + (S.set.gender === 'f' ? 'on' : '') + '">女性の声</button><button data-g="m" class="' + (S.set.gender === 'm' ? 'on' : '') + '">男性の声</button></div><button class="btn" id="test">' + IC.play + '試しに聞く</button></div>' +
+    '<label class="sw"><input type="checkbox" id="duo" ' + (S.set.duo ? 'checked' : '') + '>会話では、相手のセリフを相手の性別の声で読む</label>' +
+    '<div class="field"><label for="rate">話す速さ <span class="num" id="ratev">' + S.set.rate.toFixed(2) + '</span>倍</label><input type="range" id="rate" min="0.6" max="1.2" step="0.05" value="' + S.set.rate + '"></div>' +
+    '<div class="field"><span class="lab">いま使っている音声</span><p class="small" id="diag">' + (eng === 'device' ? '端末の中国語音声　女性：<b>' + how('f') + '</b>　／　男性：<b>' + how('m') + '</b>' : eng === 'claude' ? '<b>Claudeの音声(中国語)</b>' : '<b>なし</b>') + '<br><span class="muted">端末の中国語音声 <span class="num">' + devs.length + '</span> 種類　／　Claudeの音声：' + (Voice.tts ? (Voice.ttsZh ? '中国語に対応' : '中国語に未対応のため使いません') : 'この画面では使えません') + '</span></p></div>' +
+    (Voice.ttsOK() ? '<div class="field"><span class="lab">音声の種類</span><div class="seg" id="engine"><button data-e="auto" class="' + (S.set.engine !== 'claude' ? 'on' : '') + '">端末の音声</button><button data-e="claude" class="' + (S.set.engine === 'claude' ? 'on' : '') + '">Claudeの音声</button></div></div>' : '') +
+    (devs.length ? '<div class="grid g2"><div class="field"><label for="vF">女性の声に使う音声</label><select id="vF">' + optV('f') + '</select></div><div class="field"><label for="vM">男性の声に使う音声</label><select id="vM">' + optV('m') + '</select></div></div>' : '') +
+    (Voice.ttsOK() ? '<div class="grid g2"><div class="field"><label for="cvF">Claudeの音声(女性の声として使う)</label><select id="cvF">' + optC('f') + '</select></div><div class="field"><label for="cvM">Claudeの音声(男性の声として使う)</label><select id="cvM">' + optC('m') + '</select></div></div>' : '') +
+    '<p class="note">声の質(年代・性別)は、端末やブラウザに入っている音声で決まります。' + (noNatM ? '<b>この端末には自然な男性の中国語音声がありません。</b>男性の声は、女性の音声の高さを下げて代用しています。' : '') + (IOS ? 'iPhoneは「設定 → アクセシビリティ → 読み上げコンテンツ → 声 → 中国語」から音声を追加できます(Li-mu は男性、Lili・Yu-shu などは女性の声です)。追加後にこのページを読み込み直すと、下の一覧から選べます。' : 'Microsoft Edge で開くと、若い男女の自然な音声(Yunxi・Xiaoxiao など)が使えます。Mac は「システム設定 → アクセシビリティ → 読み上げコンテンツ → システムの声 → 声を管理」から中国語(中国本土)の音声を追加できます。') + '</p></section>' +
+    '<section class="card grid"><p class="eyebrow">録音と判定</p><p class="small">この表示での判定方法：<b>' + ({ mic: 'マイクで録音して、声の高さの動きを分析', dict: '聞き取り判定(話した中国語が正しく聞き取れるか)', none: '録音ファイルの読み込みのみ' })[mode] + '</b></p>' +
+    (mode !== 'mic' ? '<p class="note">この表示ではマイクの音声を直接取得できません。' + (IOS ? 'iPhoneでは、Safariで開く公開ページ版なら、その場で録音して声の高さを分析できます。' : 'Chromeで開くファイル版では、その場で録音して声の高さの波形を分析できます。') + '</p>' : IOS ? '<p class="small muted">iPhoneでは、声の高さ(声調)の分析に絞って判定します。話した内容の聞き取り判定は、パソコンのChromeで使えます。</p>' : '<label class="sw"><input type="checkbox" id="sr" ' + (S.set.sr ? 'checked' : '') + '>録音と同時に、話した内容の聞き取り判定もする(Chrome)</label>') +
+    (S.range ? '<p class="small muted">あなたの声域を学習済みです。高さの判定はこの声域を基準にしています。<button class="btn sm" id="rr">声域をリセット</button></p>' : '<p class="small muted">録音を重ねると、あなたの声域(低い所と高い所)を学習して判定が安定します。</p>') + '</section>' +
+    '<section class="card grid"><p class="eyebrow">学習</p><div class="field"><label for="goal">1日の目標</label><select id="goal">' + [30, 50, 80, 120].map(g => '<option value="' + g + '" ' + (S.set.goal === g ? 'selected' : '') + '>' + g + ' XP（' + ({ 30: '約5分', 50: '約10分', 80: '約15分', 120: '約25分' })[g] + '）</option>').join('') + '</select></div><label class="sw"><input type="checkbox" id="unlock" ' + (S.set.unlock ? 'checked' : '') + '>すべてのシーンを最初から開く</label><div class="row"><button class="btn" id="reset">学習記録をすべて消す</button><span class="small muted" id="resetmsg"></span></div></section>';
+  const sv = () => { Store.save(); };
+  $('#gender').addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (!b) return; S.set.gender = b.dataset.g; sv(); $$('#gender button').forEach(x => x.classList.toggle('on', x === b)); Voice.speak('你好，很高兴认识你。', {}); });
+  $('#test').addEventListener('click', () => Voice.speak('你好，我们一起学中文吧！', {}));
+  $('#duo').addEventListener('change', e => { S.set.duo = e.target.checked; sv(); });
+  $('#rate').addEventListener('input', e => { S.set.rate = +e.target.value; $('#ratev').textContent = S.set.rate.toFixed(2); sv(); });
+  if ($('#engine')) $('#engine').addEventListener('click', e => { const b = e.target.closest('[data-e]'); if (!b) return; S.set.engine = b.dataset.e; sv(); App.render(); });
+  [['vF'], ['vM'], ['cvF'], ['cvM']].forEach(([k]) => { const s = $('#' + k); if (s) s.addEventListener('change', () => { S.set[k] = s.value; sv(); Voice.speak('你好，很高兴认识你。', { gender: k.endsWith('M') ? 'm' : 'f' }); }); });
+  if ($('#sr')) $('#sr').addEventListener('change', e => { S.set.sr = e.target.checked; sv(); });
+  if ($('#rr')) $('#rr').addEventListener('click', () => { S.range = null; sv(); App.render(); });
+  $('#goal').addEventListener('change', e => { S.set.goal = +e.target.value; sv(); App.header(); });
+  $('#unlock').addEventListener('change', e => { S.set.unlock = e.target.checked; sv(); });
+  let armed = false;
+  $('#reset').addEventListener('click', () => {
+    if (!armed) { armed = true; $('#reset').textContent = 'もう一度押すと消去します'; $('#resetmsg').textContent = 'XP・★・単語の記録がすべて消えます。元に戻せません。'; return; }
+    const keep = S.set; S = DEF(); S.set = keep; Store.save(); Store.flush(); App.refresh(); toast('学習記録を消去しました');
+  });
+}
+
+/* ---------- 起動 ---------- */
+let touched = false;
+function boot() {
+  ['pointerdown', 'keydown'].forEach(ev => addEventListener(ev, () => { touched = true; }, { once: true, capture: true }));
+  if (IOS) { let un = false; ['touchend', 'click'].forEach(ev => addEventListener(ev, () => { if (un) return; un = true; unlockAudio(); }, { capture: true })); }
+  if (IOS) {
+    document.documentElement.classList.add('ios');
+    const nv = document.querySelector('#novoice .novoice-in');
+    if (nv) nv.innerHTML = '<b>中国語の音声が見つかりません。</b>iPhoneの「設定 → アクセシビリティ → 読み上げコンテンツ → 声」で中国語(中国本土)の音声を追加して、このページを読み込み直してください。<a href="#voice">音声と設定を見る</a>';
+  }
+  Store.loadLocal();
+  buildPyMap();
+  Voice.load();
+  if ('speechSynthesis' in window && speechSynthesis.addEventListener) speechSynthesis.addEventListener('voiceschanged', () => { const n = Voice.dev.length; Voice.load(); if (Voice.dev.length !== n) { App.header(); if (App.name() === 'voice') App.render(); } });
+  Voice.waitVoices().then(() => { App.header(); if (App.name() === 'voice' && !touched) App.render(); });
+  App.render();
+  addEventListener('hashchange', () => { App.render(); scrollTo(0, 0); });
+  if (window.claude && window.claude.use) {
+    window.claude.use('tts').then(async t => {
+      Voice.tts = t || null;
+      if (t) { let ls; try { ls = t.languages ? await t.languages() : undefined; } catch (e) { ls = undefined; } Voice.ttsLangs = ls || null; Voice.ttsZh = Array.isArray(ls) && ls.some(x => /^(zh|cmn)/i.test(x)); }
+      App.header(); if (App.name() === 'voice' && !touched) App.render();
+    }).catch(() => {});
+    window.claude.use('dictation').then(d => { const had = recMode(); Dict = d || null; if (recMode() !== had && !touched) App.render(); }).catch(() => {});
+  }
+  Store.initCloud();
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { Voice.stop(); if (Mic.stopFn) Mic.stopFn(); Mic.release(); Store.flush(); } });
+  addEventListener('pagehide', () => { Store.flush(); });
+}
+boot();
+
+</script>
+</body>
+</html>
