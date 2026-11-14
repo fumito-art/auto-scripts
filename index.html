@@ -1201,13 +1201,23 @@ function levelUp(L) {
 const IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 const HOSTED = /^https?:$/.test(location.protocol) && !(window.claude && window.claude.use);   // 公開ページ版(Claudeの外)
 /* iPhoneは、指で触れた瞬間に一度鳴らさないと音声が出ない。最初のタップで無音を流して解禁する */
+/* iPhoneは、①指で触れた瞬間に一度鳴らさないと読み上げが出ない ②マナーモードだとページの音が消える。
+   最初のタップで無音の音声を流し、音の扱いを「再生」(マナーモードでも鳴る)に切り替える */
+const SILENT_WAV = 'data:audio/wav;base64,UklGRkQDAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YSADAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==';
+let audioUnlocked = false;
 function unlockAudio() {
+  audioSession('playback');
+  try { const a = new Audio(SILENT_WAV); a.setAttribute('playsinline', ''); a.volume = 0.01; const p = a.play(); if (p && p.catch) p.catch(() => {}); } catch (e) { /* 無視 */ }
   try {
-    if ('speechSynthesis' in window) { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; u.lang = 'zh-CN'; speechSynthesis.speak(u); }
+    if ('speechSynthesis' in window) {
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance('。'); u.lang = 'zh-CN'; u.volume = 0.01; u.rate = 2;
+      speechSynthesis.speak(u);
+      if (speechSynthesis.paused) speechSynthesis.resume();
+    }
   } catch (e) { /* 無視 */ }
+  audioUnlocked = true;
 }
-const PAGE_URL = 'https://fumito-art.github.io/auto-scripts/';
-const PAGE_LINK = HOSTED ? '' : ' <a href="' + PAGE_URL + '" target="_blank" rel="noopener">公開ページ版を開く</a>';
 function audioSession(type) { try { if (navigator.audioSession) navigator.audioSession.type = type; } catch (e) { /* 無視 */ } }
 
 /* ================= 音声(お手本) ================= */
@@ -1265,6 +1275,7 @@ const Voice = {
     if (e === 'claude' && this.tts) return 'claude';
     if (this.dev.length) return 'device';
     if (this.tts && this.ttsZh) return 'claude';
+    if (IOS && 'speechSynthesis' in window) return 'device';   // iPhoneのChromeは一覧が空でも言語指定で読める
     return 'none';
   },
   warn() { if (window.App) App.header(); },
@@ -1272,7 +1283,7 @@ const Voice = {
   /* 読み上げ。終わったら true、中断・失敗なら false */
   async speak(text, o = {}) {
     const my = ++this.token;
-    await this.waitVoices();
+    if (IOS) { this.load(); if (!audioUnlocked) unlockAudio(); } else await this.waitVoices();
     if (my !== this.token) return false;
     const eng = this.engine(), g = o.gender || S.set.gender;
     const rate = (o.rate || S.set.rate) * (o.slow ? 0.62 : 1);
@@ -1292,15 +1303,18 @@ const Voice = {
         return;
       }
       const p = this.pick(g);
-      if (!p.voice || !/^(zh|cmn)/i.test(p.voice.lang)) { toast('中国語の音声が見つかりません'); return fin(false); }
+      const byLang = !p.voice && IOS;
+      if (!byLang && (!p.voice || !/^(zh|cmn)/i.test(p.voice.lang))) { toast('中国語の音声が見つかりません'); return fin(false); }
+      if (IOS) audioSession('playback');
       const u = new SpeechSynthesisUtterance(text);
-      u.voice = p.voice; u.lang = p.voice.lang;
+      if (byLang) { u.lang = 'zh-CN'; if (g === 'm') p.pitch = 0.7; } else { u.voice = p.voice; u.lang = p.voice.lang; }
+      u.volume = 1;
       u.rate = clamp(rate, 0.4, 1.6); u.pitch = p.pitch;
       u.onstart = () => { if (my === this.token && o.onStart) o.onStart(); };
       u.onend = () => fin(true); u.onerror = () => fin(false);
-      if (!this._said) { this._said = true; toast('音声：' + p.voice.name); }
-      const go = () => { if (my !== this.token) return fin(false); speechSynthesis.speak(u); this._u = u; };
-      if (speechSynthesis.speaking || speechSynthesis.pending) { speechSynthesis.cancel(); setTimeout(go, 80); } else go();
+      if (!this._said) { this._said = true; toast('音声：' + (p.voice ? p.voice.name : '端末の中国語音声')); }
+      const go = () => { if (my !== this.token) return fin(false); speechSynthesis.speak(u); this._u = u; if (IOS) { try { speechSynthesis.resume(); } catch (e) { /* 無視 */ } } };
+      if (speechSynthesis.speaking || speechSynthesis.pending) { speechSynthesis.cancel(); if (IOS) go(); else setTimeout(go, 80); } else go();
       setTimeout(() => fin(my === this.token), 4000 + text.length * 900 / u.rate);
     });
   }
@@ -1328,7 +1342,7 @@ const Mic = {
   release() {
     if (!IOS) return;
     try { if (this.stream) this.stream.getTracks().forEach(t => t.stop()); } catch (e) { /* 無視 */ }
-    this.stream = null; audioSession('auto');
+    this.stream = null; audioSession('playback');
     try { if (this.ctx && this.ctx.state === 'running') this.ctx.suspend().catch(() => {}); } catch (e) { /* 無視 */ }
   },
   record({ maxMs = 12000, onChunk } = {}) {
@@ -2121,7 +2135,7 @@ function vVoice(v) {
 let touched = false;
 function boot() {
   ['pointerdown', 'keydown'].forEach(ev => addEventListener(ev, () => { touched = true; }, { once: true, capture: true }));
-  if (IOS) { let un = false; ['touchend', 'click'].forEach(ev => addEventListener(ev, () => { if (un) return; un = true; unlockAudio(); }, { capture: true })); }
+  if (IOS) { let un = false; ['touchend', 'pointerup', 'click'].forEach(ev => addEventListener(ev, () => { if (un) return; un = true; unlockAudio(); }, { capture: true })); }
   if (IOS) {
     document.documentElement.classList.add('ios');
     const nv = document.querySelector('#novoice .novoice-in');
